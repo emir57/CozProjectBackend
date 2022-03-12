@@ -1,3 +1,5 @@
+using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.Concrete;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
@@ -33,6 +35,7 @@ namespace CozProjectBackend.WebAPI
             services.AddScoped<DbContext, CozProjectDbContext>();
             services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();
             services.AddScoped<IRoleReadDal, EfRoleReadDal>();
+            services.AddScoped<IRoleReadService, RoleReadManager>();
             services.AddControllers();
         }
 

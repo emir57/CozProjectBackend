@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.DataAccess.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,24 +14,22 @@ namespace CozProjectBackend.WebAPI.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
-        private readonly IRoleWriteDal _roleWriteDal;
-        private readonly IRoleReadDal _roleReadDal;
-        public RolesController(IRoleReadDal roleReadDal, IRoleWriteDal roleWriteDal)
+        private readonly IRoleReadService _roleReadService;
+        public RolesController(IRoleReadService roleReadService)
         {
-            _roleReadDal = roleReadDal;
-            _roleWriteDal = roleWriteDal;
+            _roleReadService = roleReadService;
         }
         [HttpPost("add")]
         public async Task<IActionResult> Add(Role role)
         {
-            bool result = await _roleWriteDal.AddAsync(role);
-            await _roleWriteDal.SaveAsync();
-            return Ok(result);
+            //bool result = await _roleWriteService.AddAsync(role);
+            //await _roleWriteDal.SaveAsync();
+            return Ok();
         }
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
-            IQueryable<Role> result = _roleReadDal.GetAll();
+            var result = _roleReadService.GetAll();
             return Ok(result);
         }
     }

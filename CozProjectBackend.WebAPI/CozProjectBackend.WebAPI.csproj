@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CozProjectBackend.Business\CozProjectBackend.Business.csproj" />
     <ProjectReference Include="..\CozProjectBackend.DataAccess\CozProjectBackend.DataAccess.csproj" />
   </ItemGroup>
 
