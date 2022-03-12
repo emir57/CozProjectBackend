@@ -13,7 +13,7 @@ namespace Core.DataAccess
     {
         Task<T> GetAsync(Expression<Func<T, bool>> filter);
         Task<T> GetByIdAsync(int id);
-        Task<IQueryable<T>> GetAllAsync();
-        Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> filter);
+        IQueryable<T> GetAll();
+        IQueryable<T> GetAll(Expression<Func<T, bool>> filter);
     }
 }
