@@ -9,4 +9,8 @@
     <ProjectReference Include="..\CozProjectBackend.DataAccess\CozProjectBackend.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DependencyResolvers\Autofac\" />
+  </ItemGroup>
+
 </Project>

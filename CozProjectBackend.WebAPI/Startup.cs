@@ -32,11 +32,7 @@ namespace CozProjectBackend.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CozProjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
-            services.AddScoped<DbContext, CozProjectDbContext>();
-            services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();
-            services.AddScoped<IRoleReadDal, EfRoleReadDal>();
-            services.AddScoped<IRoleReadService, RoleReadManager>();
-            services.AddScoped<IRoleWriteService, RoleWriteManager>();
+            
             services.AddControllers();
         }
 
