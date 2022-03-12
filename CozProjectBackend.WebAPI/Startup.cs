@@ -36,6 +36,7 @@ namespace CozProjectBackend.WebAPI
             services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();
             services.AddScoped<IRoleReadDal, EfRoleReadDal>();
             services.AddScoped<IRoleReadService, RoleReadManager>();
+            services.AddScoped<IRoleWriteService, RoleWriteManager>();
             services.AddControllers();
         }
 
