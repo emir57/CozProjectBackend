@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.DataAccess
 {
-    public interface IWriteRepository<T>
+    public interface IWriteRepository<T> : IRepository<T>
         where T:class,IEntity,new()
     {
         Task<int> Add(T entity);
