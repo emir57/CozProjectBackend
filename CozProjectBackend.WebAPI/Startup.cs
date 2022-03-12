@@ -1,5 +1,6 @@
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
+using CozProjectBackend.Business.DependencyResolvers.Microsoft;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
@@ -32,7 +33,7 @@ namespace CozProjectBackend.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CozProjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
-            
+            services.AddMicrosoftBusinessModule();
             services.AddControllers();
         }
 
