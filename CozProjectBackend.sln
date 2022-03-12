@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozProjectBackend.Business"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{DE98E13A-3C85-4FD3-90E0-A25048A1A002}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozProjectBackend.WebAPI", "CozProjectBackend.WebAPI\CozProjectBackend.WebAPI.csproj", "{95910287-E691-4412-BFD2-F30999C02639}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DE98E13A-3C85-4FD3-90E0-A25048A1A002}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE98E13A-3C85-4FD3-90E0-A25048A1A002}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE98E13A-3C85-4FD3-90E0-A25048A1A002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95910287-E691-4412-BFD2-F30999C02639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95910287-E691-4412-BFD2-F30999C02639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95910287-E691-4412-BFD2-F30999C02639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95910287-E691-4412-BFD2-F30999C02639}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
