@@ -12,6 +12,6 @@ namespace Core.DataAccess
         Task<bool> AddAsync(T entity);
         bool Update(T entity);
         void Delete(T entity);
-        Task SaveAsync();
+        Task<int> SaveAsync();
     }
 }

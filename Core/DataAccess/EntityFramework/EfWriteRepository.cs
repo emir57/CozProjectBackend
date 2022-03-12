@@ -29,9 +29,9 @@ namespace Core.DataAccess.EntityFramework
             _context.Remove(entity);
         }
 
-        public async Task SaveAsync()
+        public async Task<int> SaveAsync()
         {
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
 
         public bool Update(T entity)
