@@ -16,10 +16,10 @@ namespace CozProjectBackend.Business.DependencyResolvers.Microsoft
         public static IServiceCollection AddMicrosoftBusinessModule(this IServiceCollection services)
         {
             services.AddScoped<DbContext, CozProjectDbContext>();
-            services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();
-            services.AddScoped<IRoleReadDal, EfRoleReadDal>();
-            services.AddScoped<IRoleReadService, RoleReadManager>();
-            services.AddScoped<IRoleWriteService, RoleWriteManager>();
+            //services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();
+            //services.AddScoped<IRoleReadDal, EfRoleReadDal>();
+            //services.AddScoped<IRoleReadService, RoleReadManager>();
+            //services.AddScoped<IRoleWriteService, RoleWriteManager>();
             return services;
         }
     }

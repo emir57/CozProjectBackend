@@ -16,8 +16,8 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfRoleWriteDal>().As<IRoleWriteDal>();
             builder.RegisterType<EfRoleReadDal>().As<IRoleReadDal>();
 
-            builder.RegisterType<IRoleReadService>().As<RoleReadManager>();
-            builder.RegisterType<IRoleWriteService>().As<RoleWriteManager>();
+            builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
+            builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
             base.Load(builder);
         }
     }
