@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\CozProjectBackend.DataAccess\CozProjectBackend.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
