@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
+using Core.Utilities.Interceptors;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
 using CozProjectBackend.DataAccess.Abstract;
@@ -23,6 +25,12 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
             builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
 
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new Castle.DynamicProxy.ProxyGenerationOptions
+                {
+                    Selector = new AspectInterceptorSelector()
+                });
 
             base.Load(builder);
         }
