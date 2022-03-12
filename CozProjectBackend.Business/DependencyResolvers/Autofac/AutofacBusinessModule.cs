@@ -3,6 +3,8 @@ using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
+using CozProjectBackend.DataAccess.Contexts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,11 +15,15 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<CozProjectDbContext>().As<DbContext>();
+
             builder.RegisterType<EfRoleWriteDal>().As<IRoleWriteDal>();
             builder.RegisterType<EfRoleReadDal>().As<IRoleReadDal>();
 
             builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
             builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
+
+
             base.Load(builder);
         }
     }

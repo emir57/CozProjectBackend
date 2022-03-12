@@ -33,7 +33,7 @@ namespace CozProjectBackend.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CozProjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
-            services.AddMicrosoftBusinessModule();
+            //services.AddMicrosoftBusinessModule();
             services.AddControllers();
         }
 
