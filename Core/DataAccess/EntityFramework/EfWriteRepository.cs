@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,24 +18,26 @@ namespace Core.DataAccess.EntityFramework
         }
         public DbSet<T> Table => _context.Set<T>();
 
-        public Task<int> Add(T entity)
+        public async Task<bool> AddAsync(T entity)
         {
-            throw new NotImplementedException();
+            EntityEntry<T> entityEntry = await _context.AddAsync(entity);
+            return entityEntry.State == EntityState.Added;
         }
 
-        public Task<int> Delete(T entity)
+        public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _context.Remove(entity);
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
 
-        public Task<int> Update(T entity)
+        public bool Update(T entity)
         {
-            throw new NotImplementedException();
+            EntityEntry<T> entityEntry = _context.Update(entity);
+            return entityEntry.State == EntityState.Modified;
         }
     }
 }
