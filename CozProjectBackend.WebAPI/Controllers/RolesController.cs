@@ -24,6 +24,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         public async Task<IActionResult> Add(Role role)
         {
             bool result = await _roleWriteDal.AddAsync(role);
+            await _roleWriteDal.SaveAsync();
             return Ok(result);
         }
         [HttpGet("getall")]
