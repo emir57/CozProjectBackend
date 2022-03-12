@@ -1,3 +1,5 @@
+using CozProjectBackend.DataAccess.Abstract;
+using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +29,8 @@ namespace CozProjectBackend.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();
+            services.AddScoped<IRoleReadDal, EfRoleReadDal>();
             services.AddDbContext<CozProjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
             services.AddControllers();
         }
