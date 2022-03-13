@@ -13,5 +13,6 @@ namespace CozProjectBackend.Business.Abstract
         Task<IDataResult<User>> GetByIdAsync(int id);
         Task<IDataResult<User>> GetByEmailAsync(string email);
         IDataResult<IQueryable<User>> GetAll();
+        IQueryable<Role> GetRoles(User user);
     }
 }

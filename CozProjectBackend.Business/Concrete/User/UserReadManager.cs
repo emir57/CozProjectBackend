@@ -41,5 +41,10 @@ namespace CozProjectBackend.Business.Concrete
                 return new ErrorDataResult<User>(_language.UserNotFound);
             return new SuccessDataResult<User>(user,_language.SuccessGet);
         }
+
+        public IQueryable<Role> GetRoles(User user)
+        {
+            return _userReadDal.GetRoles(user);
+        }
     }
 }
