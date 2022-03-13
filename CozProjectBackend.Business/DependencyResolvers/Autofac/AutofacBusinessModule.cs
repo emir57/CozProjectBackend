@@ -19,9 +19,9 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>();
+            builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>().SingleInstance();
 
-            builder.RegisterType<ITokenHelper>().As<JwtHelper>();
+            builder.RegisterType<ITokenHelper>().As<JwtHelper>().SingleInstance();
 
             builder.RegisterType<CozProjectDbContext>().As<DbContext>();
 
