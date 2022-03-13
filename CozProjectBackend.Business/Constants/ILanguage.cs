@@ -20,5 +20,6 @@ namespace CozProjectBackend.Business.Constants
         string UnAuthorize { get;}
 
         string UserNotFound { get; }
+        string RoleNotFound { get; }
     }
 }

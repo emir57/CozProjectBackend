@@ -25,5 +25,7 @@ namespace CozProjectBackend.Business.Constants
         public string UnAuthorize => "Yetkisiz İşlem";
 
         public string UserNotFound => "Kullanıcı Bulunamadı";
+
+        public string RoleNotFound => "Rol Bulunamadı";
     }
 }

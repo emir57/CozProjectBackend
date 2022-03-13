@@ -25,5 +25,7 @@ namespace CozProjectBackend.Business.Constants
         public string UnAuthorize => "Authorize Denied";
 
         public string UserNotFound => "User not found";
+
+        public string RoleNotFound => "Role not found";
     }
 }
