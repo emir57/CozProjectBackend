@@ -29,6 +29,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
+            //TODO: return access token
             return Ok(result);
         }
         [HttpPost("register")]
