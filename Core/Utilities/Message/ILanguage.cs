@@ -28,5 +28,6 @@ namespace Core.Utilities.Message
 
         string UserAlreadyExists { get; }
         string FailureRegister { get; }
+        string SuccessRegister { get; }
     }
 }

@@ -38,5 +38,6 @@ namespace CozProjectBackend.Business.Constants.Turkish
         public string UserAlreadyExists => "Böyle Bir Kullanıcı Zaten Var";
 
         public string FailureRegister => "Kayıt Olunurken Bir Hata Meydana Geldi";
+        public string SuccessRegister => "Başarıyla Kayıt Olundu";
     }
 }

@@ -67,8 +67,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
             {
                 return new ErrorDataResult<User>(_language.FailureRegister);
             }
-
-
+            return new ErrorDataResult<User>(user);
         }
 
         public async Task<IResult> UserExists(string email)
