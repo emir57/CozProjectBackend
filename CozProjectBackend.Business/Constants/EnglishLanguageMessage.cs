@@ -6,22 +6,22 @@ namespace CozProjectBackend.Business.Constants
 {
     public class EnglishLanguageMessage : ILanguage
     {
-        public string SuccessAdd => throw new NotImplementedException();
+        public string SuccessAdd => "Add is successful";
 
-        public string SuccessDelete => throw new NotImplementedException();
+        public string SuccessDelete => "Delete is successful";
 
-        public string SuccessUpdate => throw new NotImplementedException();
+        public string SuccessUpdate => "Update is successful";
 
-        public string FailureAdd => throw new NotImplementedException();
+        public string FailureAdd => "Add is unsuccessful";
 
-        public string FailureUpdate => throw new NotImplementedException();
+        public string FailureUpdate => "Update is unsuccessful";
 
-        public string FailureDelete => throw new NotImplementedException();
+        public string FailureDelete => "Delete is unsuccessful";
 
-        public string SuccessGet => throw new NotImplementedException();
+        public string SuccessGet => "Get is successful";
 
-        public string FailureGet => throw new NotImplementedException();
+        public string FailureGet => "Get is unsuccessful";
 
-        public string UnAuthorize => throw new NotImplementedException();
+        public string UnAuthorize => "Authorize Denied";
     }
 }
