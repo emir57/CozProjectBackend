@@ -30,5 +30,7 @@ namespace CozProjectBackend.Business.Constants.English
         public string RoleNotFound => "Role not found";
 
         public string SuccessCreateToken => "Token create successful";
+
+        public string PasswordIsWrong => "Password is wrong";
     }
 }

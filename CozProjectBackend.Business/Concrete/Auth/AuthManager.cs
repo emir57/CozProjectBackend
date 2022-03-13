@@ -2,6 +2,7 @@
 using Core.Entities.Dtos;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
+using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Abstract.Auth;
@@ -31,9 +32,17 @@ namespace CozProjectBackend.Business.Concrete.Auth
             return new SuccessDataResult<AccessToken>(accessToken,_language.SuccessCreateToken);
         }
 
-        public Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto)
+        public async Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto)
         {
-            throw new NotImplementedException();
+            User user = (await _userReadService.GetByEmailAsync(userForLoginDto.Email)).Data;
+            if(user == null)
+            {
+                return new ErrorDataResult<User>(_language.UserNotFound);
+            }
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                return new ErrorDataResult<User>(_language.PasswordIsWrong);
+            }
         }
 
         public Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)

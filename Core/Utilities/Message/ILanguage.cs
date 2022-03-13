@@ -23,5 +23,6 @@ namespace Core.Utilities.Message
         string RoleNotFound { get; }
 
         string SuccessCreateToken { get; }
+        string PasswordIsWrong { get; }
     }
 }

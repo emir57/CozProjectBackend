@@ -30,5 +30,7 @@ namespace CozProjectBackend.Business.Constants.Turkish
         public string RoleNotFound => "Rol Bulunamadı";
 
         public string SuccessCreateToken => "Token Oluşturma Başarılı";
+
+        public string PasswordIsWrong => "Şifre Yanlış";
     }
 }
