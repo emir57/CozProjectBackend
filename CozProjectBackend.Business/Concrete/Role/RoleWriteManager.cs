@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.Constants;
 using CozProjectBackend.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
@@ -12,24 +13,25 @@ namespace CozProjectBackend.Business.Concrete
     public class RoleWriteManager : IRoleWriteService
     {
         private readonly IRoleWriteDal _roleWriteDal;
-
-        public RoleWriteManager(IRoleWriteDal roleWriteDal)
+        private readonly ILanguage _language;
+        public RoleWriteManager(IRoleWriteDal roleWriteDal, ILanguage language)
         {
             _roleWriteDal = roleWriteDal;
+            _language = language;
         }
 
         public async Task<IResult> AddAsync(Role entity)
         {
             bool result = await _roleWriteDal.AddAsync(entity);
             if (result)
-                return new SuccessResult();
-            return new ErrorResult();
+                return new SuccessResult(_language.SuccessAdd);
+            return new ErrorResult(_language.FailureAdd);
         }
 
         public IResult Delete(Role entity)
         {
             _roleWriteDal.Delete(entity);
-            return new SuccessResult();
+            return new SuccessResult(_language.SuccessDelete);
         }
 
         public Task<int> SaveAsync()
@@ -41,8 +43,8 @@ namespace CozProjectBackend.Business.Concrete
         {
             bool result = _roleWriteDal.Update(entity);
             if (result)
-                return new SuccessResult();
-            return new ErrorResult();
+                return new SuccessResult(_language.SuccessUpdate);
+            return new ErrorResult(_language.FailureUpdate);
         }
     }
 }
