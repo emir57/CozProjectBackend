@@ -25,10 +25,10 @@ namespace CozProjectBackend.Business.Concrete.Auth
             _language = language;
         }
 
-        public Task<IDataResult<AccessToken>> CreateAccessTokenAsync(User user)
+        public IDataResult<AccessToken> CreateAccessToken(User user)
         {
             AccessToken accessToken = _tokenHelper.CreateToken(user, _userReadService.GetRoles(user));
-            return new SuccessDataResult<AccessToken>(accessToken, _language.SuccessCreateToken);
+            return new SuccessDataResult<AccessToken>(accessToken,_language.SuccessCreateToken);
         }
 
         public Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto)
