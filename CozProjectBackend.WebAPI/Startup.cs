@@ -1,3 +1,4 @@
+using Core.Extensions;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
@@ -64,6 +65,7 @@ namespace CozProjectBackend.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCustomMiddleware();
 
             app.UseHttpsRedirection();
 
