@@ -3,6 +3,7 @@ using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
 using CozProjectBackend.Business.Constants;
+using CozProjectBackend.Business.Constants.English;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;

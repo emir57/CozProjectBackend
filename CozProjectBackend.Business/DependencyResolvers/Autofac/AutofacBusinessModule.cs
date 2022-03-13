@@ -5,7 +5,8 @@ using Core.Utilities.Message;
 using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
-using CozProjectBackend.Business.Constants;
+using CozProjectBackend.Business.Constants.English;
+using CozProjectBackend.Business.Constants.Turkish;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
@@ -20,7 +21,12 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new Castle.DynamicProxy.ProxyGenerationOptions
+                {
+                    Selector = new AspectInterceptorSelector()
+                });
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
@@ -32,14 +38,9 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
             builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
 
-            builder.RegisterType<EnglishLanguageMessage>().As<ILanguage>();
+            builder.RegisterType<EnglishLanguageMessage>().As<ILanguage>().ExternallyOwned();
 
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
-                .EnableInterfaceInterceptors(new Castle.DynamicProxy.ProxyGenerationOptions
-                {
-                    Selector = new AspectInterceptorSelector()
-                });
+            
 
             base.Load(builder);
         }
