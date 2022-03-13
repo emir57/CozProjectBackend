@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CozProjectBackend.Business.Constants
 {
-    public class TurkishLanguage : ILanguage
+    public class TurkishLanguageMessage : ILanguage
     {
         public string SuccessAdd => "Ekleme Başarılı";
 
