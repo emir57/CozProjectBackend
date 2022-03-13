@@ -31,12 +31,16 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
             builder.RegisterType<CozProjectDbContext>().As<DbContext>();
-
+            //DataAccess
             builder.RegisterType<EfRoleWriteDal>().As<IRoleWriteDal>();
             builder.RegisterType<EfRoleReadDal>().As<IRoleReadDal>();
-
+            builder.RegisterType<EfUserWriteDal>().As<IUserWriteDal>();
+            builder.RegisterType<EfUserReadDal>().As<IUserReadDal>();
+            //SErvices
             builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
             builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
+            builder.RegisterType<UserReadManager>().As<IUserReadService>();
+            builder.RegisterType<UserWriteManager>().As<IUserWriteService>();
 
             builder.RegisterType<EnglishLanguageMessage>().As<ILanguage>().ExternallyOwned();
 
