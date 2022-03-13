@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.Constants;
 using CozProjectBackend.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,15 @@ namespace CozProjectBackend.Business.Concrete
     public class UserReadManager : IUserReadService
     {
         private readonly IUserReadDal _userReadDal;
-        public UserReadManager(IUserReadDal userReadDal)
+        private readonly ILanguage _language;
+        public UserReadManager(IUserReadDal userReadDal, ILanguage language)
         {
             _userReadDal = userReadDal;
+            _language = language;
         }
         public IDataResult<IQueryable<User>> GetAll()
         {
-            return new SuccessDataResult<IQueryable<User>>(_userReadDal.GetAll());
+            return new SuccessDataResult<IQueryable<User>>(_userReadDal.GetAll(),_language.SuccessGet);
         }
 
         public async Task<IDataResult<User>> GetByEmailAsync(string email)

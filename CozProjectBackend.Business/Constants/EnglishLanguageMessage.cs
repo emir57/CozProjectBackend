@@ -23,5 +23,7 @@ namespace CozProjectBackend.Business.Constants
         public string FailureGet => "Get is unsuccessful";
 
         public string UnAuthorize => "Authorize Denied";
+
+        public string UserNotFound => "User not found";
     }
 }

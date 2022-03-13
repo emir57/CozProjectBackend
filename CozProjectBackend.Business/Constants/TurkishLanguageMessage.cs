@@ -23,5 +23,7 @@ namespace CozProjectBackend.Business.Constants
         public string FailureGet => "Listeleme Başarısız";
 
         public string UnAuthorize => "Yetkisiz İşlem";
+
+        public string UserNotFound => "Kullanıcı Bulunamadı";
     }
 }
