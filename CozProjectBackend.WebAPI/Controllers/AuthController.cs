@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Dtos;
+using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +33,11 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            var userCheck = _authService.us
+            IResult userCheck = await _authService.UserExistsAsync(userForRegisterDto.Email);
+            if (userCheck.Success)
+            {
+
+            }
         }
     }
 }
