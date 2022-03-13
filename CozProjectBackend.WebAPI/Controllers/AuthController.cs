@@ -19,7 +19,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         {
             _authService = authService;
         }
-
+        [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var result = await _authService.LoginAsync(userForLoginDto);
@@ -28,6 +28,11 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(result);
             }
             return Ok(result);
+        }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        {
+            var userCheck = _authService.us
         }
     }
 }

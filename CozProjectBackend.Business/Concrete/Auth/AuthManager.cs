@@ -70,7 +70,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
             return new ErrorDataResult<User>(user);
         }
 
-        public async Task<IResult> UserExists(string email)
+        public async Task<IResult> UserExistsAsync(string email)
         {
             User user = (await _userReadService.GetByEmailAsync(email)).Data;
             if (user != null)
