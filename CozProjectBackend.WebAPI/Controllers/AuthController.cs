@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using Core.Utilities.Result;
+using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,13 +25,17 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var result = await _authService.LoginAsync(userForLoginDto);
-            if (!result.Success)
+            IDataResult<User> loginResult = await _authService.LoginAsync(userForLoginDto);
+            if (!loginResult.Success)
             {
-                return BadRequest(result);
+                return BadRequest(loginResult);
             }
-            //TODO: return access token
-            return Ok(result);
+            IDataResult<AccessToken> tokenResult = _authService.CreateAccessToken(loginResult.Data);
+            if (!tokenResult.Success)
+            {
+                return BadRequest(tokenResult);
+            }
+            return Ok(tokenResult);
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
