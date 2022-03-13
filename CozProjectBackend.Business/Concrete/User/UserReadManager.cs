@@ -29,16 +29,16 @@ namespace CozProjectBackend.Business.Concrete
         {
             User user = await _userReadDal.GetAsync(x => x.Email == email);
             if (user == null)
-                return new ErrorDataResult<User>();
-            return new SuccessDataResult<User>();
+                return new ErrorDataResult<User>(_language.UserNotFound);
+            return new SuccessDataResult<User>(user,_language.SuccessGet);
         }
 
         public async Task<IDataResult<User>> GetByIdAsync(int id)
         {
             User user = await _userReadDal.GetByIdAsync(id);
             if (user == null)
-                return new ErrorDataResult<User>();
-            return new SuccessDataResult<User>();
+                return new ErrorDataResult<User>(_language.UserNotFound);
+            return new SuccessDataResult<User>(user,_language.SuccessGet);
         }
     }
 }
