@@ -49,6 +49,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
         public Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)
         {
             byte[] passwordHash, passwordSalt;
+            HashingHelper.
 
         }
 
