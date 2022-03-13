@@ -63,6 +63,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
                 Score = 0,
             };
             IResult result = await _userWriteService.AddAsync(user);
+            await _userWriteService.SaveAsync();
             if (!result.Success)
             {
                 return new ErrorDataResult<User>(_language.FailureRegister);
