@@ -29,7 +29,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             return Ok(result);
         }
         [HttpGet("getall")]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
             var result = _roleReadService.GetAll();
             return Ok(result);
