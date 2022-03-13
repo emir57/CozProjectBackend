@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Utilities.Middleware
 {
-    public class ErrorDetail
+    public class ErrorDetails
     {
         public string Message { get; set; }
         public int StatusCode { get; set; }
