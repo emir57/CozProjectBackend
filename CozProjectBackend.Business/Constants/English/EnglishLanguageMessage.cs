@@ -28,5 +28,7 @@ namespace CozProjectBackend.Business.Constants.English
         public string UserNotFound => "User not found";
 
         public string RoleNotFound => "Role not found";
+
+        public string SuccessCreateToken => "Token create successful";
     }
 }

@@ -28,5 +28,7 @@ namespace CozProjectBackend.Business.Constants.Turkish
         public string UserNotFound => "Kullanıcı Bulunamadı";
 
         public string RoleNotFound => "Rol Bulunamadı";
+
+        public string SuccessCreateToken => "Token Oluşturma Başarılı";
     }
 }

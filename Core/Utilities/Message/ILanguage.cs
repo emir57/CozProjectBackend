@@ -21,5 +21,7 @@ namespace Core.Utilities.Message
 
         string UserNotFound { get; }
         string RoleNotFound { get; }
+
+        string SuccessCreateToken { get; }
     }
 }
