@@ -17,13 +17,15 @@ namespace CozProjectBackend.Business.Concrete.Auth
     {
         private readonly ITokenHelper _tokenHelper;
         private readonly IUserReadService _userReadService;
+        private readonly IUserWriteService _userWriteService;
         private readonly ILanguage _language;
 
-        public AuthManager(ITokenHelper tokenHelper, IUserReadService userReadService, ILanguage language)
+        public AuthManager(ITokenHelper tokenHelper, IUserReadService userReadService, ILanguage language, IUserWriteService userWriteService)
         {
             _tokenHelper = tokenHelper;
             _userReadService = userReadService;
             _language = language;
+            _userWriteService = userWriteService;
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user)
@@ -46,10 +48,26 @@ namespace CozProjectBackend.Business.Concrete.Auth
             return new SuccessDataResult<User>(user, _language.LoginSuccess);
         }
 
-        public Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)
+        public async Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)
         {
             byte[] passwordHash, passwordSalt;
-            HashingHelper.
+            HashingHelper.CreatePasswordHash(userForRegisterDto.Password,out passwordHash,out passwordSalt);
+            User user = new User
+            {
+                FirstName = userForRegisterDto.FirstName,
+                LastName = userForRegisterDto.LastName,
+                Email = userForRegisterDto.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                EmailConfirmed = false,
+                Score = 0,
+            };
+            IResult result = await _userWriteService.AddAsync(user);
+            if (!result.Success)
+            {
+                return new ErrorDataResult<User>(_language.FailureRegister);
+            }
+
 
         }
 

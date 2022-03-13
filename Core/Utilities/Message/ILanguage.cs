@@ -27,5 +27,6 @@ namespace Core.Utilities.Message
         string LoginSuccess { get; }
 
         string UserAlreadyExists { get; }
+        string FailureRegister { get; }
     }
 }

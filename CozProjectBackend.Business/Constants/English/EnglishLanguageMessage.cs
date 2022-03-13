@@ -35,5 +35,6 @@ namespace CozProjectBackend.Business.Constants.English
         public string LoginSuccess => "Login is successful";
 
         public string UserAlreadyExists => "User already exists";
+        public string FailureRegister => "Register is unsuccessful";
     }
 }
