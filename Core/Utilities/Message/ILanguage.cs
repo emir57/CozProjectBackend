@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CozProjectBackend.Business.Constants
+namespace Core.Utilities.Message
 {
     public interface ILanguage
     {

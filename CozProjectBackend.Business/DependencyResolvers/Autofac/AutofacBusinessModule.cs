@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Message;
 using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
@@ -19,7 +20,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>().SingleInstance();
+            
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
@@ -30,6 +31,8 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
 
             builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
             builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
+
+            builder.RegisterType<EnglishLanguageMessage>().As<ILanguage>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
