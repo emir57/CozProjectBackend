@@ -1,9 +1,12 @@
+using Core.Utilities.Security.Encryption;
+using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
 using CozProjectBackend.Business.DependencyResolvers.Microsoft;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +38,23 @@ namespace CozProjectBackend.WebAPI
             services.AddDbContext<CozProjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
             //services.AddMicrosoftBusinessModule();
             services.AddControllers();
+
+            TokenOptions tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
