@@ -29,9 +29,9 @@ namespace CozProjectBackend.Business.Concrete
         public async Task<IDataResult<Role>> GetByIdAsync(int id)
         {
             Role role = await _roleReadDal.GetByIdAsync(id);
-            if(role == null)
-                return new SuccessDataResult<Role>(_language.)
-            return new SuccessDataResult<Role>();
+            if (role == null)
+                return new SuccessDataResult<Role>(_language.RoleNotFound);
+            return new SuccessDataResult<Role>(role,_language.SuccessGet);
         }
     }
 }
