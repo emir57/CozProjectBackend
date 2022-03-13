@@ -21,7 +21,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>().SingleInstance();
 
-            builder.RegisterType<ITokenHelper>().As<JwtHelper>().SingleInstance();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
             builder.RegisterType<CozProjectDbContext>().As<DbContext>();
 
