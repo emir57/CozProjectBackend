@@ -75,8 +75,8 @@ namespace CozProjectBackend.Business.Concrete.Auth
         {
             User user = (await _userReadService.GetByEmailAsync(email)).Data;
             if (user == null)
-                return new ErrorResult();
-            return new SuccessResult(_language.UserAlreadyExists);
+                return new SuccessResult(_language.UserNotFound);
+            return new ErrorResult(_language.UserAlreadyExists);
         }
     }
 }

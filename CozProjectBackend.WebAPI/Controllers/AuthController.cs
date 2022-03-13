@@ -36,7 +36,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             IResult userCheckResult = await _authService.UserExistsAsync(userForRegisterDto.Email);
-            if (userCheckResult.Success)
+            if (!userCheckResult.Success)
             {
                 return BadRequest(userCheckResult);
             }
