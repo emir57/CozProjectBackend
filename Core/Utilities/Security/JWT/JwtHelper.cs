@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Core.Extensions;
 using Core.Utilities.Security.Encryption;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -27,6 +28,13 @@ namespace Core.Utilities.Security.JWT
             SecurityKey securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
             SigningCredentials signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
             JwtSecurityToken jwt = CreateJwtSecurityToken(user, roles, signingCredentials, _tokenOptions, _accessTokenExpiration);
+            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            string token = jwtSecurityTokenHandler.WriteToken(jwt);
+            return new AccessToken
+            {
+                Token = token,
+                Expiration = _accessTokenExpiration
+            };
         }
 
         private JwtSecurityToken CreateJwtSecurityToken(User user, IQueryable<Role> roles, SigningCredentials signingCredentials, TokenOptions tokenOptions, DateTime accessTokenExpiration)
@@ -43,7 +51,11 @@ namespace Core.Utilities.Security.JWT
         private IEnumerable<Claim> SetClaims(User user, IQueryable<Role> roles)
         {
             List<Claim> claims = new List<Claim>();
-
+            claims.AddEmail(user.Email);
+            claims.AddNameIdentifier(user.Id.ToString());
+            claims.AddName($"{user.FirstName} {user.LastName}");
+            claims.AddRoles(roles.Select(x => x.Name).ToArray());
+            return claims;
         }
     }
 }
