@@ -67,15 +67,15 @@ namespace CozProjectBackend.Business.Concrete.Auth
             {
                 return new ErrorDataResult<User>(_language.FailureRegister);
             }
-            return new ErrorDataResult<User>(user);
+            return new SuccessDataResult<User>(_language.SuccessRegister);
         }
 
         public async Task<IResult> UserExistsAsync(string email)
         {
             User user = (await _userReadService.GetByEmailAsync(email)).Data;
-            if (user != null)
-                return new ErrorResult(_language.UserAlreadyExists);
-            return new SuccessResult();
+            if (user == null)
+                return new ErrorResult();
+            return new SuccessResult(_language.UserAlreadyExists);
         }
     }
 }
