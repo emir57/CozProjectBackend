@@ -48,12 +48,16 @@ namespace CozProjectBackend.Business.Concrete.Auth
 
         public Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)
         {
-            throw new NotImplementedException();
+            byte[] passwordHash, passwordSalt;
+
         }
 
-        public Task<IResult> UserExists(string email)
+        public async Task<IResult> UserExists(string email)
         {
-            throw new NotImplementedException();
+            User user = (await _userReadService.GetByEmailAsync(email)).Data;
+            if (user != null)
+                return new ErrorResult();
+            return new SuccessResult();
         }
     }
 }

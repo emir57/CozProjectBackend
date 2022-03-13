@@ -34,5 +34,7 @@ namespace CozProjectBackend.Business.Constants.Turkish
         public string PasswordIsWrong => "Şifre Yanlış";
 
         public string LoginSuccess => "Giriş Başarılı";
+
+        public string UserAlreadyExists => "Böyle Bir Kullanıcı Zaten Var";
     }
 }
