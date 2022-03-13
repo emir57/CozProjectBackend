@@ -43,6 +43,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
             {
                 return new ErrorDataResult<User>(_language.PasswordIsWrong);
             }
+            return new SuccessDataResult<User>(user, _language.LoginSuccess);
         }
 
         public Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)

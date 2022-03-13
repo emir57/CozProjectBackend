@@ -32,5 +32,6 @@ namespace CozProjectBackend.Business.Constants.English
         public string SuccessCreateToken => "Token create successful";
 
         public string PasswordIsWrong => "Password is wrong";
+        public string LoginSuccess => "Login is successful";
     }
 }

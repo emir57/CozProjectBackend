@@ -32,5 +32,7 @@ namespace CozProjectBackend.Business.Constants.Turkish
         public string SuccessCreateToken => "Token Oluşturma Başarılı";
 
         public string PasswordIsWrong => "Şifre Yanlış";
+
+        public string LoginSuccess => "Giriş Başarılı";
     }
 }

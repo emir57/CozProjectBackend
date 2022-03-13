@@ -24,5 +24,6 @@ namespace Core.Utilities.Message
 
         string SuccessCreateToken { get; }
         string PasswordIsWrong { get; }
+        string LoginSuccess { get; }
     }
 }
