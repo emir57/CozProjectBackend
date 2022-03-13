@@ -1,5 +1,7 @@
-﻿using CozProjectBackend.Business.Abstract;
+﻿using Core.Utilities.Security.JWT;
+using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
+using CozProjectBackend.Business.Constants;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
@@ -15,6 +17,8 @@ namespace CozProjectBackend.Business.DependencyResolvers.Microsoft
     {
         public static IServiceCollection AddMicrosoftBusinessModule(this IServiceCollection services)
         {
+            services.AddSingleton<ILanguage, TurkishLanguageMessage>();
+            services.AddSingleton<ITokenHelper, JwtHelper>();
             services.AddScoped<DbContext, CozProjectDbContext>();
             services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();
             services.AddScoped<IRoleReadDal, EfRoleReadDal>();
