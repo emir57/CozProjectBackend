@@ -16,12 +16,12 @@ namespace CozProjectBackend.Business.BusinessAspects
     {
         private IHttpContextAccessor _httpContextAccessor;
         private string[] _roles;
-        private ILanguageMessage _language;
+        private ILanguageMessage _languageMessage;
         public SecuredOperation(string roles)
         {
             _roles = roles.Split(",");
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
-            _language = ServiceTool.ServiceProvider.GetService<ILanguageMessage>();
+            _languageMessage = ServiceTool.ServiceProvider.GetService<ILanguageMessage>();
         }
         protected override void OnBefore(IInvocation invocation)
         {
@@ -31,7 +31,7 @@ namespace CozProjectBackend.Business.BusinessAspects
                 if (claims.Contains(role))
                     return;
             }
-            throw new UnAuthorizedException(_language.UnAuthorize);
+            throw new UnAuthorizedException(_languageMessage.UnAuthorize);
         }
     }
 }

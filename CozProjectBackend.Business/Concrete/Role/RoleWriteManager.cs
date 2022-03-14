@@ -13,25 +13,25 @@ namespace CozProjectBackend.Business.Concrete
     public class RoleWriteManager : IRoleWriteService
     {
         private readonly IRoleWriteDal _roleWriteDal;
-        private readonly ILanguageMessage _language;
+        private readonly ILanguageMessage _languageMessage;
         public RoleWriteManager(IRoleWriteDal roleWriteDal, ILanguageMessage language)
         {
             _roleWriteDal = roleWriteDal;
-            _language = language;
+            _languageMessage = language;
         }
 
         public async Task<IResult> AddAsync(Role entity)
         {
             bool result = await _roleWriteDal.AddAsync(entity);
             if (result)
-                return new SuccessResult(_language.SuccessAdd);
-            return new ErrorResult(_language.FailureAdd);
+                return new SuccessResult(_languageMessage.SuccessAdd);
+            return new ErrorResult(_languageMessage.FailureAdd);
         }
 
         public IResult Delete(Role entity)
         {
             _roleWriteDal.Delete(entity);
-            return new SuccessResult(_language.SuccessDelete);
+            return new SuccessResult(_languageMessage.SuccessDelete);
         }
 
         public Task<int> SaveAsync()
@@ -43,8 +43,8 @@ namespace CozProjectBackend.Business.Concrete
         {
             bool result = _roleWriteDal.Update(entity);
             if (result)
-                return new SuccessResult(_language.SuccessUpdate);
-            return new ErrorResult(_language.FailureUpdate);
+                return new SuccessResult(_languageMessage.SuccessUpdate);
+            return new ErrorResult(_languageMessage.FailureUpdate);
         }
     }
 }

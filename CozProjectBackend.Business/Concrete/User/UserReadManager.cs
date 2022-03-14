@@ -15,32 +15,32 @@ namespace CozProjectBackend.Business.Concrete
     public class UserReadManager : IUserReadService
     {
         private readonly IUserReadDal _userReadDal;
-        private readonly ILanguageMessage _language;
+        private readonly ILanguageMessage _languageMessage;
         public UserReadManager(IUserReadDal userReadDal, ILanguageMessage language)
         {
             _userReadDal = userReadDal;
-            _language = language;
+            _languageMessage = language;
         }
         
         public IDataResult<IQueryable<User>> GetAll()
         {
-            return new SuccessDataResult<IQueryable<User>>(_userReadDal.GetAll(),_language.SuccessGet);
+            return new SuccessDataResult<IQueryable<User>>(_userReadDal.GetAll(),_languageMessage.SuccessGet);
         }
 
         public async Task<IDataResult<User>> GetByEmailAsync(string email)
         {
             User user = await _userReadDal.GetAsync(x => x.Email == email);
             if (user == null)
-                return new ErrorDataResult<User>(_language.UserNotFound);
-            return new SuccessDataResult<User>(user,_language.SuccessGet);
+                return new ErrorDataResult<User>(_languageMessage.UserNotFound);
+            return new SuccessDataResult<User>(user,_languageMessage.SuccessGet);
         }
 
         public async Task<IDataResult<User>> GetByIdAsync(int id)
         {
             User user = await _userReadDal.GetByIdAsync(id);
             if (user == null)
-                return new ErrorDataResult<User>(_language.UserNotFound);
-            return new SuccessDataResult<User>(user,_language.SuccessGet);
+                return new ErrorDataResult<User>(_languageMessage.UserNotFound);
+            return new SuccessDataResult<User>(user,_languageMessage.SuccessGet);
         }
 
         public IQueryable<Role> GetRoles(User user)

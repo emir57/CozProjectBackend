@@ -15,24 +15,24 @@ namespace CozProjectBackend.Business.Concrete
     public class RoleReadManager : IRoleReadService
     {
         private readonly IRoleReadDal _roleReadDal;
-        private readonly ILanguageMessage _language;
+        private readonly ILanguageMessage _languageMessage;
         public RoleReadManager(IRoleReadDal roleReadDal, ILanguageMessage language)
         {
             _roleReadDal = roleReadDal;
-            _language = language;
+            _languageMessage = language;
         }
         [SecuredOperation("Admin")]
         public IDataResult<IQueryable<Role>> GetAll()
         {
-            return new SuccessDataResult<IQueryable<Role>>(_roleReadDal.GetAll(),_language.SuccessGet);
+            return new SuccessDataResult<IQueryable<Role>>(_roleReadDal.GetAll(),_languageMessage.SuccessGet);
         }
 
         public async Task<IDataResult<Role>> GetByIdAsync(int id)
         {
             Role role = await _roleReadDal.GetByIdAsync(id);
             if (role == null)
-                return new SuccessDataResult<Role>(_language.RoleNotFound);
-            return new SuccessDataResult<Role>(role,_language.SuccessGet);
+                return new SuccessDataResult<Role>(_languageMessage.RoleNotFound);
+            return new SuccessDataResult<Role>(role,_languageMessage.SuccessGet);
         }
     }
 }

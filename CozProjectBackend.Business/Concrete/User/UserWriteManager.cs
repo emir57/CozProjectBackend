@@ -13,26 +13,26 @@ namespace CozProjectBackend.Business.Concrete
     public class UserWriteManager : IUserWriteService
     {
         private readonly IUserWriteDal _userWriteDal;
-        private readonly ILanguageMessage _language;
+        private readonly ILanguageMessage _languageMessage;
 
         public UserWriteManager(IUserWriteDal userWriteDal, ILanguageMessage language)
         {
             _userWriteDal = userWriteDal;
-            _language = language;
+            _languageMessage = language;
         }
 
         public async Task<IResult> AddAsync(User entity)
         {
             bool result = await _userWriteDal.AddAsync(entity);
             if (result)
-                return new SuccessResult(_language.SuccessAdd);
-            return new ErrorResult(_language.FailureAdd);
+                return new SuccessResult(_languageMessage.SuccessAdd);
+            return new ErrorResult(_languageMessage.FailureAdd);
         }
 
         public IResult Delete(User entity)
         {
             _userWriteDal.Delete(entity);
-            return new SuccessResult(_language.SuccessDelete);
+            return new SuccessResult(_languageMessage.SuccessDelete);
         }
 
         public async Task<int> SaveAsync()
@@ -44,8 +44,8 @@ namespace CozProjectBackend.Business.Concrete
         {
             bool result = _userWriteDal.Update(entity);
             if (result)
-                return new SuccessResult(_language.SuccessUpdate);
-            return new ErrorResult(_language.FailureUpdate);
+                return new SuccessResult(_languageMessage.SuccessUpdate);
+            return new ErrorResult(_languageMessage.FailureUpdate);
         }
     }
 }
