@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CozProjectBackend.Business.Constants.Turkish
+namespace Core.Utilities.Message.Turkish
 {
     public class TurkishLanguageMessage : ILanguage
     {
