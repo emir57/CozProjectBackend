@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Castle.DynamicProxy;
 using Core.Extensions;
 using Core.Utilities.Message;
-using Core.Utilities.Exception.UnAuthorizeException;
+using Core.Utilities.Exception.UnAuthorizedException;
 
 namespace CozProjectBackend.Business.BusinessAspects
 {
@@ -29,11 +29,9 @@ namespace CozProjectBackend.Business.BusinessAspects
             foreach (var role in _roles)
             {
                 if (claims.Contains(role))
-                {
                     return;
-                }
             }
-            throw new UnAuthorizeException(_language.UnAuthorize);
+            throw new UnAuthorizedException(_language.UnAuthorize);
         }
     }
 }

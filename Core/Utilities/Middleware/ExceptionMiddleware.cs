@@ -48,7 +48,7 @@ namespace Core.Utilities.Middleware
                     StatusCode = 400
                 }.ToString());
             }
-            if(e.GetType() == typeof(UnAuthorizeException))
+            if(e.GetType() == typeof(UnAuthorizedException))
             {
                 message = e.Message;
                 context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
