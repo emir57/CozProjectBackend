@@ -3,6 +3,7 @@ using Autofac.Extras.DynamicProxy;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Message;
 using Core.Utilities.Message.English;
+using Core.Utilities.Message.Turkish;
 using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
@@ -41,7 +42,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<UserReadManager>().As<IUserReadService>();
             builder.RegisterType<UserWriteManager>().As<IUserWriteService>();
 
-            builder.RegisterType<EnglishLanguageMessage>().As<ILanguage>().ExternallyOwned();
+            builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>().ExternallyOwned();
 
             
 
