@@ -51,6 +51,7 @@ namespace Core.Utilities.Middleware
             if(e.GetType() == typeof(UnAuthorizeException))
             {
                 message = e.Message;
+                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
             }
             return context.Response.WriteAsync(new ErrorDetails
             {
