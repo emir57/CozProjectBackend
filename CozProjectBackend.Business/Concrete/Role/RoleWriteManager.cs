@@ -22,7 +22,7 @@ namespace CozProjectBackend.Business.Concrete
 
         public async Task<IResult> AddAsync(Role entity)
         {
-            bool result = await _roleWriteDal.AddAsync(entity);
+            bool result = true;//await _roleWriteDal.AddAsync(entity);
             if (result)
                 return new SuccessResult(_language.SuccessAdd);
             return new ErrorResult(_language.FailureAdd);

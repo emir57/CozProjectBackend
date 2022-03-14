@@ -37,7 +37,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<UserReadManager>().As<IUserReadService>();
             builder.RegisterType<UserWriteManager>().As<IUserWriteService>();
 
-            builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>();
+            
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
@@ -45,7 +45,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
                 {
                     Selector = new AspectInterceptorSelector()
                 });
-
+            builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>();
             base.Load(builder);
         }
     }
