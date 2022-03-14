@@ -2,7 +2,6 @@
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.Constants;
 using CozProjectBackend.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
