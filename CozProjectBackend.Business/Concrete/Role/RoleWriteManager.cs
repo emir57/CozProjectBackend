@@ -13,8 +13,8 @@ namespace CozProjectBackend.Business.Concrete
     public class RoleWriteManager : IRoleWriteService
     {
         private readonly IRoleWriteDal _roleWriteDal;
-        private readonly ILanguage _language;
-        public RoleWriteManager(IRoleWriteDal roleWriteDal, ILanguage language)
+        private readonly ILanguageMessage _language;
+        public RoleWriteManager(IRoleWriteDal roleWriteDal, ILanguageMessage language)
         {
             _roleWriteDal = roleWriteDal;
             _language = language;

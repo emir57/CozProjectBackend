@@ -15,8 +15,8 @@ namespace CozProjectBackend.Business.Concrete
     public class RoleReadManager : IRoleReadService
     {
         private readonly IRoleReadDal _roleReadDal;
-        private readonly ILanguage _language;
-        public RoleReadManager(IRoleReadDal roleReadDal, ILanguage language)
+        private readonly ILanguageMessage _language;
+        public RoleReadManager(IRoleReadDal roleReadDal, ILanguageMessage language)
         {
             _roleReadDal = roleReadDal;
             _language = language;

@@ -18,9 +18,9 @@ namespace CozProjectBackend.Business.Concrete.Auth
         private readonly ITokenHelper _tokenHelper;
         private readonly IUserReadService _userReadService;
         private readonly IUserWriteService _userWriteService;
-        private readonly ILanguage _language;
+        private readonly ILanguageMessage _language;
 
-        public AuthManager(ITokenHelper tokenHelper, IUserReadService userReadService, ILanguage language, IUserWriteService userWriteService)
+        public AuthManager(ITokenHelper tokenHelper, IUserReadService userReadService, ILanguageMessage language, IUserWriteService userWriteService)
         {
             _tokenHelper = tokenHelper;
             _userReadService = userReadService;

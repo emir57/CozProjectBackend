@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Utilities.Message.English
 {
-    public class EnglishLanguageMessage : ILanguage
+    public class EnglishLanguageMessage : ILanguageMessage
     {
         public string SuccessAdd => "Add is successful";
 

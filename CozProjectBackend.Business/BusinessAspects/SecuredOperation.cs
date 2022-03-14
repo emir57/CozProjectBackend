@@ -16,12 +16,12 @@ namespace CozProjectBackend.Business.BusinessAspects
     {
         private IHttpContextAccessor _httpContextAccessor;
         private string[] _roles;
-        private ILanguage _language;
+        private ILanguageMessage _language;
         public SecuredOperation(string roles)
         {
             _roles = roles.Split(",");
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
-            _language = ServiceTool.ServiceProvider.GetService<ILanguage>();
+            _language = ServiceTool.ServiceProvider.GetService<ILanguageMessage>();
         }
         protected override void OnBefore(IInvocation invocation)
         {

@@ -18,7 +18,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Microsoft
     {
         public static IServiceCollection AddMicrosoftBusinessModule(this IServiceCollection services)
         {
-            services.AddSingleton<ILanguage, EnglishLanguageMessage>();
+            services.AddSingleton<ILanguageMessage, EnglishLanguageMessage>();
             services.AddSingleton<ITokenHelper, JwtHelper>();
             services.AddScoped<DbContext, CozProjectDbContext>();
             services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();

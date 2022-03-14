@@ -17,7 +17,7 @@ namespace Core.DependencyResolvers
             services.AddSingleton<Stopwatch>();
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<ILanguage, TurkishLanguageMessage>();
+            services.AddSingleton<ILanguageMessage, TurkishLanguageMessage>();
         }
     }
 }

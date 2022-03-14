@@ -13,9 +13,9 @@ namespace CozProjectBackend.Business.Concrete
     public class UserWriteManager : IUserWriteService
     {
         private readonly IUserWriteDal _userWriteDal;
-        private readonly ILanguage _language;
+        private readonly ILanguageMessage _language;
 
-        public UserWriteManager(IUserWriteDal userWriteDal, ILanguage language)
+        public UserWriteManager(IUserWriteDal userWriteDal, ILanguageMessage language)
         {
             _userWriteDal = userWriteDal;
             _language = language;

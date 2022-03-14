@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Utilities.Message.Turkish
 {
-    public class TurkishLanguageMessage : ILanguage
+    public class TurkishLanguageMessage : ILanguageMessage
     {
         public string SuccessAdd => "Ekleme Başarılı";
 

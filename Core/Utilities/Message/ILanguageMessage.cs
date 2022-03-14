@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Utilities.Message
 {
-    public interface ILanguage
+    public interface ILanguageMessage
     {
         string SuccessAdd { get; }
         string SuccessDelete { get;}

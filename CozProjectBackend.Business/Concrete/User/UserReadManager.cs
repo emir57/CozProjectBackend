@@ -15,8 +15,8 @@ namespace CozProjectBackend.Business.Concrete
     public class UserReadManager : IUserReadService
     {
         private readonly IUserReadDal _userReadDal;
-        private readonly ILanguage _language;
-        public UserReadManager(IUserReadDal userReadDal, ILanguage language)
+        private readonly ILanguageMessage _language;
+        public UserReadManager(IUserReadDal userReadDal, ILanguageMessage language)
         {
             _userReadDal = userReadDal;
             _language = language;
