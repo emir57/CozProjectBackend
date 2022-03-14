@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Core.Utilities.Exception.UnAuthorizeException;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -23,14 +24,14 @@ namespace Core.Utilities.Middleware
             {
                 await _next(context);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 await HandleExceptionAsync(context, e);
                 throw;
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception e)
+        private Task HandleExceptionAsync(HttpContext context, System.Exception e)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -46,6 +47,10 @@ namespace Core.Utilities.Middleware
                     Errors = validationFailures,
                     StatusCode = 400
                 }.ToString());
+            }
+            if(e.GetType() == typeof(UnAuthorizeException))
+            {
+                message = e.Message;
             }
             return context.Response.WriteAsync(new ErrorDetails
             {

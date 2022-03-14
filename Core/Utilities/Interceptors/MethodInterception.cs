@@ -28,7 +28,7 @@ namespace Core.Utilities.Interceptors
                         isSuccess = false;
                     }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 isSuccess = false;
                 OnException(invocation, e);
