@@ -42,7 +42,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<UserReadManager>().As<IUserReadService>();
             builder.RegisterType<UserWriteManager>().As<IUserWriteService>();
 
-            builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>().ExternallyOwned();
+            builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>();
 
             
 
