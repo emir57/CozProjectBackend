@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Castle.DynamicProxy;
 using Core.Extensions;
 using Core.Utilities.Message;
+using Core.Utilities.Exception.UnAuthorizeException;
 
 namespace CozProjectBackend.Business.BusinessAspects
 {
@@ -32,7 +33,7 @@ namespace CozProjectBackend.Business.BusinessAspects
                     return;
                 }
             }
-            throw new Exception(_language.UnAuthorize);
+            throw new UnAuthorizeException(_language.UnAuthorize);
         }
     }
 }
