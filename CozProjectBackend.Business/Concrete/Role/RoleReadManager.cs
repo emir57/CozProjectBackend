@@ -2,6 +2,7 @@
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace CozProjectBackend.Business.Concrete
             _roleReadDal = roleReadDal;
             _language = language;
         }
-
+        [SecuredOperation("Admin")]
         public IDataResult<IQueryable<Role>> GetAll()
         {
             return new SuccessDataResult<IQueryable<Role>>(_roleReadDal.GetAll(),_language.SuccessGet);

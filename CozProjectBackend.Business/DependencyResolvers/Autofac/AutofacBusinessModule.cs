@@ -21,12 +21,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
-                .EnableInterfaceInterceptors(new Castle.DynamicProxy.ProxyGenerationOptions
-                {
-                    Selector = new AspectInterceptorSelector()
-                });
+            
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
@@ -44,7 +39,12 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
 
             builder.RegisterType<TurkishLanguageMessage>().As<ILanguage>();
 
-            
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new Castle.DynamicProxy.ProxyGenerationOptions
+                {
+                    Selector = new AspectInterceptorSelector()
+                });
 
             base.Load(builder);
         }

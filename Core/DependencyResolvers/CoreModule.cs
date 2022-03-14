@@ -1,4 +1,6 @@
 ﻿using Core.Utilities.IoC;
+using Core.Utilities.Message;
+using Core.Utilities.Message.Turkish;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +17,7 @@ namespace Core.DependencyResolvers
             services.AddSingleton<Stopwatch>();
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<ILanguage, TurkishLanguageMessage>();
         }
     }
 }

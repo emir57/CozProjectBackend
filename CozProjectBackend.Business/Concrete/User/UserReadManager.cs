@@ -2,6 +2,7 @@
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace CozProjectBackend.Business.Concrete
             _userReadDal = userReadDal;
             _language = language;
         }
+        
         public IDataResult<IQueryable<User>> GetAll()
         {
             return new SuccessDataResult<IQueryable<User>>(_userReadDal.GetAll(),_language.SuccessGet);
