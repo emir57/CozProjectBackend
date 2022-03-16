@@ -19,10 +19,11 @@ namespace Core.Utilities.Interceptors
                 (true).ToList();
             var methodAttributes = type.GetMethod(method.Name)
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
-            classAttributes.AddRange(methodAttributes);
             classAttributes.Add(new LogAspect(typeof(FileLogger)));
             classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
             classAttributes.Add(new PerformanceAspect(5));
+            classAttributes.AddRange(methodAttributes);
+            
 
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }
