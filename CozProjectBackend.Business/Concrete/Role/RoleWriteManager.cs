@@ -3,6 +3,7 @@ using Core.Entities.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace CozProjectBackend.Business.Concrete
             _roleWriteDal = roleWriteDal;
             _languageMessage = language;
         }
+        [SecuredOperation("Admin")]
         [CacheRemoveAspect("IRoleReadService.Get")]
         public async Task<IResult> AddAsync(Role entity)
         {
@@ -28,18 +30,21 @@ namespace CozProjectBackend.Business.Concrete
                 return new SuccessResult(_languageMessage.SuccessAdd);
             return new ErrorResult(_languageMessage.FailureAdd);
         }
-
+        [SecuredOperation("Admin")]
+        [CacheRemoveAspect("IRoleReadService.Get")]
         public IResult Delete(Role entity)
         {
             _roleWriteDal.Delete(entity);
             return new SuccessResult(_languageMessage.SuccessDelete);
         }
-
+        [SecuredOperation("Admin")]
+        [CacheRemoveAspect("IRoleReadService.Get")]
         public Task<int> SaveAsync()
         {
             return _roleWriteDal.SaveAsync();
         }
-
+        [SecuredOperation("Admin")]
+        [CacheRemoveAspect("IRoleReadService.Get")]
         public IResult Update(Role entity)
         {
             bool result = _roleWriteDal.Update(entity);
