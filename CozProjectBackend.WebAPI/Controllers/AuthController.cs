@@ -30,7 +30,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(loginResult);
             }
-            IDataResult<AccessToken> tokenResult = _authService.CreateAccessToken(loginResult.Data);
+            IDataResult<AccessToken> tokenResult = await _authService.CreateAccessTokenAsync(loginResult.Data);
             if (!tokenResult.Success)
             {
                 return BadRequest(tokenResult);
