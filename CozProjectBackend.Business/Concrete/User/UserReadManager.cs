@@ -22,7 +22,7 @@ namespace CozProjectBackend.Business.Concrete
             _userReadDal = userReadDal;
             _languageMessage = language;
         }
-        
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<User>>> GetAllAsync()
         {
             return new SuccessDataResult<List<User>>(await _userReadDal.GetAll().ToListAsync(),_languageMessage.SuccessGet);
