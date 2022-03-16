@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using Core.Aspects.Autofac.Caching;
+using Core.Entities.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
@@ -19,7 +20,7 @@ namespace CozProjectBackend.Business.Concrete
             _roleWriteDal = roleWriteDal;
             _languageMessage = language;
         }
-
+        [CacheRemoveAspect("IRoleReadService.Get")]
         public async Task<IResult> AddAsync(Role entity)
         {
             bool result = await _roleWriteDal.AddAsync(entity);

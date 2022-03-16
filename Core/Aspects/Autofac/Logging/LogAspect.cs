@@ -48,7 +48,7 @@ namespace Core.Aspects.Autofac.Logging
             LogDetail logDetail = new LogDetail
             {
                 LogParameters = parameters,
-                MethodName = invocation.Method.Name,
+                MethodName = $"{invocation.Method.DeclaringType.FullName}.{invocation.Method.Name}",
                 UserEmail = userEmail,
                 UserRoles = userRoles
             };

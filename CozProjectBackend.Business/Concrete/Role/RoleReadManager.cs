@@ -1,4 +1,8 @@
-﻿using Core.Entities.Concrete;
+﻿using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Exception;
+using Core.Aspects.Autofac.Logging;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
+using Core.Entities.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;

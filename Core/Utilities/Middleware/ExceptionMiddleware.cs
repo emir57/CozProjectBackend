@@ -55,7 +55,7 @@ namespace Core.Utilities.Middleware
             }
             return context.Response.WriteAsync(new ErrorDetails
             {
-                Message = message,
+                Message = e.Message,
                 StatusCode = context.Response.StatusCode
             }.ToString());
         }

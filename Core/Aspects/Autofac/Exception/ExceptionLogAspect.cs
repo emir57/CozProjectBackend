@@ -50,7 +50,7 @@ namespace Core.Aspects.Autofac.Exception
 
             LogDetailWithException logDetailWithException = new LogDetailWithException
             {
-                MethodName = invocation.Method.Name,
+                MethodName = $"{invocation.Method.DeclaringType.FullName}.{invocation.Method.Name}",
                 LogParameters = parameters,
                 UserEmail = userEmail,
                 UserRoles = userRoles
