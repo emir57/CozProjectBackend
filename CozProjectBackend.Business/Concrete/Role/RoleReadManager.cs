@@ -27,11 +27,12 @@ namespace CozProjectBackend.Business.Concrete
             _languageMessage = language;
         }
         [SecuredOperation("Admin")]
+        [CacheAspect]
         public async Task<IDataResult<List<Role>>> GetAllAsync()
         {
             return new SuccessDataResult<List<Role>>(await _roleReadDal.GetAll().ToListAsync(),_languageMessage.SuccessGet);
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<Role>> GetByIdAsync(int id)
         {
             Role role = await _roleReadDal.GetByIdAsync(id);
