@@ -24,6 +24,11 @@ namespace Core.DataAccess.EntityFramework
             return entityEntry.State == EntityState.Added;
         }
 
+        public async Task AddRangeAsync(List<T> entities)
+        {
+            await _context.AddRangeAsync(entities);
+        }
+
         public void Delete(T entity)
         {
             _context.Remove(entity);
@@ -38,6 +43,11 @@ namespace Core.DataAccess.EntityFramework
         {
             EntityEntry<T> entityEntry = _context.Update(entity);
             return entityEntry.State == EntityState.Modified;
+        }
+
+        public void UpdateRange(List<T> entities)
+        {
+            _context.UpdateRange(entities);
         }
     }
 }
