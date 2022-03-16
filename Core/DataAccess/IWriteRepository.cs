@@ -10,7 +10,9 @@ namespace Core.DataAccess
         where T:class,IEntity,new()
     {
         Task<bool> AddAsync(T entity);
+        void AddRange(List<T> entities);
         bool Update(T entity);
+        void UpdateRange(List<T> entities);
         void Delete(T entity);
         Task<int> SaveAsync();
     }
