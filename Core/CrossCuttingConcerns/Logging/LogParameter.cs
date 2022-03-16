@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.CrossCuttingConcerns.Logging
 {
-    public class LogParameters
+    public class LogParameter
     {
         public string Name { get; set; }
         public object Value { get; set; }
