@@ -51,7 +51,7 @@ namespace Core.Aspects.Autofac.Logging
                 MethodName = invocation.Method.Name,
                 UserEmail = userEmail,
                 UserRoles = userRoles
-            }
+            };
             return logDetail;
         }
     }
