@@ -11,6 +11,6 @@ namespace CozProjectBackend.Business.Abstract
     public interface IRoleReadService
     {
         Task<IDataResult<Role>> GetByIdAsync(int id);
-        IDataResult<IQueryable<Role>> GetAll();
+        Task<IDataResult<List<Role>>> GetAllAsync();
     }
 }

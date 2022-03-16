@@ -8,6 +8,7 @@ using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.DataAccess.Abstract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,10 @@ namespace CozProjectBackend.Business.Concrete
             _languageMessage = language;
         }
         [SecuredOperation("Admin")]
-        public IDataResult<IQueryable<Role>> GetAll()
+        [CacheAspect]
+        public async Task<IDataResult<List<Role>>> GetAllAsync()
         {
-            return new SuccessDataResult<IQueryable<Role>>(_roleReadDal.GetAll(),_languageMessage.SuccessGet);
+            return new SuccessDataResult<List<Role>>(await _roleReadDal.GetAll().ToListAsync(),_languageMessage.SuccessGet);
         }
 
         public async Task<IDataResult<Role>> GetByIdAsync(int id)
