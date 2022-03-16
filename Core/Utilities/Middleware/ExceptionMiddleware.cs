@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Exception.UnAuthorizeException;
+﻿using Core.Utilities.Exception.UnAuthorizedException;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
