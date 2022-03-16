@@ -1,4 +1,6 @@
-﻿using Core.Utilities.IoC;
+﻿using Core.CrossCuttingConcerns.Caching;
+using Core.CrossCuttingConcerns.Caching.Microsoft;
+using Core.Utilities.IoC;
 using Core.Utilities.Message;
 using Core.Utilities.Message.Turkish;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +20,7 @@ namespace Core.DependencyResolvers
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<ILanguageMessage, TurkishLanguageMessage>();
+            services.AddSingleton<ICacheManager, MemoryCacheManager>();
         }
     }
 }
