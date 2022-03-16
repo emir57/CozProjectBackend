@@ -28,6 +28,7 @@ namespace CozProjectBackend.Business.Concrete
             return new SuccessDataResult<List<User>>(await _userReadDal.GetAll().ToListAsync(),_languageMessage.SuccessGet);
         }
 
+        [SecuredOperation("User")]
         public async Task<IDataResult<User>> GetByEmailAsync(string email)
         {
             User user = await _userReadDal.GetAsync(x => x.Email == email);
@@ -35,7 +36,7 @@ namespace CozProjectBackend.Business.Concrete
                 return new ErrorDataResult<User>(_languageMessage.UserNotFound);
             return new SuccessDataResult<User>(user,_languageMessage.SuccessGet);
         }
-
+        [SecuredOperation("User")]
         public async Task<IDataResult<User>> GetByIdAsync(int id)
         {
             User user = await _userReadDal.GetByIdAsync(id);
@@ -43,7 +44,7 @@ namespace CozProjectBackend.Business.Concrete
                 return new ErrorDataResult<User>(_languageMessage.UserNotFound);
             return new SuccessDataResult<User>(user,_languageMessage.SuccessGet);
         }
-
+        [SecuredOperation("Admin")]
         public async Task<List<Role>> GetRolesAsync(User user)
         {
             return await _userReadDal.GetRoles(user).ToListAsync();
