@@ -5,12 +5,10 @@ using System.Text;
 
 namespace CozProjectBackend.Entities.Concrete
 {
-    public class Question : IEntity
+    public class Category : IEntity
     {
         public int Id { get; set; }
-        public string Content { get; set; }
-        public int TeacherId { get; set; }
-        public int CategoryId { get; set; }
+        public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
     }
