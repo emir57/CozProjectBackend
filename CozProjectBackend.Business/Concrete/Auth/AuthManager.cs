@@ -28,9 +28,9 @@ namespace CozProjectBackend.Business.Concrete.Auth
             _userWriteService = userWriteService;
         }
 
-        public IDataResult<AccessToken> CreateAccessToken(User user)
+        public async Task<IDataResult<AccessToken>> CreateAccessTokenAsync(User user)
         {
-            AccessToken accessToken = _tokenHelper.CreateToken(user, _userReadService.GetRoles(user));
+            AccessToken accessToken = _tokenHelper.CreateToken(user, await _userReadService.GetRolesAsync(user));
             return new SuccessDataResult<AccessToken>(accessToken,_language.SuccessCreateToken);
         }
 

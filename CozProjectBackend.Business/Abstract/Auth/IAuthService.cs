@@ -13,7 +13,7 @@ namespace CozProjectBackend.Business.Abstract.Auth
     {
         Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto);
         Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto);
-        IDataResult<AccessToken> CreateAccessToken(User user);
+        Task<IDataResult<AccessToken>> CreateAccessTokenAsync(User user);
         Task<IResult> UserExistsAsync(string email); 
     }
 }

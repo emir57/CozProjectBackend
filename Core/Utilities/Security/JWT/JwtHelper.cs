@@ -22,7 +22,7 @@ namespace Core.Utilities.Security.JWT
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
         }
-        public AccessToken CreateToken(User user, IQueryable<Role> roles)
+        public AccessToken CreateToken(User user, List<Role> roles)
         {
             _accessTokenExpiration = DateTime.Now.AddDays(_tokenOptions.AccessTokenExpiration);
             SecurityKey securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
@@ -37,7 +37,7 @@ namespace Core.Utilities.Security.JWT
             };
         }
 
-        private JwtSecurityToken CreateJwtSecurityToken(User user, IQueryable<Role> roles, SigningCredentials signingCredentials, TokenOptions tokenOptions, DateTime accessTokenExpiration)
+        private JwtSecurityToken CreateJwtSecurityToken(User user, List<Role> roles, SigningCredentials signingCredentials, TokenOptions tokenOptions, DateTime accessTokenExpiration)
         {
             return new JwtSecurityToken(
                 issuer: _tokenOptions.Issuer,
@@ -48,7 +48,7 @@ namespace Core.Utilities.Security.JWT
                 expires: _accessTokenExpiration);
         }
 
-        private IEnumerable<Claim> SetClaims(User user, IQueryable<Role> roles)
+        private IEnumerable<Claim> SetClaims(User user, List<Role> roles)
         {
             List<Claim> claims = new List<Claim>();
             claims.AddEmail(user.Email);
