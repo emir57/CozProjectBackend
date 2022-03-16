@@ -23,7 +23,7 @@ namespace CozProjectBackend.Business.Concrete
         [CacheRemoveAspect("IRoleReadService.Get")]
         public async Task<IResult> AddAsync(Role entity)
         {
-            bool result = true;//await _roleWriteDal.AddAsync(entity);
+            bool result = await _roleWriteDal.AddAsync(entity);
             if (result)
                 return new SuccessResult(_languageMessage.SuccessAdd);
             return new ErrorResult(_languageMessage.FailureAdd);
