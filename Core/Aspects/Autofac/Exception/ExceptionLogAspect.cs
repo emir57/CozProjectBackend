@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Castle.DynamicProxy;
+using Core.CrossCuttingConcerns.Logging;
+using Core.Extensions;
 
 namespace Core.Aspects.Autofac.Exception
 {
@@ -26,7 +28,34 @@ namespace Core.Aspects.Autofac.Exception
         }
         protected override void OnException(IInvocation invocation, System.Exception e)
         {
-            base.OnException(invocation, e);
+            LogDetailWithException logDetailWithException = GetMethodDetail(invocation);
+            logDetailWithException.ExceptionMessage = e.Message;
+            _loggerServiceBase.Error(logDetailWithException);
+        }
+
+        private LogDetailWithException GetMethodDetail(IInvocation invocation)
+        {
+            List<LogParameter> parameters = new List<LogParameter>();
+            for (int i = 0; i < invocation.Arguments.Length; i++)
+            {
+                parameters.Add(new LogParameter
+                {
+                    Name = invocation.GetConcreteMethod().GetParameters()[i].Name,
+                    Type = invocation.Arguments[i].GetType().ToString(),
+                    Value = invocation.Arguments[i]
+                });
+            }
+            string userEmail = _httpContextAccessor.HttpContext.User.ClaimEmail();
+            List<string> userRoles = _httpContextAccessor.HttpContext.User.ClaimRoles();
+
+            LogDetailWithException logDetailWithException = new LogDetailWithException
+            {
+                MethodName = invocation.Method.Name,
+                LogParameters = parameters,
+                UserEmail = userEmail,
+                UserRoles = userRoles
+            };
+            return logDetailWithException;
         }
     }
 }
