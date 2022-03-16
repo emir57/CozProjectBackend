@@ -47,7 +47,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
                 cacheEntries.Add(cacheItemValue);
             }
             var regex = new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
-            var keysToRemove = cacheEntries.Where(x => regex.IsMatch(x.ToString())).Select(x => x.Key);
+            var keysToRemove = cacheEntries.Where(x => regex.IsMatch(x.Key.ToString())).Select(x => x.Key).ToList();
             foreach (var key in keysToRemove)
             {
                 _memory.Remove(key);
