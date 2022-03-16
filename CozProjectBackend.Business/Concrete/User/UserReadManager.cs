@@ -4,6 +4,7 @@ using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.DataAccess.Abstract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,9 @@ namespace CozProjectBackend.Business.Concrete
             _languageMessage = language;
         }
         
-        public IDataResult<IQueryable<User>> GetAll()
+        public async Task<IDataResult<List<User>>> GetAllAsync()
         {
-            return new SuccessDataResult<IQueryable<User>>(_userReadDal.GetAll(),_languageMessage.SuccessGet);
+            return new SuccessDataResult<List<User>>(await _userReadDal.GetAll().ToListAsync(),_languageMessage.SuccessGet);
         }
 
         public async Task<IDataResult<User>> GetByEmailAsync(string email)
@@ -43,9 +44,9 @@ namespace CozProjectBackend.Business.Concrete
             return new SuccessDataResult<User>(user,_languageMessage.SuccessGet);
         }
 
-        public IQueryable<Role> GetRoles(User user)
+        public async Task<List<Role>> GetRolesAsync(User user)
         {
-            return _userReadDal.GetRoles(user);
+            return await _userReadDal.GetRoles(user).ToListAsync();
         }
     }
 }
