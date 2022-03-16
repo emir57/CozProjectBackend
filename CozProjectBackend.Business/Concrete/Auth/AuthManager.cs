@@ -19,13 +19,15 @@ namespace CozProjectBackend.Business.Concrete.Auth
         private readonly IUserReadService _userReadService;
         private readonly IUserWriteService _userWriteService;
         private readonly ILanguageMessage _language;
+        private readonly IRoleWriteService _roleWriteService;
 
-        public AuthManager(ITokenHelper tokenHelper, IUserReadService userReadService, ILanguageMessage language, IUserWriteService userWriteService)
+        public AuthManager(ITokenHelper tokenHelper, IUserReadService userReadService, ILanguageMessage language, IUserWriteService userWriteService, IRoleWriteService roleWriteService)
         {
             _tokenHelper = tokenHelper;
             _userReadService = userReadService;
             _language = language;
             _userWriteService = userWriteService;
+            _roleWriteService = roleWriteService;
         }
 
         public async Task<IDataResult<AccessToken>> CreateAccessTokenAsync(User user)
@@ -64,6 +66,10 @@ namespace CozProjectBackend.Business.Concrete.Auth
             };
             IResult result = await _userWriteService.AddAsync(user);
             await _userWriteService.SaveAsync();
+            _roleWriteService.AddAsync(new Role
+            {
+                
+            })
             if (!result.Success)
             {
                 return new ErrorDataResult<User>(_language.FailureRegister);
