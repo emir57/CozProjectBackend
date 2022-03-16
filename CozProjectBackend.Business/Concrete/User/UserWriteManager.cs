@@ -21,7 +21,7 @@ namespace CozProjectBackend.Business.Concrete
             _userWriteDal = userWriteDal;
             _languageMessage = language;
         }
-        [SecuredOperation("Admin")]
+        
         public async Task<IResult> AddAsync(User entity)
         {
             bool result = await _userWriteDal.AddAsync(entity);
@@ -35,7 +35,7 @@ namespace CozProjectBackend.Business.Concrete
             _userWriteDal.Delete(entity);
             return new SuccessResult(_languageMessage.SuccessDelete);
         }
-        [SecuredOperation("Admin")]
+        
         public async Task<int> SaveAsync()
         {
             return await _userWriteDal.SaveAsync();

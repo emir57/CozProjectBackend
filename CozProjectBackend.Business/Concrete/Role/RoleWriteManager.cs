@@ -30,7 +30,7 @@ namespace CozProjectBackend.Business.Concrete
                 return new SuccessResult(_languageMessage.SuccessAdd);
             return new ErrorResult(_languageMessage.FailureAdd);
         }
-        [SecuredOperation("Admin")]
+        
         public async Task AddUserRoleAsync(int userId, int roleId)
         {
             await _roleWriteDal.AddUserRoleAsync(userId, roleId);
@@ -43,7 +43,6 @@ namespace CozProjectBackend.Business.Concrete
             _roleWriteDal.Delete(entity);
             return new SuccessResult(_languageMessage.SuccessDelete);
         }
-        [SecuredOperation("Admin")]
         [CacheRemoveAspect("IRoleReadService.Get")]
         public Task<int> SaveAsync()
         {
