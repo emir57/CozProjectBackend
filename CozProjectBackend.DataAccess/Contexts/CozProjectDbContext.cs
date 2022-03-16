@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Entities.Concrete;
+using CozProjectBackend.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,5 +36,8 @@ namespace CozProjectBackend.DataAccess.Contexts
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
