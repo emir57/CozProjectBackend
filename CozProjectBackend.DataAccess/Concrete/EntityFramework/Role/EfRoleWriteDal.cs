@@ -17,7 +17,7 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
             _context = context;
         }
 
-        public async Task AddUserRole(int userId, int roleId)
+        public async Task AddUserRoleAsync(int userId, int roleId)
         {
             await _context.Set<UserRole>().AddAsync(new UserRole
             {

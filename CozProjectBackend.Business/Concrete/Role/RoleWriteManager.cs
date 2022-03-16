@@ -31,6 +31,12 @@ namespace CozProjectBackend.Business.Concrete
             return new ErrorResult(_languageMessage.FailureAdd);
         }
         [SecuredOperation("Admin")]
+        public async Task AddUserRoleAsync(int userId, int roleId)
+        {
+            await _roleWriteDal.AddUserRoleAsync(userId, roleId);
+        }
+
+        [SecuredOperation("Admin")]
         [CacheRemoveAspect("IRoleReadService.Get")]
         public IResult Delete(Role entity)
         {

@@ -12,6 +12,7 @@ namespace CozProjectBackend.Business.Abstract
         Task<IResult> AddAsync(Role entity);
         IResult Update(Role entity);
         IResult Delete(Role entity);
+        Task AddUserRoleAsync(int userId, int roleId);
         Task<int> SaveAsync();
     }
 }
