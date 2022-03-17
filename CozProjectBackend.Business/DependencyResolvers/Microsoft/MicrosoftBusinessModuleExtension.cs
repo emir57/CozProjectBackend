@@ -25,6 +25,15 @@ namespace CozProjectBackend.Business.DependencyResolvers.Microsoft
             services.AddScoped<IRoleReadDal, EfRoleReadDal>();
             services.AddScoped<IRoleReadService, RoleReadManager>();
             services.AddScoped<IRoleWriteService, RoleWriteManager>();
+
+            services.AddScoped<IQuestionReadDal, EfQuestionReadDal>();
+            services.AddScoped<IQuestionWriteDal, EfQuestionWriteDal>();
+
+            services.AddScoped<IAnswerReadDal, EfAnswerReadDal>();
+            services.AddScoped<IAnswerWriteDal, EfAnswerWriteDal>();
+
+            services.AddScoped<ICategoryReadDal, EfCategoryReadDal>();
+            services.AddScoped<ICategoryWriteDal, EfCategoryWriteDal>();
             return services;
         }
     }
