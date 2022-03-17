@@ -31,7 +31,13 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfRoleReadDal>().As<IRoleReadDal>();
             builder.RegisterType<EfUserWriteDal>().As<IUserWriteDal>();
             builder.RegisterType<EfUserReadDal>().As<IUserReadDal>();
-            //SErvices
+            builder.RegisterType<EfQuestionWriteDal>().As<IQuestionWriteDal>();
+            builder.RegisterType<EfQuestionReadDal>().As<IQuestionReadDal>();
+            builder.RegisterType<EfAnswerReadDal>().As<IAnswerReadDal>();
+            builder.RegisterType<EfAnswerWriteDal>().As<IAnswerWriteDal>();
+            builder.RegisterType<EfCategoryReadDal>().As<ICategoryReadDal>();
+            builder.RegisterType<EfCategoryWriteDal>().As<ICategoryWriteDal>();
+            //Services
             builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
             builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
             builder.RegisterType<UserReadManager>().As<IUserReadService>();
