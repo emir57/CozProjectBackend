@@ -28,7 +28,7 @@ namespace CozProjectBackend.Business.Concrete
         }
         [SecuredOperation("Admin")]
         [CacheAspect]
-        public async Task<IDataResult<List<Role>>> GetAllAsync()
+        public async Task<IDataResult<List<Role>>> GetListAsync()
         {
             return new SuccessDataResult<List<Role>>(await _roleReadDal.GetAll().ToListAsync(),_languageMessage.SuccessGet);
         }

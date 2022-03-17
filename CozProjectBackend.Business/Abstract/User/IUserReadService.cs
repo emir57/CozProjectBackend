@@ -12,7 +12,7 @@ namespace CozProjectBackend.Business.Abstract
     {
         Task<IDataResult<User>> GetByIdAsync(int id);
         Task<IDataResult<User>> GetByEmailAsync(string email);
-        Task<IDataResult<List<User>>> GetAllAsync();
+        Task<IDataResult<List<User>>> GetListAsync();
         Task<List<Role>> GetRolesAsync(User user);
     }
 }

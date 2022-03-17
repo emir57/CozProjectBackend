@@ -31,7 +31,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _roleReadService.GetAllAsync();
+            var result = await _roleReadService.GetListAsync();
             return Ok(result);
         }
     }
