@@ -44,8 +44,8 @@ namespace CozProjectBackend.Business.Concrete
         {
             bool result = _answerWriteDal.Update(answer);
             if (result)
-                return new SuccessResult(_language.SuccessAdd);
-            return new ErrorResult(_language.FailureAdd);
+                return new SuccessResult(_language.SuccessUpdate);
+            return new ErrorResult(_language.FailureUpdate);
         }
     }
 }
