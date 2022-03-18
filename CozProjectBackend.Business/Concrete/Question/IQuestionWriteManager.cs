@@ -31,17 +31,21 @@ namespace CozProjectBackend.Business.Concrete
 
         public IResult Delete(Question question)
         {
-            throw new NotImplementedException();
+            _questionWriteDal.Delete(question);
+            return new SuccessResult(_language.SuccessDelete);
         }
 
-        public Task<int> SaveAsync()
+        public async Task<int> SaveAsync()
         {
-            throw new NotImplementedException();
+            return await _questionWriteDal.SaveAsync();
         }
 
         public IResult Update(Question question)
         {
-            throw new NotImplementedException();
+            bool result = _questionWriteDal.Update(question);
+            if (result)
+                return new SuccessResult(_language.SuccessUpdate);
+            return new ErrorResult(_language.FailureUpdate);
         }
     }
 }
