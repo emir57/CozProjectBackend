@@ -10,5 +10,6 @@ namespace Core.CrossCuttingConcerns.Logging
         public List<LogParameter> LogParameters { get; set; }
         public string UserEmail { get; set; }
         public List<string> UserRoles { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }
