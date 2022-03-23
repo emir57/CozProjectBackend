@@ -52,6 +52,7 @@ namespace CozProjectBackend.Business.Concrete
             return _roleWriteDal.SaveAsync();
         }
         [SecuredOperation("Admin")]
+        [ValidationAspect(typeof(RoleValidator))]
         [CacheRemoveAspect("IRoleReadService.Get")]
         public IResult Update(Role entity)
         {
