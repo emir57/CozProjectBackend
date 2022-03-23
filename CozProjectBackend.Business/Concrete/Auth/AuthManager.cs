@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using Core.Aspects.Autofac.Validation;
+using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
@@ -6,6 +7,7 @@ using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Abstract.Auth;
+using CozProjectBackend.Business.Validators.FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,7 +37,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
             AccessToken accessToken = _tokenHelper.CreateToken(user, await _userReadService.GetRolesAsync(user));
             return new SuccessDataResult<AccessToken>(accessToken,_language.SuccessCreateToken);
         }
-
+        [ValidationAspect(typeof(UserForLoginValidator))]
         public async Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto)
         {
             User user = (await _userReadService.GetByEmailAsync(userForLoginDto.Email)).Data;

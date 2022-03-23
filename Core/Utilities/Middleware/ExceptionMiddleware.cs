@@ -41,6 +41,7 @@ namespace Core.Utilities.Middleware
             {
                 message = e.Message;
                 validationFailures = ((ValidationException)e).Errors;
+                context.Response.StatusCode = 400;
                 return context.Response.WriteAsync(new ValidationErrorDetails
                 {
                     Message = message,
