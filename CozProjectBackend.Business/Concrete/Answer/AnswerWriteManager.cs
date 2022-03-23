@@ -1,6 +1,8 @@
-﻿using Core.Utilities.Message;
+﻿using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.Validators.FluentValidation;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.Entities.Concrete;
 using System;
@@ -20,7 +22,7 @@ namespace CozProjectBackend.Business.Concrete
             _answerWriteDal = answerWriteDal;
             _language = language;
         }
-
+        [ValidationAspect(typeof(AnswerValidator))]
         public async Task<IResult> AddAsync(Answer answer)
         {
             bool result = await _answerWriteDal.AddAsync(answer);
