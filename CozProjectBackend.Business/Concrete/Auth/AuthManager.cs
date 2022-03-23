@@ -51,7 +51,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
             }
             return new SuccessDataResult<User>(user, _language.LoginSuccess);
         }
-
+        [ValidationAspect(typeof(UserForRegisterValidator))]
         public async Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)
         {
             byte[] passwordHash, passwordSalt;
