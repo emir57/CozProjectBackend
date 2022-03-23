@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace CozProjectBackend.Business.Concrete
 {
-    public class IQuestionReadManager : IQuestionReadService
+    public class QuestionReadManager : IQuestionReadService
     {
         private readonly IQuestionReadDal _questionReadDal;
         private readonly ILanguageMessage _language;
 
-        public IQuestionReadManager(IQuestionReadDal questionReadDal, ILanguageMessage language)
+        public QuestionReadManager(IQuestionReadDal questionReadDal, ILanguageMessage language)
         {
             _questionReadDal = questionReadDal;
             _language = language;
