@@ -1,9 +1,11 @@
 ﻿using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.BusinessAspects;
+using CozProjectBackend.Business.Validators.FluentValidation;
 using CozProjectBackend.DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,7 @@ namespace CozProjectBackend.Business.Concrete
             _languageMessage = language;
         }
         [SecuredOperation("Admin")]
+        [ValidationAspect(typeof(RoleValidator))]
         [CacheRemoveAspect("IRoleReadService.Get")]
         public async Task<IResult> AddAsync(Role entity)
         {
