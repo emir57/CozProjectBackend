@@ -41,7 +41,7 @@ namespace CozProjectBackend.Business.Concrete
         {
             return await _questionWriteDal.SaveAsync();
         }
-
+        [ValidationAspect(typeof(QuestionValidator))]
         public IResult Update(Question question)
         {
             bool result = _questionWriteDal.Update(question);
