@@ -41,7 +41,7 @@ namespace CozProjectBackend.Business.Concrete
         {
             return await _categoryWriteDal.SaveAsync();
         }
-
+        [ValidationAspect(typeof(CategoryValidator))]
         public IResult Update(Category entity)
         {
             bool result = _categoryWriteDal.Update(entity);
