@@ -35,15 +35,19 @@ namespace CozProjectBackend.Business.Concrete.Auth
         public async Task<IDataResult<AccessToken>> CreateAccessTokenAsync(User user)
         {
             AccessToken accessToken = _tokenHelper.CreateToken(user, await _userReadService.GetRolesAsync(user));
-            return new SuccessDataResult<AccessToken>(accessToken,_language.SuccessCreateToken);
+            return new SuccessDataResult<AccessToken>(accessToken, _language.SuccessCreateToken);
         }
         [ValidationAspect(typeof(UserForLoginValidator))]
         public async Task<IDataResult<User>> LoginAsync(UserForLoginDto userForLoginDto)
         {
             User user = (await _userReadService.GetByEmailAsync(userForLoginDto.Email)).Data;
-            if(user == null)
+            if (user == null)
             {
                 return new ErrorDataResult<User>(_language.UserNotFound);
+            }
+            if (!user.EmailConfirmed)
+            {
+                return new ErrorDataResult<User>(_language.FailEmailConfirm);
             }
             if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, user.PasswordHash, user.PasswordSalt))
             {
@@ -55,7 +59,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
         public async Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)
         {
             byte[] passwordHash, passwordSalt;
-            HashingHelper.CreatePasswordHash(userForRegisterDto.Password,out passwordHash,out passwordSalt);
+            HashingHelper.CreatePasswordHash(userForRegisterDto.Password, out passwordHash, out passwordSalt);
             User user = new User
             {
                 FirstName = userForRegisterDto.FirstName,
