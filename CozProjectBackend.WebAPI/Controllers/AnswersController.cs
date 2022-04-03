@@ -61,5 +61,16 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("update")]
+        public async Task<IActionResult> Update(Answer answer)
+        {
+            IResult result = _answerWriteService.Update(answer);
+            await _answerWriteService.SaveAsync();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }
