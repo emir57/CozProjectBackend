@@ -72,5 +72,15 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("delete")]
+        public IActionResult Delete(Answer answer)
+        {
+            IResult result = _answerWriteService.Delete(answer);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }
