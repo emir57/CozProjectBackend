@@ -25,7 +25,7 @@ namespace CozProjectBackend.Business.Concrete
         [SecuredOperation("Admin")]
         public async Task<IDataResult<List<User>>> GetListAsync()
         {
-            return new SuccessDataResult<List<User>>(await _userReadDal.GetAll().ToListAsync(),_languageMessage.SuccessGet);
+            return new SuccessDataResult<List<User>>(await _userReadDal.GetAll().ToListAsync(),_languageMessage.SuccessList);
         }
 
         public async Task<IDataResult<User>> GetByEmailAsync(string email)
