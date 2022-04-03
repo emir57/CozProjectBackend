@@ -21,7 +21,7 @@ namespace Core.Utilities.Message.English
 
         public string SuccessGet => "Get is successful";
 
-        public string FailureGet => "Get is unsuccessful";
+        public string FailureGet => "Not Found";
 
         public string UnAuthorize => "Authorize Denied";
 
@@ -37,5 +37,9 @@ namespace Core.Utilities.Message.English
         public string UserAlreadyExists => "User already exists";
         public string FailureRegister => "Register is unsuccessful";
         public string SuccessRegister => "Register is successful";
+
+        public string SuccessList => "Listing Successful";
+
+        public string FailureList => "Listing Unsuccessful";
     }
 }
