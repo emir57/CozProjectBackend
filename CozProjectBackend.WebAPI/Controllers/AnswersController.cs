@@ -1,6 +1,7 @@
 ﻿using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace CozProjectBackend.WebAPI.Controllers
 {
-    public class AnswersController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AnswersController : ControllerBase
     {
         private readonly IAnswerReadService _answerReadService;
         private readonly IAnswerWriteService _answerWriteService;
