@@ -1,4 +1,4 @@
-﻿using CozProjectBackend.DataAccess.Abstract;
+﻿using CozProjectBackend.Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,15 +9,13 @@ namespace CozProjectBackend.WebAPI.Controllers
 {
     public class AnswersController : Controller
     {
-        private readonly IAnswerReadDal _answerReadDal;
-        private readonly IAnswerWriteDal _answerWriteDal;
+        private readonly IAnswerReadService _answerReadService;
+        private readonly IAnswerWriteService _answerWriteService;
 
-        public AnswersController(IAnswerReadDal answerReadDal, IAnswerWriteDal answerWriteDal)
+        public AnswersController(IAnswerWriteService answerWriteService, IAnswerReadService answerReadService)
         {
-            _answerReadDal = answerReadDal;
-            _answerWriteDal = answerWriteDal;
+            _answerWriteService = answerWriteService;
+            _answerReadService = answerReadService;
         }
-
-        
     }
 }
