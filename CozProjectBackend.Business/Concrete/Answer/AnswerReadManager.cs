@@ -34,12 +34,12 @@ namespace CozProjectBackend.Business.Concrete
 
         public async Task<IDataResult<List<Answer>>> GetListAsync()
         {
-            return new SuccessDataResult<List<Answer>>(await _answerReadDal.GetAll().ToListAsync(), _language.SuccessGet);
+            return new SuccessDataResult<List<Answer>>(await _answerReadDal.GetAll().ToListAsync(), _language.SuccessList);
         }
 
         public async Task<IDataResult<List<Answer>>> GetListByQuestionIdAsync(int questionId)
         {
-            return new SuccessDataResult<List<Answer>>(await _answerReadDal.GetAll(x => x.QuestionId == questionId).ToListAsync(), _language.SuccessGet);
+            return new SuccessDataResult<List<Answer>>(await _answerReadDal.GetAll(x => x.QuestionId == questionId).ToListAsync(), _language.SuccessList);
         }
     }
 }
