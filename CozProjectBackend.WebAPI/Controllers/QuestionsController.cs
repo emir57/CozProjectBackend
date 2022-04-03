@@ -1,4 +1,6 @@
-﻿using CozProjectBackend.Business.Abstract;
+﻿using Core.Utilities.Result;
+using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,6 +20,17 @@ namespace CozProjectBackend.WebAPI.Controllers
         {
             _questionWriteService = questionWriteService;
             _questionReadService = questionReadService;
+        }
+
+        [HttpGet("getlistbycategoryid")]
+        public async Task<IActionResult> GetListByCategoryId(int categoryId)
+        {
+            IDataResult<List<Question>> result = await _questionReadService.GetListByCategoryIdAsync(categoryId);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }
