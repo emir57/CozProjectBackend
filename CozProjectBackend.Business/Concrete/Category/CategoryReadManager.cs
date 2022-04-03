@@ -24,12 +24,17 @@ namespace CozProjectBackend.Business.Concrete
 
         public async Task<IDataResult<Category>> GetByIdAsync(int categoryId)
         {
-            return new SuccessDataResult<Category>(await _categoryReadDal.GetByIdAsync(categoryId), _language.SuccessGet);
+            Category category = await _categoryReadDal.GetByIdAsync(categoryId);
+            if(category == null)
+            {
+                return new ErrorDataResult<Category>(category, _language.FailureGet);
+            }
+            return new SuccessDataResult<Category>(category, _language.SuccessGet);
         }
 
         public async Task<IDataResult<List<Category>>> GetListAsync()
         {
-            return new SuccessDataResult<List<Category>>(await _categoryReadDal.GetAll().ToListAsync(), _language.SuccessGet);
+            return new SuccessDataResult<List<Category>>(await _categoryReadDal.GetAll().ToListAsync(), _language.SuccessList);
         }
     }
 }
