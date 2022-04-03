@@ -7,17 +7,20 @@ namespace Core.Utilities.Message
     public interface ILanguageMessage
     {
         string SuccessAdd { get; }
-        string SuccessDelete { get;}
-        string SuccessUpdate { get;}
+        string SuccessDelete { get; }
+        string SuccessUpdate { get; }
 
-        string FailureAdd { get;}
-        string FailureUpdate { get;}
-        string FailureDelete { get;}
+        string FailureAdd { get; }
+        string FailureUpdate { get; }
+        string FailureDelete { get; }
 
-        string SuccessGet { get;}
-        string FailureGet { get;}
+        string SuccessGet { get; }
+        string FailureGet { get; }
 
-        string UnAuthorize { get;}
+        string SuccessList { get; }
+        string FailureList { get; }
+
+        string UnAuthorize { get; }
 
         string UserNotFound { get; }
         string RoleNotFound { get; }

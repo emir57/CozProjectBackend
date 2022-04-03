@@ -24,7 +24,12 @@ namespace CozProjectBackend.Business.Concrete
 
         public async Task<IDataResult<Answer>> GetByIdAsync(int answerId)
         {
-            return new SuccessDataResult<Answer>(await _answerReadDal.GetByIdAsync(answerId), _language.SuccessGet);
+            Answer answer = await _answerReadDal.GetByIdAsync(answerId);
+            if (answer == null)
+            {
+                return new ErrorDataResult<Answer>(answer, _language.FailureGet);
+            }
+            return new SuccessDataResult<Answer>(answer, _language.SuccessGet);
         }
 
         public async Task<IDataResult<List<Answer>>> GetListAsync()
