@@ -30,7 +30,7 @@ namespace CozProjectBackend.Business.Concrete
         [CacheAspect]
         public async Task<IDataResult<List<Role>>> GetListAsync()
         {
-            return new SuccessDataResult<List<Role>>(await _roleReadDal.GetAll().ToListAsync(),_languageMessage.SuccessGet);
+            return new SuccessDataResult<List<Role>>(await _roleReadDal.GetAll().ToListAsync(),_languageMessage.SuccessList);
         }
         [SecuredOperation("Admin")]
         public async Task<IDataResult<Role>> GetByIdAsync(int id)
