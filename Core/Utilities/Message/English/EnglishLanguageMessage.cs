@@ -41,5 +41,7 @@ namespace Core.Utilities.Message.English
         public string SuccessList => "Listing Successful";
 
         public string FailureList => "Listing Unsuccessful";
+
+        public string FailEmailConfirm => "Please verify your email";
     }
 }
