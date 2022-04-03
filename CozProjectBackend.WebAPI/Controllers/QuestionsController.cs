@@ -22,6 +22,16 @@ namespace CozProjectBackend.WebAPI.Controllers
             _questionReadService = questionReadService;
         }
 
+        [HttpGet("getall")]
+        public async Task<IActionResult> GetAll()
+        {
+            IDataResult<List<Question>> result = await _questionReadService.GetListAsync();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
         [HttpGet("getlistbycategoryid")]
         public async Task<IActionResult> GetListByCategoryId(int categoryId)
         {
