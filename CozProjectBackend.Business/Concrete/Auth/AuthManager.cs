@@ -47,6 +47,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
             }
             if (!user.EmailConfirmed)
             {
+                //TODO: send email verification
                 return new ErrorDataResult<User>(_language.FailEmailConfirm);
             }
             if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, user.PasswordHash, user.PasswordSalt))
