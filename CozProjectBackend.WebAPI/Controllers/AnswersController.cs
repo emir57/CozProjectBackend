@@ -49,5 +49,17 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+
+        [HttpGet("add")]
+        public async Task<IActionResult> Add(Answer answer)
+        {
+            IResult result = await _answerWriteService.AddAsync(answer);
+            await _answerWriteService.SaveAsync();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }
