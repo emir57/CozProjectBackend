@@ -43,5 +43,7 @@ namespace Core.Utilities.Message.Turkish
         public string SuccessList => "Listeleme Başarılı";
 
         public string FailureList => "Listeleme Başarısız";
+
+        public string FailEmailConfirm => "Lütfen Eposta adresinizi onaylayınız";
     }
 }
