@@ -1,4 +1,6 @@
-﻿using CozProjectBackend.Business.Abstract;
+﻿using Core.Utilities.Result;
+using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,5 +19,18 @@ namespace CozProjectBackend.WebAPI.Controllers
             _categoryWriteService = categoryWriteService;
             _categoryReadService = categoryReadService;
         }
+
+        [HttpGet("getall")]
+        public async Task<IActionResult> GetAll()
+        {
+            IDataResult<List<Category>> result = await _categoryReadService.GetListAsync();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+
     }
 }
