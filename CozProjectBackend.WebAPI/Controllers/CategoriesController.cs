@@ -30,6 +30,16 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("getbyid")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            IDataResult<Category> result = await _categoryReadService.GetByIdAsync(id);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
 
 
     }
