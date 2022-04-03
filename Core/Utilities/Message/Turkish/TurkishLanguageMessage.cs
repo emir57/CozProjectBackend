@@ -19,9 +19,9 @@ namespace Core.Utilities.Message.Turkish
 
         public string FailureDelete => "Silme Başarısız";
 
-        public string SuccessGet => "Listeleme Başarılı";
+        public string SuccessGet => "Getirme Başarılı";
 
-        public string FailureGet => "Listeleme Başarısız";
+        public string FailureGet => "Bulunamadı";
 
         public string UnAuthorize => "Yetkisiz İşlem";
 
@@ -39,5 +39,9 @@ namespace Core.Utilities.Message.Turkish
 
         public string FailureRegister => "Kayıt Olunurken Bir Hata Meydana Geldi";
         public string SuccessRegister => "Başarıyla Kayıt Olundu";
+
+        public string SuccessList => "Listeleme Başarılı";
+
+        public string FailureList => "Listeleme Başarısız";
     }
 }
