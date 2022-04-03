@@ -1,4 +1,6 @@
-﻿using CozProjectBackend.Business.Abstract;
+﻿using Core.Entities.Concrete;
+using Core.Utilities.Result;
+using CozProjectBackend.Business.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,6 +20,18 @@ namespace CozProjectBackend.WebAPI.Controllers
         {
             _userReadService = userReadService;
             _userWriteService = userWriteService;
+        }
+
+        [HttpPost("updateprofile")]
+        public async Task<IActionResult> UpdateProfile(User user)
+        {
+            IResult result = _userWriteService.Update(user);
+            await _userWriteService.SaveAsync();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }
