@@ -52,5 +52,17 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("add")]
+        public async Task<IActionResult> Add(Question question)
+        {
+            IResult result = await _questionWriteService.AddAsync(question);
+            await _questionWriteService.SaveAsync();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }
