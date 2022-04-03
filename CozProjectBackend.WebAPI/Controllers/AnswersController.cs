@@ -50,7 +50,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("add")]
+        [HttpPost("add")]
         public async Task<IActionResult> Add(Answer answer)
         {
             IResult result = await _answerWriteService.AddAsync(answer);
@@ -61,7 +61,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpGet("update")]
+        [HttpPost("update")]
         public async Task<IActionResult> Update(Answer answer)
         {
             IResult result = _answerWriteService.Update(answer);
@@ -72,10 +72,15 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpGet("delete")]
-        public IActionResult Delete(Answer answer)
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(int id)
         {
-            IResult result = _answerWriteService.Delete(answer);
+            IDataResult<Answer> answerResult = await _answerReadService.GetByIdAsync(id);
+            if (!answerResult.Success)
+            {
+                return BadRequest(answerResult);
+            }
+            IResult result = _answerWriteService.Delete(answerResult.Data);
             if (!result.Success)
             {
                 return BadRequest(result);
