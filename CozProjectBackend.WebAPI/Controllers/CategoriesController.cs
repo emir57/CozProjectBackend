@@ -63,5 +63,20 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            IDataResult<Category> categoryResult = await _categoryReadService.GetByIdAsync(id);
+            if (!categoryResult.Success)
+            {
+                return BadRequest(categoryResult);
+            }
+            IResult result = _categoryWriteService.Delete(categoryResult.Data);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }
