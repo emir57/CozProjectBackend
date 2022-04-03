@@ -30,7 +30,7 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(userResult);
             }
             List<Role> roles = await _userReadService.GetRolesAsync(userResult.Data);
-            return Ok(roles);
+            return Ok(roles.Select(r => r.Name));
         }
 
         [HttpPost("updateprofile")]
