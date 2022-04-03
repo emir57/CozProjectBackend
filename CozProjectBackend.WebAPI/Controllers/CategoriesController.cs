@@ -1,6 +1,7 @@
 ﻿using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace CozProjectBackend.WebAPI.Controllers
 {
-    public class CategoriesController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CategoriesController : ControllerBase
     {
         private readonly ICategoryReadService _categoryReadService;
         private readonly ICategoryWriteService _categoryWriteService;
