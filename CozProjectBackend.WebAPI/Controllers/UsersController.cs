@@ -21,6 +21,17 @@ namespace CozProjectBackend.WebAPI.Controllers
             _userReadService = userReadService;
             _userWriteService = userWriteService;
         }
+        [HttpGet("getroles")]
+        public async Task<IActionResult> GetRoles(int userId)
+        {
+            IDataResult<User> userResult = await _userReadService.GetByIdAsync(userId);
+            if (!userResult.Success)
+            {
+                return BadRequest(userResult);
+            }
+            List<Role> roles = await _userReadService.GetRolesAsync(userResult.Data);
+            return Ok(roles);
+        }
 
         [HttpPost("updateprofile")]
         public async Task<IActionResult> UpdateProfile(User user)
