@@ -63,6 +63,16 @@ namespace CozProjectBackend.WebAPI
                 });
             services.AddDependencyResolvers(
                 new CoreModule());
+
+            services.AddCors(opt =>
+            {
+                opt.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:8100/");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,7 +83,7 @@ namespace CozProjectBackend.WebAPI
                 app.UseDeveloperExceptionPage();
             }
             app.UseCustomMiddleware();
-
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.UseRouting();
