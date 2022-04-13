@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using AutoMapper;
+using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using Core.Utilities.Result;
 using Core.Utilities.Security.JWT;
@@ -17,6 +18,7 @@ namespace CozProjectBackend.WebAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IMapper _mapper;
 
         public AuthController(IAuthService authService)
         {
@@ -38,9 +40,9 @@ namespace CozProjectBackend.WebAPI.Controllers
             var loginResponseDto = new LoginResponseDto()
             {
                 Token = tokenResult.Data,
-                User = null
+                User = _mapper.Map<LoginedUserDto>(loginResult.Data)
             };
-            var data = new DataResult<LoginResponseDto>(loginResponseDto, true,"Giriş Başarılı");
+            var data = new DataResult<LoginResponseDto>(loginResponseDto, true, "Giriş Başarılı");
             return Ok(data);
         }
         [HttpPost("register")]
