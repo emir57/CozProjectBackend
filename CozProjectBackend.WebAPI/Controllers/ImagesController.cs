@@ -13,7 +13,7 @@ namespace CozProjectBackend.WebAPI.Controllers
     public class ImagesController : ControllerBase
     {
         [HttpPost("upload")]
-        public async Task<IActionResult> UploadImage(IFormFile file)
+        public async Task<IActionResult> UploadImage([FromForm]IFormFile file)
         {
             string ex = Path.GetExtension(file.FileName);
             return Ok();
