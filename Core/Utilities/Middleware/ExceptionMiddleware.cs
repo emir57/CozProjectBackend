@@ -37,7 +37,7 @@ namespace Core.Utilities.Middleware
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             string message = "Internal Server Error";
             IEnumerable<ValidationFailure> validationFailures;
-            if(e.GetType() == typeof(ValidationFailure))
+            if(e.GetType() == typeof(ValidationException))
             {
                 message = e.Message;
                 validationFailures = ((ValidationException)e).Errors;
