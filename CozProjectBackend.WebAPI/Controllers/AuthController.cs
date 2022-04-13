@@ -19,10 +19,10 @@ namespace CozProjectBackend.WebAPI.Controllers
     {
         private readonly IAuthService _authService;
         private readonly IMapper _mapper;
-
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IMapper mapper)
         {
             _authService = authService;
+            _mapper = mapper;
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
