@@ -1,4 +1,5 @@
 using Core.DependencyResolvers;
+using Core.Entities.MapperProfiles;
 using Core.Extensions;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -37,11 +38,13 @@ namespace CozProjectBackend.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CozProjectDbContext>(options => 
+            services.AddDbContext<CozProjectDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection"),
-                sqlServerOptionsAction:sqlOptions=> {
+                sqlServerOptionsAction: sqlOptions =>
+                {
                     sqlOptions.EnableRetryOnFailure();
                 }));
+            services.AddAutoMapper(typeof(CoreLayerProfile));
             //services.AddMicrosoftBusinessModule();
             services.AddControllers();
 
@@ -83,7 +86,7 @@ namespace CozProjectBackend.WebAPI
                 app.UseDeveloperExceptionPage();
             }
             app.UseCustomMiddleware();
-            
+
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseRouting();
