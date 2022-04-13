@@ -35,7 +35,13 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(tokenResult);
             }
-            return Ok(tokenResult);
+            var loginResponseDto = new LoginResponseDto()
+            {
+                Token = tokenResult.Data,
+                User = null
+            };
+            var data = new DataResult<LoginResponseDto>(loginResponseDto, true,"Giriş Başarılı");
+            return Ok(data);
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
