@@ -13,9 +13,15 @@ namespace CozProjectBackend.WebAPI.Controllers
     public class ImagesController : ControllerBase
     {
         [HttpPost("upload")]
-        public async Task<IActionResult> UploadImage([FromForm]IFormFile file)
+        public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
         {
-            string ex = Path.GetExtension(file.FileName);
+            string ex = "jpeg";
+            string fileName = $"{Guid.NewGuid()}.{ex}";
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/"+fileName);
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
             return Ok();
         }
     }

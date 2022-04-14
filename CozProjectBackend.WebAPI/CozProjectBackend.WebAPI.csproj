@@ -17,5 +17,9 @@
     <ProjectReference Include="..\CozProjectBackend.DataAccess\CozProjectBackend.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 
 </Project>
