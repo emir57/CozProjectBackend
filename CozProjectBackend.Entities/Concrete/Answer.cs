@@ -11,7 +11,8 @@ namespace CozProjectBackend.Entities.Concrete
         public int QuestionId { get; set; }
         public string Content { get; set; }
         public bool IsTrue { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
     }
 }
