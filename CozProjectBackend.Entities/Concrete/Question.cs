@@ -12,7 +12,8 @@ namespace CozProjectBackend.Entities.Concrete
         public int TeacherId { get; set; }
         public int CategoryId { get; set; }
         public int Score { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
     }
 }
