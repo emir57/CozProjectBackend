@@ -14,7 +14,9 @@ namespace Core.Entities.Concrete
         public byte[] PasswordSalt { get; set; }
         public bool EmailConfirmed { get; set; }
         public int Score { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
+
     }
 }
