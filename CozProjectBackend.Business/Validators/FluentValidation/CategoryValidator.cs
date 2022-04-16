@@ -11,7 +11,7 @@ namespace CozProjectBackend.Business.Validators.FluentValidation
         public CategoryValidator()
         {
             RuleFor(c => c.Name).NotEmpty();
-            RuleFor(c => c.Name).MaximumLength(50);
+            RuleFor(c => c.Name).MaximumLength(30);
         }
     }
 }
