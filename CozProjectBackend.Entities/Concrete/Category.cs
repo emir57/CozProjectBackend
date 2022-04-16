@@ -13,5 +13,6 @@ namespace CozProjectBackend.Entities.Concrete
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public string BackgroundColor { get; set; }
+        public string TextColor { get; set; }
     }
 }
