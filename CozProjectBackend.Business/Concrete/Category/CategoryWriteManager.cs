@@ -44,7 +44,7 @@ namespace CozProjectBackend.Business.Concrete
         private async Task<IResult> CheckCategoryName(Category entity)
         {
             var categories = await _categoryReadService.GetListAsync();
-            if (categories.Data.Any(x=>x.Name == entity.Name))
+            if (categories.Data.Any(x=>x.Name.ToLower() == entity.Name.ToLower()))
             {
                 return new ErrorResult("Böyle bir kategori zaten var");
             }
