@@ -37,26 +37,31 @@ namespace Core.Utilities.Middleware
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             string message = "Internal Server Error";
             IEnumerable<ValidationFailure> validationFailures;
-            if(e.GetType() == typeof(ValidationException))
+            if (e.GetType() == typeof(ValidationException))
             {
                 message = e.Message;
                 validationFailures = ((ValidationException)e).Errors;
                 context.Response.StatusCode = 400;
                 return context.Response.WriteAsync(new ValidationErrorDetails
                 {
-                    Message = message,
+                    message = message,
                     Errors = validationFailures,
                     StatusCode = 400
                 }.ToString());
             }
-            if(e.GetType() == typeof(UnAuthorizedException))
+            if (e.GetType() == typeof(UnAuthorizedException))
             {
                 message = e.Message;
                 context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                return context.Response.WriteAsync(new ErrorDetails
+                {
+                    message = message,
+                    StatusCode = context.Response.StatusCode
+                }.ToString());
             }
             return context.Response.WriteAsync(new ErrorDetails
             {
-                Message = e.Message,
+                message = e.Message,
                 StatusCode = context.Response.StatusCode
             }.ToString());
         }
