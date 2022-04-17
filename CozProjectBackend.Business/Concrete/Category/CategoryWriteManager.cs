@@ -30,7 +30,7 @@ namespace CozProjectBackend.Business.Concrete
         public async Task<IResult> AddAsync(Category entity)
         {
             var result = BusinessRules.Run(
-                await CheckCategoryName(entity));
+                await CheckCategoryNameAsync(entity));
             if(result != null)
             {
                 return result;
@@ -41,7 +41,7 @@ namespace CozProjectBackend.Business.Concrete
             return new ErrorResult(_language.FailureAdd);
         }
 
-        private async Task<IResult> CheckCategoryName(Category entity)
+        private async Task<IResult> CheckCategoryNameAsync(Category entity)
         {
             var categories = await _categoryReadService.GetListAsync();
             if (categories.Data.Any(x=>x.Name.ToLower() == entity.Name.ToLower()))
