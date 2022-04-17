@@ -3,6 +3,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.Business.Validators.FluentValidation;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.Entities.Concrete;
@@ -26,12 +27,13 @@ namespace CozProjectBackend.Business.Concrete
             _categoryWriteDal = categoryWriteDal;
             _categoryReadService = categoryReadService;
         }
+        [SecuredOperation("Admin")]
         [ValidationAspect(typeof(CategoryValidator))]
         public async Task<IResult> AddAsync(Category entity)
         {
             var result = BusinessRules.Run(
                 await CheckCategoryNameAsync(entity));
-            if(result != null)
+            if (result != null)
             {
                 return result;
             }
@@ -44,13 +46,13 @@ namespace CozProjectBackend.Business.Concrete
         private async Task<IResult> CheckCategoryNameAsync(Category entity)
         {
             var categories = await _categoryReadService.GetListAsync();
-            if (categories.Data.Any(x=>x.Name.ToLower() == entity.Name.ToLower()))
+            if (categories.Data.Any(x => x.Name.ToLower() == entity.Name.ToLower()))
             {
                 return new ErrorResult("Böyle bir kategori zaten var");
             }
             return new SuccessResult();
         }
-
+        [SecuredOperation("Admin")]
         public IResult Delete(Category entity)
         {
             _categoryWriteDal.Delete(entity);
@@ -61,6 +63,7 @@ namespace CozProjectBackend.Business.Concrete
         {
             return await _categoryWriteDal.SaveAsync();
         }
+        [SecuredOperation("Admin")]
         [ValidationAspect(typeof(CategoryValidator))]
         public IResult Update(Category entity)
         {
