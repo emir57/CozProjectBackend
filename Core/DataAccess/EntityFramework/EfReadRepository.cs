@@ -23,23 +23,26 @@ namespace Core.DataAccess.EntityFramework
 
         public IQueryable<T> GetAll(bool tracking = true)
         {
-            var result = tracking ? Table : Table.AsNoTracking();
+            var result = tracking ? Table.AsQueryable() : Table.AsQueryable().AsNoTracking();
             return result;
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> filter)
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> filter, bool tracking = true)
         {
-            return Table.Where(filter);
+            var result = tracking ? Table.Where(filter) : Table.Where(filter).AsNoTracking();
+            return result;
         }
 
-        public Task<T> GetAsync(Expression<Func<T, bool>> filter)
+        public Task<T> GetAsync(Expression<Func<T, bool>> filter, bool tracking = true)
         {
-            return Table.FirstOrDefaultAsync(filter);
+            var result = tracking ? Table.AsQueryable() : Table.AsQueryable().AsNoTracking();
+            return result.FirstOrDefaultAsync(filter);
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public Task<T> GetByIdAsync(int id, bool tracking = true)
         {
-            return Table.FirstOrDefaultAsync(x => x.Id == id);
+            var result = tracking ? Table.AsQueryable() : Table.AsQueryable().AsNoTracking();
+            return result.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
