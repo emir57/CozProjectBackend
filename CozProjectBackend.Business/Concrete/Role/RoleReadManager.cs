@@ -28,17 +28,17 @@ namespace CozProjectBackend.Business.Concrete
         }
         [SecuredOperation("Admin")]
         [CacheAspect]
-        public async Task<IDataResult<List<Role>>> GetListAsync()
+        public async Task<IDataResult<List<Role>>> GetListAsync(bool tracking = true)
         {
-            return new SuccessDataResult<List<Role>>(await _roleReadDal.GetAll().ToListAsync(),_languageMessage.SuccessList);
+            return new SuccessDataResult<List<Role>>(await _roleReadDal.GetAll(tracking).ToListAsync(), _languageMessage.SuccessList);
         }
         [SecuredOperation("Admin")]
-        public async Task<IDataResult<Role>> GetByIdAsync(int id)
+        public async Task<IDataResult<Role>> GetByIdAsync(int id, bool tracking = true)
         {
-            Role role = await _roleReadDal.GetByIdAsync(id);
+            Role role = await _roleReadDal.GetByIdAsync(id, tracking);
             if (role == null)
                 return new SuccessDataResult<Role>(_languageMessage.RoleNotFound);
-            return new SuccessDataResult<Role>(role,_languageMessage.SuccessGet);
+            return new SuccessDataResult<Role>(role, _languageMessage.SuccessGet);
         }
     }
 }
