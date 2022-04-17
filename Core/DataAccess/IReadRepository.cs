@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace Core.DataAccess
 {
     public interface IReadRepository<T> : IRepository<T>
-        where T:class,IEntity,new()
+        where T : class, IEntity, new()
     {
-        Task<T> GetAsync(Expression<Func<T, bool>> filter);
-        Task<T> GetByIdAsync(int id);
-        IQueryable<T> GetAll();
-        IQueryable<T> GetAll(Expression<Func<T, bool>> filter);
+        Task<T> GetAsync(Expression<Func<T, bool>> filter, bool tracking = true);
+        Task<T> GetByIdAsync(int id, bool tracking = true);
+        IQueryable<T> GetAll(bool tracking = true);
+        IQueryable<T> GetAll(Expression<Func<T, bool>> filter, bool tracking = true);
     }
 }
