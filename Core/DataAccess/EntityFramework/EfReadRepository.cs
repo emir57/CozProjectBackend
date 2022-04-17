@@ -21,9 +21,10 @@ namespace Core.DataAccess.EntityFramework
 
         public DbSet<T> Table => _context.Set<T>();
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> GetAll(bool tracking = true)
         {
-            return Table;
+            var result = tracking ? Table : Table.AsNoTracking();
+            return result;
         }
 
         public IQueryable<T> GetAll(Expression<Func<T, bool>> filter)
