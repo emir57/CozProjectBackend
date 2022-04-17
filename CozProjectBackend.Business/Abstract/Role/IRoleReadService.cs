@@ -10,7 +10,7 @@ namespace CozProjectBackend.Business.Abstract
 {
     public interface IRoleReadService
     {
-        Task<IDataResult<Role>> GetByIdAsync(int id);
-        Task<IDataResult<List<Role>>> GetListAsync();
+        Task<IDataResult<Role>> GetByIdAsync(int id, bool tracking = true);
+        Task<IDataResult<List<Role>>> GetListAsync(bool tracking = true);
     }
 }
