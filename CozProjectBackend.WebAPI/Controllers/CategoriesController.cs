@@ -58,7 +58,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpPut("update")]
         public async Task<IActionResult> Update(Category category)
         {
-            IResult result = await _categoryWriteService.AddAsync(category);
+            IResult result = _categoryWriteService.Update(category);
             await _categoryWriteService.SaveAsync();
             if (!result.Success)
             {
