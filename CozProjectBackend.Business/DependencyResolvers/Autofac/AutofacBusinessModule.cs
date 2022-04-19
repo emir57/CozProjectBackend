@@ -7,6 +7,7 @@ using Core.Utilities.Message.Turkish;
 using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
+using CozProjectBackend.Business.Concrete.QuestionComplete;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
@@ -37,6 +38,8 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfCategoryWriteDal>().As<ICategoryWriteDal>();
             builder.RegisterType<EfCategoryCompleteReadDal>().As<ICategoryCompleteReadDal>();
             builder.RegisterType<EfCategoryCompleteWriteDal>().As<ICategoryCompleteWriteDal>();
+            builder.RegisterType<EfQuestionCompleteReadDal>().As<IQuestionCompleteReadDal>();
+            builder.RegisterType<EfQuestionCompleteWriteDal>().As<IQuestionCompleteWriteDal>();
             //Services
             builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
             builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
@@ -44,6 +47,8 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<UserWriteManager>().As<IUserWriteService>();
             builder.RegisterType<CategoryCompleteReadManager>().As<ICategoryCompleteReadService>();
             builder.RegisterType<CategoryCompleteWriteManager>().As<ICategoryCompleteWriteService>();
+            builder.RegisterType<QuestionCompleteReadManager>().As<IQuestionCompleteReadService>();
+            builder.RegisterType<QuestionCompleteWriteManager>().As<IQuestionCompleteWriteService>();
 
 
 
