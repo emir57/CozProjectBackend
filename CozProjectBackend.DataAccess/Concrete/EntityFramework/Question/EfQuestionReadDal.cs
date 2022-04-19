@@ -29,6 +29,7 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
                              Score = q.Score,
                              Content = q.Content,
                              Answers = _context.Set<Answer>().Where(x => x.QuestionId == q.Id).ToList(),
+                             
                          };
             return await result.ToListAsync();
         }

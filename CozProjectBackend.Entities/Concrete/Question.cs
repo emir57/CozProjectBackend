@@ -15,6 +15,8 @@ namespace CozProjectBackend.Entities.Concrete
         public int Score { get; set; }
         [NotMapped]
         public List<Answer> Answers { get; set; }
+        [NotMapped]
+        public bool Result { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
