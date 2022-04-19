@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Abstract.CategoryComplete
+namespace CozProjectBackend.Business.Abstract
 {
     public interface ICategoryCompleteReadService
     {
