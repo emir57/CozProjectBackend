@@ -18,7 +18,7 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
             _context = context;
         }
 
-        public async Task<List<Question>> GetAllWithAnswers()
+        public async Task<List<Question>> GetAllWithAnswers(int? userId)
         {
             var result = from q in _context.Set<Question>()
                          select new Question
@@ -29,7 +29,7 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
                              Score = q.Score,
                              Content = q.Content,
                              Answers = _context.Set<Answer>().Where(x => x.QuestionId == q.Id).ToList(),
-                             Result = _context.Set<QuestionComplete>().SingleOrDefault(x=>x.QuestionId==q.Id).Result
+                             Result = userId != null ? _context.Set<QuestionComplete>().SingleOrDefault(x => x.QuestionId == q.Id && x.UserId == userId).Result : null
                          };
             return await result.ToListAsync();
         }
