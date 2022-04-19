@@ -21,8 +21,6 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            
-
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
             builder.RegisterType<CozProjectDbContext>().As<DbContext>();
@@ -37,13 +35,17 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfAnswerWriteDal>().As<IAnswerWriteDal>();
             builder.RegisterType<EfCategoryReadDal>().As<ICategoryReadDal>();
             builder.RegisterType<EfCategoryWriteDal>().As<ICategoryWriteDal>();
+            builder.RegisterType<EfCategoryCompleteReadDal>().As<ICategoryCompleteReadDal>();
+            builder.RegisterType<EfCategoryCompleteWriteDal>().As<ICategoryCompleteWriteDal>();
             //Services
             builder.RegisterType<RoleReadManager>().As<IRoleReadService>();
             builder.RegisterType<RoleWriteManager>().As<IRoleWriteService>();
             builder.RegisterType<UserReadManager>().As<IUserReadService>();
             builder.RegisterType<UserWriteManager>().As<IUserWriteService>();
+            builder.RegisterType<CategoryCompleteReadManager>().As<ICategoryCompleteReadService>();
+            builder.RegisterType<CategoryCompleteWriteManager>().As<ICategoryCompleteWriteService>();
 
-            
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
