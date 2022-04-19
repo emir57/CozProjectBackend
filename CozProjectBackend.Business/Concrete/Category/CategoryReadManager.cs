@@ -32,6 +32,11 @@ namespace CozProjectBackend.Business.Concrete
             return new SuccessDataResult<Category>(category, _language.SuccessGet);
         }
 
+        public Task<IDataResult<List<Category>>> GetCategoriesWithComplete(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IDataResult<List<Category>>> GetListAsync()
         {
             return new SuccessDataResult<List<Category>>(await _categoryReadDal.GetAll().ToListAsync(), _language.SuccessList);
