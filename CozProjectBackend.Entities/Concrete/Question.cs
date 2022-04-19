@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace CozProjectBackend.Entities.Concrete
@@ -12,6 +13,8 @@ namespace CozProjectBackend.Entities.Concrete
         public int TeacherId { get; set; }
         public int CategoryId { get; set; }
         public int Score { get; set; }
+        [NotMapped]
+        public List<Answer> Answers { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
