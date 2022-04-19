@@ -32,8 +32,8 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpGet("getallwithquestions")]
-        public async Task<IActionResult> GetAllWithQuestions()
+        [HttpGet("getallwithanswers")]
+        public async Task<IActionResult> GetAllWithAnswers()
         {
             IDataResult<List<Question>> result = await _questionReadService.GetAllWithAnswers();
             if (!result.Success)
