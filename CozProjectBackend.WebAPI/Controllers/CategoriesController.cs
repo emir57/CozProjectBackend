@@ -33,6 +33,16 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("getallwithcheckcomplete")]
+        public async Task<IActionResult> GetAllWithCheckComplete(int userId)
+        {
+            IDataResult<List<Category>> result = await _categoryReadService.GetCategoriesWithComplete(userId);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
         [HttpGet("getbyid")]
         public async Task<IActionResult> GetById(int id)
         {
