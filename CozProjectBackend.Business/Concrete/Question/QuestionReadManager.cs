@@ -22,7 +22,7 @@ namespace CozProjectBackend.Business.Concrete
             _language = language;
         }
 
-        public async Task<IDataResult<List<Question>>> GetAllWithAnswers(int? userId)
+        public async Task<IDataResult<List<Question>>> GetAllWithAnswers(int userId = 0)
         {
             return new SuccessDataResult<List<Question>>(await _questionReadDal.GetAllWithAnswers(userId), _language.SuccessList);
         }
