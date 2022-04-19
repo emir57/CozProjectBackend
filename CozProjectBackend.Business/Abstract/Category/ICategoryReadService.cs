@@ -12,6 +12,5 @@ namespace CozProjectBackend.Business.Abstract
         Task<IDataResult<List<Category>>> GetListAsync();
         Task<IDataResult<Category>> GetByIdAsync(int categoryId);
         Task<IDataResult<List<Category>>> GetCategoriesWithComplete(int userId);
-        Task<IDataResult<List<Question>>> GetAllWithAnswers();
     }
 }
