@@ -25,16 +25,17 @@ namespace CozProjectBackend.Business.Concrete
         public async Task<IDataResult<Category>> GetByIdAsync(int categoryId)
         {
             Category category = await _categoryReadDal.GetByIdAsync(categoryId);
-            if(category == null)
+            if (category == null)
             {
                 return new ErrorDataResult<Category>(category, _language.FailureGet);
             }
             return new SuccessDataResult<Category>(category, _language.SuccessGet);
         }
 
-        public Task<IDataResult<List<Category>>> GetCategoriesWithComplete(int userId)
+        public async Task<IDataResult<List<Category>>> GetCategoriesWithComplete(int userId)
         {
-            throw new NotImplementedException();
+            var result = await _categoryReadDal.GetCategoriesWithComplete(userId);
+            return new SuccessDataResult<List<Category>>(result, _language.SuccessList);
         }
 
         public async Task<IDataResult<List<Category>>> GetListAsync()
