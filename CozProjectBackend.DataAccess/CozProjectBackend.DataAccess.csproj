@@ -9,8 +9,4 @@
     <ProjectReference Include="..\CozProjectBackend.Entities\CozProjectBackend.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Concrete\EntityFramework\QuestionComplete\" />
-  </ItemGroup>
-
 </Project>
