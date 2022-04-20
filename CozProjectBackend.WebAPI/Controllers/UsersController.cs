@@ -2,6 +2,7 @@
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Entities.Concrete;
+using CozProjectBackend.Entities.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -49,21 +50,21 @@ namespace CozProjectBackend.WebAPI.Controllers
         }
 
         [HttpPost("updatescore")]
-        public async Task<IActionResult> UpdateScore(int userId, int score, int questionId, bool result)
+        public async Task<IActionResult> UpdateScore(UpdateScoreModel scoreModel)
         {
-            var getUserResult = await _userReadService.GetByIdAsync(userId);
+            var getUserResult = await _userReadService.GetByIdAsync(scoreModel.UserId);
             if (!getUserResult.Success)
             {
                 return BadRequest(getUserResult);
             }
             var user = getUserResult.Data;
-            user.Score += score;
+            user.Score += scoreModel.Score;
             _userWriteService.Update(user);
             await _questionCompleteWriteService.AddAsync(new QuestionComplete
             {
-                QuestionId = questionId,
-                Result = result,
-                UserId = userId
+                QuestionId = scoreModel.QuestionId,
+                Result = scoreModel.Result,
+                UserId = scoreModel.UserId
             });
             await _userWriteService.SaveAsync();
             return Ok();
