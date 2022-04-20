@@ -18,6 +18,7 @@ namespace CozProjectBackend.WebAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly IHubContext<ScoreHub> _scoreHub;
         private readonly IUserReadService _userReadService;
         private readonly IUserWriteService _userWriteService;
         private readonly IQuestionCompleteWriteService _questionCompleteWriteService;
@@ -26,6 +27,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             _userReadService = userReadService;
             _userWriteService = userWriteService;
             _questionCompleteWriteService = questionCompleteWriteService;
+            _scoreHub = scoreHub;
         }
         [HttpGet("getroles")]
         public async Task<IActionResult> GetRoles(int userId)
@@ -70,8 +72,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             });
             await _userWriteService.SaveAsync();
             await _questionCompleteWriteService.SaveAsync();
-            ScoreHub scoreHub = new ScoreHub();
-            await scoreHub.SendScoreAsync(user.Score);
+            await _scoreHub.Clients.All.SendAsync("SendScore", user.Id, user.Score);
             return Ok();
         }
     }

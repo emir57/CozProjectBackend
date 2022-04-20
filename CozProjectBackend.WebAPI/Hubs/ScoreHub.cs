@@ -10,7 +10,7 @@ namespace CozProjectBackend.WebAPI.Hubs
     {
         public async Task SendScoreAsync(int score)
         {
-            await Clients.Caller.SendAsync("SendScore", 0);
+            await Clients.Caller.SendAsync("SendScore", score);
         }
     }
 }
