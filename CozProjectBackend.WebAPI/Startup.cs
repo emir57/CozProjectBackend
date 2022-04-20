@@ -9,6 +9,7 @@ using CozProjectBackend.Business.DependencyResolvers.Microsoft;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
+using CozProjectBackend.WebAPI.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -99,6 +100,7 @@ namespace CozProjectBackend.WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ScoreHub>("/scorehub");
             });
         }
     }
