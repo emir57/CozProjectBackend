@@ -34,7 +34,7 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
             return await result.ToListAsync();
         }
 
-        public async Task<List<Question>> GetByIdAnswers(int categoryId, int userId)
+        public async Task<List<Question>> GetByCategoryIdWithAnswers(int categoryId, int userId)
         {
             var result = from q in _context.Set<Question>()
                          select new Question

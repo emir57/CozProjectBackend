@@ -53,9 +53,9 @@ namespace CozProjectBackend.WebAPI.Controllers
             return Ok(result);
         }
         [HttpGet("getbycategoryidwithanswersbyuserid")]
-        public async Task<IActionResult> GetByCategoryIdQuestionsWithAnswers(int id, int userId)
+        public async Task<IActionResult> GetByCategoryIdQuestionsWithAnswers(int categoryId, int userId)
         {
-            IDataResult<List<Question>> result = await _questionReadService.GetByIdWithAnswers(id, userId);
+            IDataResult<List<Question>> result = await _questionReadService.GetByCategoryIdWithAnswers(categoryId, userId);
             if (!result.Success)
             {
                 return BadRequest(result);
