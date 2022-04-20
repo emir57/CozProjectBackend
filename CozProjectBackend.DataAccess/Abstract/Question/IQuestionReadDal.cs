@@ -11,5 +11,6 @@ namespace CozProjectBackend.DataAccess.Abstract
     public interface IQuestionReadDal : IReadRepository<Question>
     {
         Task<List<Question>> GetAllWithAnswers(int userId = 0);
+        Task<List<Question>> GetByIdAnswers(int categoryId, int userId);
     }
 }

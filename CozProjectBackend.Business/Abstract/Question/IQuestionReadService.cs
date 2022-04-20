@@ -13,6 +13,6 @@ namespace CozProjectBackend.Business.Abstract
         Task<IDataResult<Question>> GetByIdAsync(int questionId);
         Task<IDataResult<List<Question>>> GetListAsync();
         Task<IDataResult<List<Question>>> GetAllWithAnswers(int userId = 0);
-        Task<IDataResult<List<Question>>> GetByIdWithAnswers(int id, int userId = 0);
+        Task<IDataResult<List<Question>>> GetByIdWithAnswers(int categoryId, int userId = 0);
     }
 }

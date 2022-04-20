@@ -33,5 +33,21 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
                          };
             return await result.ToListAsync();
         }
+
+        public async Task<List<Question>> GetByIdAnswers(int categoryId, int userId)
+        {
+            var result = from q in _context.Set<Question>()
+                         select new Question
+                         {
+                             Id = q.Id,
+                             CategoryId = q.CategoryId,
+                             TeacherId = q.TeacherId,
+                             Score = q.Score,
+                             Content = q.Content,
+                             Answers = _context.Set<Answer>().Where(x => x.QuestionId == q.Id).ToList(),
+                             Result = _context.Set<QuestionComplete>().SingleOrDefault(x => x.QuestionId == q.Id && x.UserId == userId).Result
+                         };
+            return await result.Where(x => x.CategoryId == categoryId).ToListAsync();
+        }
     }
 }
