@@ -55,7 +55,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpGet("getbyidwithanswersbyuserid")]
         public async Task<IActionResult> GetAllQuestionsWithAnswers(int id, int userId)
         {
-            IDataResult<List<Question>> result = await _questionReadService.GetAllWithAnswers(id);
+            IDataResult<List<Question>> result = await _questionReadService.GetByIdWithAnswers(id, userId);
             if (!result.Success)
             {
                 return BadRequest(result);
