@@ -11,5 +11,6 @@ namespace CozProjectBackend.Business.Abstract
     {
         Task<IResult> AddAsync(QuestionComplete questionComplete);
         IResult Delete(QuestionComplete questionComplete);
+        Task<int> SaveAsync();
     }
 }

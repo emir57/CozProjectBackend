@@ -67,6 +67,7 @@ namespace CozProjectBackend.WebAPI.Controllers
                 UserId = scoreModel.UserId
             });
             await _userWriteService.SaveAsync();
+            await _questionCompleteWriteService.SaveAsync();
             return Ok();
         }
     }

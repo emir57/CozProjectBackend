@@ -33,5 +33,10 @@ namespace CozProjectBackend.Business.Concrete.QuestionComplete
             _questionCompleteWriteDal.Delete(questionComplete);
             return new SuccessResult(_language.SuccessDelete);
         }
+
+        public Task<int> SaveAsync()
+        {
+            return _questionCompleteWriteDal.SaveAsync();
+        }
     }
 }
