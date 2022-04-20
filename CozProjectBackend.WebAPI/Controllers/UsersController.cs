@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,10 +17,12 @@ namespace CozProjectBackend.WebAPI.Controllers
     {
         private readonly IUserReadService _userReadService;
         private readonly IUserWriteService _userWriteService;
-        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService)
+        private readonly IQuestionCompleteWriteService _questionCompleteWriteService;
+        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService)
         {
             _userReadService = userReadService;
             _userWriteService = userWriteService;
+            _questionCompleteWriteService = questionCompleteWriteService;
         }
         [HttpGet("getroles")]
         public async Task<IActionResult> GetRoles(int userId)
@@ -43,6 +46,27 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(result);
             }
             return Ok(result);
+        }
+
+        [HttpPost("updatescore")]
+        public async Task<IActionResult> UpdateScore(int userId, int score, int questionId, bool result)
+        {
+            var getUserResult = await _userReadService.GetByIdAsync(userId);
+            if (!getUserResult.Success)
+            {
+                return BadRequest(getUserResult);
+            }
+            var user = getUserResult.Data;
+            user.Score += score;
+            _userWriteService.Update(user);
+            await _questionCompleteWriteService.AddAsync(new QuestionComplete
+            {
+                QuestionId = questionId,
+                Result = result,
+                UserId = userId
+            });
+            await _userWriteService.SaveAsync();
+            return Ok();
         }
     }
 }
