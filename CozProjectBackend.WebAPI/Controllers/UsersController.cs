@@ -3,8 +3,10 @@ using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Entities.Concrete;
 using CozProjectBackend.Entities.Dto;
+using CozProjectBackend.WebAPI.Hubs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         private readonly IUserReadService _userReadService;
         private readonly IUserWriteService _userWriteService;
         private readonly IQuestionCompleteWriteService _questionCompleteWriteService;
-        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService)
+        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub)
         {
             _userReadService = userReadService;
             _userWriteService = userWriteService;
@@ -68,6 +70,8 @@ namespace CozProjectBackend.WebAPI.Controllers
             });
             await _userWriteService.SaveAsync();
             await _questionCompleteWriteService.SaveAsync();
+            ScoreHub scoreHub = new ScoreHub();
+            await scoreHub.SendScoreAsync(user.Score);
             return Ok();
         }
     }
