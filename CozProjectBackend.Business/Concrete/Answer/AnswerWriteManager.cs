@@ -52,7 +52,7 @@ namespace CozProjectBackend.Business.Concrete
 
         public IResult UpdateRange(List<Answer> answers)
         {
-            //_answerWriteDal.UpdateRange(answers);
+            _answerWriteDal.UpdateRange(answers);
             return new SuccessResult(_language.SuccessUpdate);
         }
     }
