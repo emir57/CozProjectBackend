@@ -16,10 +16,12 @@ namespace CozProjectBackend.WebAPI.Controllers
     {
         private readonly IQuestionWriteService _questionWriteService;
         private readonly IQuestionReadService _questionReadService;
-        public QuestionsController(IQuestionWriteService questionWriteService, IQuestionReadService questionReadService)
+        private readonly IAnswerWriteService _answerWriteService;
+        public QuestionsController(IQuestionWriteService questionWriteService, IQuestionReadService questionReadService, IAnswerWriteService answerWriteService)
         {
             _questionWriteService = questionWriteService;
             _questionReadService = questionReadService;
+            _answerWriteService = answerWriteService;
         }
 
         [HttpGet("getall")]
@@ -95,7 +97,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             return Ok(result);
         }
         [HttpPost("update")]
-        public async Task<IActionResult> Update(Question question)
+        public async Task<IActionResult> Update(Question question,List<Answer> answers)
         {
             IResult result = _questionWriteService.Update(question);
             await _questionWriteService.SaveAsync();
