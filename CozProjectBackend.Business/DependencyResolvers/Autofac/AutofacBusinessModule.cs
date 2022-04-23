@@ -49,6 +49,8 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
             builder.RegisterType<CategoryCompleteWriteManager>().As<ICategoryCompleteWriteService>();
             builder.RegisterType<QuestionCompleteReadManager>().As<IQuestionCompleteReadService>();
             builder.RegisterType<QuestionCompleteWriteManager>().As<IQuestionCompleteWriteService>();
+            builder.RegisterType<AnswerReadManager>().As<IAnswerReadService>();
+            builder.RegisterType<AnswerWriteManager>().As<IAnswerWriteService>();
 
 
 
