@@ -97,7 +97,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             return Ok(result);
         }
         [HttpPost("update")]
-        public async Task<IActionResult> Update(Question question,List<Answer> answers)
+        public async Task<IActionResult> Update(Question question, List<Answer> answers)
         {
             IResult result = _questionWriteService.Update(question);
             await _questionWriteService.SaveAsync();
@@ -105,7 +105,12 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
-            IResult result2 = _answerWriteService.UpdateAsync(answers);
+            IResult result2 = _answerWriteService.UpdateRange(answers);
+            await _answerWriteService.SaveAsync();
+            if (!result2.Success)
+            {
+                return BadRequest(result2);
+            }
             return Ok(result);
         }
         [HttpDelete("delete")]
