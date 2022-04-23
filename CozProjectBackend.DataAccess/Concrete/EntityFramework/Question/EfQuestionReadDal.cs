@@ -29,7 +29,9 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
                              Score = q.Score,
                              Content = q.Content,
                              Answers = _context.Set<Answer>().Where(x => x.QuestionId == q.Id).ToList(),
-                             Result = userId != 0 ? _context.Set<QuestionComplete>().SingleOrDefault(x => x.QuestionId == q.Id && x.UserId == userId).Result : null
+                             Result = userId != 0 ? _context.Set<QuestionComplete>().SingleOrDefault(x => x.QuestionId == q.Id && x.UserId == userId).Result : null,
+                             CreatedDate = q.CreatedDate,
+                             UpdatedDate = q.UpdatedDate
                          };
             return await result.ToListAsync();
         }
