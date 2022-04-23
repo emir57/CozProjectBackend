@@ -49,5 +49,11 @@ namespace CozProjectBackend.Business.Concrete
                 return new SuccessResult(_language.SuccessUpdate);
             return new ErrorResult(_language.FailureUpdate);
         }
+
+        public IResult UpdateRange(List<Answer> answers)
+        {
+            _answerWriteDal.UpdateRange(answers);
+            return new SuccessResult(_language.SuccessUpdate);
+        }
     }
 }
