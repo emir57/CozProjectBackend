@@ -105,6 +105,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
+            IResult result2 = _answerWriteService.UpdateAsync(answers);
             return Ok(result);
         }
         [HttpDelete("delete")]

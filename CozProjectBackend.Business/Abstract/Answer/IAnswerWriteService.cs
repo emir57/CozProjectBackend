@@ -11,6 +11,7 @@ namespace CozProjectBackend.Business.Abstract
     {
         Task<IResult> AddAsync(Answer answer);
         IResult Update(Answer answer);
+        IResult UpdateRange(List<Answer> answers);
         IResult Delete(Answer answer);
         Task<int> SaveAsync();
     }
