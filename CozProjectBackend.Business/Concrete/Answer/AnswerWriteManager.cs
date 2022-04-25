@@ -35,11 +35,22 @@ namespace CozProjectBackend.Business.Concrete
         public async Task<IResult> AddRangeAsync(List<Answer> answers)
         {
             var result = BusinessRules.Run(
-                CheckTrueAnswers(answers));
+                CheckTrueAnswers(answers),
+                CheckContentAnswers(answers));
             if (!result.Success)
                 return result;
             await _answerWriteDal.AddRangeAsync(answers);
             return new SuccessResult(_language.SuccessAdd);
+        }
+
+        private IResult CheckContentAnswers(List<Answer> answers)
+        {
+            foreach (var answer in answers)
+            {
+                if (string.IsNullOrEmpty(answer.Content))
+                    return new ErrorResult("Lütfen girilen şıkları kontrol ediniz.");
+            }
+            return new SuccessResult();
         }
 
         private IResult CheckTrueAnswers(List<Answer> answers)
