@@ -1,4 +1,5 @@
 ﻿using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
@@ -29,6 +30,28 @@ namespace CozProjectBackend.Business.Concrete
             if (result)
                 return new SuccessResult(_language.SuccessAdd);
             return new ErrorResult(_language.FailureAdd);
+        }
+
+        public async Task<IResult> AddRangeAsync(List<Answer> answers)
+        {
+            var result = BusinessRules.Run(
+                CheckTrueAnswers(answers));
+            await _answerWriteDal.AddRangeAsync(answers);
+            return new SuccessResult(_language.SuccessAdd);
+        }
+
+        private IResult CheckTrueAnswers(List<Answer> answers)
+        {
+            int count = 0;
+            foreach (var answer in answers)
+            {
+                count += answer.IsTrue ? 1 : 0;
+            }
+            if(count == 0)
+                return new ErrorResult("Lütfen doğru şık belirtiniz.");
+            if (count > 1)
+                return new ErrorResult("Birden fazla doğru şık olamaz");
+            return new SuccessResult();
         }
 
         public IResult Delete(Answer answer)
