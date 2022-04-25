@@ -95,6 +95,7 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(result);
             }
             IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers);
+            await _answerWriteService.SaveAsync();
             if (!result2.Success)
             {
                 return BadRequest(result2);
