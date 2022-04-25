@@ -94,6 +94,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
+            IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers);
             return Ok(result);
         }
         [HttpPost("update")]
