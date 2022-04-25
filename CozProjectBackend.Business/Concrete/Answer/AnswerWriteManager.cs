@@ -36,6 +36,8 @@ namespace CozProjectBackend.Business.Concrete
         {
             var result = BusinessRules.Run(
                 CheckTrueAnswers(answers));
+            if (!result.Success)
+                return result;
             await _answerWriteDal.AddRangeAsync(answers);
             return new SuccessResult(_language.SuccessAdd);
         }
