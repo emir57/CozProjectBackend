@@ -94,6 +94,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
+            question.Answers.ForEach(x => x.QuestionId = question.Id);
             IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers);
             await _answerWriteService.SaveAsync();
             if (!result2.Success)
