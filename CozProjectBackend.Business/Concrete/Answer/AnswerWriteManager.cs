@@ -35,12 +35,20 @@ namespace CozProjectBackend.Business.Concrete
         public async Task<IResult> AddRangeAsync(List<Answer> answers)
         {
             var result = BusinessRules.Run(
+                CheckAnswersLength(answers),
                 CheckTrueAnswers(answers),
                 CheckContentAnswers(answers));
             if (!result.Success)
                 return result;
             await _answerWriteDal.AddRangeAsync(answers);
             return new SuccessResult(_language.SuccessAdd);
+        }
+
+        private IResult CheckAnswersLength(List<Answer> answers)
+        {
+            if (answers.Count > 1)
+                return new SuccessResult();
+            return new ErrorResult("En az iki şık olabilir.");
         }
 
         private IResult CheckContentAnswers(List<Answer> answers)
@@ -60,7 +68,7 @@ namespace CozProjectBackend.Business.Concrete
             {
                 count += answer.IsTrue ? 1 : 0;
             }
-            if(count == 0)
+            if (count == 0)
                 return new ErrorResult("Lütfen doğru şık belirtiniz.");
             if (count > 1)
                 return new ErrorResult("Birden fazla doğru şık olamaz");
