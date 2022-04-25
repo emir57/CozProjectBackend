@@ -38,7 +38,7 @@ namespace CozProjectBackend.Business.Concrete
                 CheckAnswersLength(answers),
                 CheckTrueAnswers(answers),
                 CheckContentAnswers(answers));
-            if (!result.Success)
+            if (result != null)
                 return result;
             await _answerWriteDal.AddRangeAsync(answers);
             return new SuccessResult(_language.SuccessAdd);
