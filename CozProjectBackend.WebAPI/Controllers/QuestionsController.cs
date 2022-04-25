@@ -95,7 +95,11 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(result);
             }
             IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers);
-            return Ok(result);
+            if (!result2.Success)
+            {
+                return BadRequest(result2);
+            }
+            return Ok(result2);
         }
         [HttpPost("update")]
         public async Task<IActionResult> Update(Question question)
