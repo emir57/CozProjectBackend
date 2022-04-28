@@ -75,5 +75,16 @@ namespace CozProjectBackend.WebAPI.Controllers
             await _scoreHub.Clients.All.SendAsync("SendScore", user.Id, user.Score);
             return Ok();
         }
+
+        [HttpGet("getall")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _userReadService.GetListAsync();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }
