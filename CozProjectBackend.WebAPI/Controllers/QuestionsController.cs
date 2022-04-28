@@ -17,11 +17,13 @@ namespace CozProjectBackend.WebAPI.Controllers
         private readonly IQuestionWriteService _questionWriteService;
         private readonly IQuestionReadService _questionReadService;
         private readonly IAnswerWriteService _answerWriteService;
-        public QuestionsController(IQuestionWriteService questionWriteService, IQuestionReadService questionReadService, IAnswerWriteService answerWriteService)
+        private readonly IAnswerReadService _answerReadService;
+        public QuestionsController(IQuestionWriteService questionWriteService, IQuestionReadService questionReadService, IAnswerWriteService answerWriteService, IAnswerReadService answerReadService)
         {
             _questionWriteService = questionWriteService;
             _questionReadService = questionReadService;
             _answerWriteService = answerWriteService;
+            _answerReadService = answerReadService;
         }
 
         [HttpGet("getall")]
@@ -133,7 +135,8 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
-            //IResult result2 = _answerWriteService.
+            var answers = (await _answerReadService.GetListByQuestionIdAsync(questionResult.Data.Id)).Data;
+            _answerWriteService.DeleteRange(answers);
             return Ok(result);
         }
     }
