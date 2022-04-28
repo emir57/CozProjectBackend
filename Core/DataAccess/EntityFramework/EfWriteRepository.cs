@@ -34,6 +34,11 @@ namespace Core.DataAccess.EntityFramework
             _context.Remove(entity);
         }
 
+        public void DeleteRange(List<T> entities)
+        {
+            _context.RemoveRange(entities);
+        }
+
         public async Task<int> SaveAsync()
         {
             return await _context.SaveChangesAsync();
