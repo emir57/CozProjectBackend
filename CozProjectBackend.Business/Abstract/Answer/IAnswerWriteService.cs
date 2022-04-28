@@ -13,6 +13,7 @@ namespace CozProjectBackend.Business.Abstract
         IResult Update(Answer answer);
         IResult UpdateRange(List<Answer> answers);
         IResult Delete(Answer answer);
+        IResult DeleteRange(List<Answer> answers);
         Task<int> SaveAsync();
         Task<IResult> AddRangeAsync(List<Answer> answers);
     }

@@ -133,6 +133,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
+            //IResult result2 = _answerWriteService.
             return Ok(result);
         }
     }
