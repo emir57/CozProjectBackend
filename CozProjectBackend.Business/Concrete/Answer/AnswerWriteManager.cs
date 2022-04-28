@@ -102,7 +102,7 @@ namespace CozProjectBackend.Business.Concrete
 
         public IResult DeleteRange(List<Answer> answers)
         {
-            //_answerWriteDal.del
+            _answerWriteDal.DeleteRange(answers);
         }
     }
 }
