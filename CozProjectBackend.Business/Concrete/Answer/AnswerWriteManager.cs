@@ -99,5 +99,10 @@ namespace CozProjectBackend.Business.Concrete
             _answerWriteDal.UpdateRange(answers);
             return new SuccessResult(_language.SuccessUpdate);
         }
+
+        public IResult DeleteRange(List<Answer> answers)
+        {
+            //_answerWriteDal.del
+        }
     }
 }
