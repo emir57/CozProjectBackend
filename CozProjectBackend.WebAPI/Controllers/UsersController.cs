@@ -2,6 +2,7 @@
 using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using Core.Utilities.Result;
+using Core.Utilities.Security.Hashing;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Entities.Concrete;
 using CozProjectBackend.Entities.Dto;
@@ -54,6 +55,11 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(getUser);
             }
             User user = getUser.Data;
+            if (!HashingHelper.VerifyPasswordHash(updateUserDto.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                var errorModel = new ErrorResult("Şifre Yanlış!");
+                return BadRequest(errorModel);
+            }
             user = _mapper.Map<User>(updateUserDto);
             IResult result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
