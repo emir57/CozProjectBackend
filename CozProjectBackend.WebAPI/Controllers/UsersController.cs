@@ -71,6 +71,11 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPassword(UserResetPasswordDto userResetPasswordDto)
+        {
+
+        }
 
         [HttpPost("updatescore")]
         public async Task<IActionResult> UpdateScore(UpdateScoreModel scoreModel)
