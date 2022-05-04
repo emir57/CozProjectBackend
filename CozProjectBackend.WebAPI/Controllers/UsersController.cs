@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Core.Entities.Dtos;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Entities.Concrete;
@@ -42,8 +43,9 @@ namespace CozProjectBackend.WebAPI.Controllers
         }
 
         [HttpPost("updateprofile")]
-        public async Task<IActionResult> UpdateProfile(User user)
+        public async Task<IActionResult> UpdateProfile(UpdateUserDto updateUserDto)
         {
+            var getUser = await _userReadService.GetByEmailAsync(updateUserDto.Email);
             IResult result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
             if (!result.Success)
