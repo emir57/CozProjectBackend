@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using AutoMapper;
+using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
@@ -23,12 +24,14 @@ namespace CozProjectBackend.WebAPI.Controllers
         private readonly IUserReadService _userReadService;
         private readonly IUserWriteService _userWriteService;
         private readonly IQuestionCompleteWriteService _questionCompleteWriteService;
-        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub)
+        private readonly IMapper _mapper;
+        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub, IMapper mapper)
         {
             _userReadService = userReadService;
             _userWriteService = userWriteService;
             _questionCompleteWriteService = questionCompleteWriteService;
             _scoreHub = scoreHub;
+            _mapper = mapper;
         }
         [HttpGet("getroles")]
         public async Task<IActionResult> GetRoles(int userId)
@@ -46,7 +49,11 @@ namespace CozProjectBackend.WebAPI.Controllers
         public async Task<IActionResult> UpdateProfile(UpdateUserDto updateUserDto)
         {
             var getUser = await _userReadService.GetByEmailAsync(updateUserDto.Email);
-            IResult result = _userWriteService.Update(user);
+            if (getUser.Data == null)
+            {
+                return BadRequest(getUser);
+            }
+            IResult result = _userWriteService.Update(getUser.Data);
             await _userWriteService.SaveAsync();
             if (!result.Success)
             {

@@ -13,6 +13,8 @@ namespace Core.Entities.MapperProfiles
         {
             CreateMap<User, LoginedUserDto>();
             CreateMap<LoginedUserDto, User>();
+            CreateMap<User, UpdateUserDto>();
+            CreateMap<UpdateUserDto, User>();
         }
     }
 }
