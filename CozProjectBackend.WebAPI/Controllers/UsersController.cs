@@ -60,7 +60,9 @@ namespace CozProjectBackend.WebAPI.Controllers
                 var errorModel = new ErrorResult("Şifre Yanlış!");
                 return BadRequest(errorModel);
             }
-            user = _mapper.Map<User>(updateUserDto);
+            //TODO: refactoring
+            user.FirstName = updateUserDto.FirstName;
+            user.LastName = updateUserDto.LastName;
             IResult result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
             if (!result.Success)
