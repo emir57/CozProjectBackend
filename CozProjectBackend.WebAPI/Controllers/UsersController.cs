@@ -53,7 +53,9 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(getUser);
             }
-            IResult result = _userWriteService.Update(getUser.Data);
+            User user = getUser.Data;
+            user = _mapper.Map<User>(updateUserDto);
+            IResult result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
             if (!result.Success)
             {
