@@ -82,9 +82,14 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
 
             var user = getUser.Data;
+            if (!HashingHelper.VerifyPasswordHash(userResetPasswordDto.OldPassword, user.PasswordHash, user.PasswordSalt))
+            {
+                var errorModel = new ErrorResult("Eski şifreniz uyuşmuyor!");
+                return BadRequest(errorModel);
+            }
             if (HashingHelper.VerifyPasswordHash(userResetPasswordDto.NewPassword, user.PasswordHash, user.PasswordSalt))
             {
-                var errorModel = new ErrorResult("Yeni şifreniz eski şifre ile aynı olamaz");
+                var errorModel = new ErrorResult("Yeni şifreniz eski şifre ile aynı olamaz!");
                 return BadRequest(errorModel);
             }
 
