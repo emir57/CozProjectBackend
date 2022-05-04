@@ -74,17 +74,31 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpPost("resetpassword")]
         public async Task<IActionResult> ResetPassword(UserResetPasswordDto userResetPasswordDto)
         {
+            byte[] passwordHash, passwordSalt;
             var getUser = await _userReadService.GetByEmailAsync(userResetPasswordDto.Email);
             if (getUser.Data == null)
             {
                 return BadRequest(getUser);
             }
+
             var user = getUser.Data;
             if (HashingHelper.VerifyPasswordHash(userResetPasswordDto.NewPassword, user.PasswordHash, user.PasswordSalt))
             {
                 var errorModel = new ErrorResult("Yeni şifreniz eski şifre ile aynı olamaz");
                 return BadRequest(errorModel);
             }
+
+            HashingHelper.CreatePasswordHash(userResetPasswordDto.NewPassword, out passwordHash, out passwordSalt);
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+            var result = _userWriteService.Update(user);
+            await _userWriteService.SaveAsync();
+
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
 
         [HttpPost("updatescore")]
