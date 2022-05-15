@@ -79,7 +79,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpGet("getbyid")]
         public async Task<IActionResult> GetById(int id)
         {
-            IDataResult<Question> result = await _questionReadService.GetByIdAsync(id);
+            IDataResult<Question> result = await _questionReadService.GetByIdWithAnswers(id);
             if (!result.Success)
             {
                 return BadRequest(result);
