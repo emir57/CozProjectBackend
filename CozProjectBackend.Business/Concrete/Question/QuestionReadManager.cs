@@ -52,9 +52,9 @@ namespace CozProjectBackend.Business.Concrete
             return new SuccessDataResult<List<Question>>(await _questionReadDal.GetAll(x => x.CategoryId == categoryId).ToListAsync(), _language.SuccessList);
         }
 
-        public async Task<IDataResult<Question>> GetByIdWithAnswers(int questionId)
+        public IDataResult<Question> GetByIdWithAnswers(int questionId)
         {
-            return new SuccessDataResult<Question>(await _questionReadDal.GetByIdWithAnswers(questionId), _language.SuccessGet);
+            return new SuccessDataResult<Question>(_questionReadDal.GetByIdWithAnswers(questionId), _language.SuccessGet);
         }
     }
 }

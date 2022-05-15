@@ -52,7 +52,7 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
             return await result.Where(x => x.CategoryId == categoryId).ToListAsync();
         }
 
-        public Task<Question> GetByIdWithAnswers(int questionId)
+        public Question GetByIdWithAnswers(int questionId)
         {
             var result = from q in _context.Set<Question>()
                          where q.Id == questionId
@@ -68,7 +68,7 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
                              CreatedDate = q.CreatedDate,
                              UpdatedDate = q.UpdatedDate
                          };
-            return (Task<Question>)result;
+            return result;
         }
     }
 }

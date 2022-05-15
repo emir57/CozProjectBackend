@@ -12,6 +12,6 @@ namespace CozProjectBackend.DataAccess.Abstract
     {
         Task<List<Question>> GetAllWithAnswers(int userId = 0);
         Task<List<Question>> GetByCategoryIdWithAnswers(int categoryId, int userId);
-        Task<Question> GetByIdWithAnswers(int questionId);
+        Question GetByIdWithAnswers(int questionId);
     }
 }
