@@ -68,7 +68,7 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
                              CreatedDate = q.CreatedDate,
                              UpdatedDate = q.UpdatedDate
                          };
-            return result;
+            return result.First();
         }
     }
 }
