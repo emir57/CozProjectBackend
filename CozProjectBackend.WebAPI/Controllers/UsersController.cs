@@ -175,14 +175,12 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 var getRole = await _roleReadService.GetByIdAsync(role.Id, tracking: false);
                 if (role.Checked)
-                {
-
-                }
+                    if (!(await _roleReadService.IsInRole(user, getRole.Data)).Success)
+                    {
+                        await _roleWriteService.AddAsync(getRole.Data);
+                    }
                 else
-                {
-
                     _roleWriteService.Delete(getRole.Data);
-                }
             });
             await _roleWriteService.SaveAsync();
             await _userWriteService.SaveAsync();
