@@ -17,9 +17,9 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
             _context = context;
         }
 
-        public async Task<bool> IsInRole(User user, Role role)
+        public async Task<bool> IsInRole(int userId, int roleId)
         {
-            var userRole = await _context.Set<UserRole>().FirstOrDefaultAsync(x => x.UserId == user.Id && x.RoleId == role.Id);
+            var userRole = await _context.Set<UserRole>().FirstOrDefaultAsync(x => x.UserId == userId && x.RoleId == roleId);
             return userRole == null ? false : true;
         }
     }

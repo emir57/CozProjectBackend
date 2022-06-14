@@ -12,6 +12,6 @@ namespace CozProjectBackend.Business.Abstract
     {
         Task<IDataResult<Role>> GetByIdAsync(int id, bool tracking = true);
         Task<IDataResult<List<Role>>> GetListAsync(bool tracking = true);
-        Task<IResult> IsInRole(User user, Role role);
+        Task<IResult> IsInRole(int userId, int roleId);
     }
 }

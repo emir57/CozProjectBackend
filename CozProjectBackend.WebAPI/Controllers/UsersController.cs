@@ -171,20 +171,18 @@ namespace CozProjectBackend.WebAPI.Controllers
             user.ProfilePhotoUrl = updateUserAdminDto.ProfilePhotoUrl;
             var result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
-            updateUserAdminDto.Roles.ForEach(async role =>
+            foreach (var role in updateUserAdminDto.Roles)
             {
-                var getRole = await _roleReadService.GetByIdAsync(role.Id, tracking: false);
+                var getRole = await _roleReadService.GetByIdAsync(role.Id);
                 if (role.Checked)
                 {
-                    var result = await _roleReadService.IsInRole(user, getRole.Data);
-                    if (!result.Success)
-                    {
-                        await _roleWriteService.AddAsync(getRole.Data);
-                    }
+                    var checkRole = await _roleReadService.IsInRole(user, getRole.Data);
+                    if (!checkRole.Success)
+                        await _roleWriteService.AddUserRoleAsync(user.Id, role.Id);
                 }
                 else
-                    _roleWriteService.Delete(getRole.Data);
-            });
+                    await _roleWriteService.RemoveUserRoleAsync(user.Id, role.Id);
+            }
             await _roleWriteService.SaveAsync();
             if (!result.Success)
                 return BadRequest(result);

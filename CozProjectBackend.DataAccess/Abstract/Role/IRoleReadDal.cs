@@ -9,6 +9,6 @@ namespace CozProjectBackend.DataAccess.Abstract
 {
     public interface IRoleReadDal : IReadRepository<Role>
     {
-        Task<bool> IsInRole(User user, Role role);
+        Task<bool> IsInRole(int userId, int roleId);
     }
 }

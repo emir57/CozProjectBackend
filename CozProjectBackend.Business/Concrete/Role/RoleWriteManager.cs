@@ -17,11 +17,13 @@ namespace CozProjectBackend.Business.Concrete
     public class RoleWriteManager : IRoleWriteService
     {
         private readonly IRoleWriteDal _roleWriteDal;
+        private readonly IRoleReadService _roleReadService;
         private readonly ILanguageMessage _languageMessage;
-        public RoleWriteManager(IRoleWriteDal roleWriteDal, ILanguageMessage language)
+        public RoleWriteManager(IRoleWriteDal roleWriteDal, ILanguageMessage language, IRoleReadService roleReadService)
         {
             _roleWriteDal = roleWriteDal;
             _languageMessage = language;
+            _roleReadService = roleReadService;
         }
         [SecuredOperation("Admin")]
         [ValidationAspect(typeof(RoleValidator))]
@@ -36,6 +38,7 @@ namespace CozProjectBackend.Business.Concrete
         
         public async Task AddUserRoleAsync(int userId, int roleId)
         {
+            var checkRole = await _roleReadService.IsInRole()
             await _roleWriteDal.AddUserRoleAsync(userId, roleId);
         }
 
