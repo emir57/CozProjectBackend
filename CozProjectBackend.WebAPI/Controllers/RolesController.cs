@@ -16,10 +16,12 @@ namespace CozProjectBackend.WebAPI.Controllers
     {
         private readonly IRoleReadService _roleReadService;
         private readonly IRoleWriteService _roleWriteService;
-        public RolesController(IRoleReadService roleReadService, IRoleWriteService roleWriteService)
+        private readonly IUserReadService _userReadService;
+        public RolesController(IRoleReadService roleReadService, IRoleWriteService roleWriteService, IUserReadService userReadService)
         {
             _roleReadService = roleReadService;
             _roleWriteService = roleWriteService;
+            _userReadService = userReadService;
         }
         [HttpPost("add")]
         public async Task<IActionResult> Add(Role role)
@@ -32,6 +34,15 @@ namespace CozProjectBackend.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await _roleReadService.GetListAsync();
+            return Ok(result);
+        }
+        [HttpGet("getuserRoles")]
+        public async Task<IActionResult> GetUserRoles(int userId)
+        {
+            var getUserResult = await _userReadService.GetByIdAsync(userId);
+            if (!getUserResult.Success)
+                return BadRequest(getUserResult);
+            var result = await _userReadService.GetRolesAsync(getUserResult.Data);
             return Ok(result);
         }
     }
