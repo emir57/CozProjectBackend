@@ -158,24 +158,19 @@ namespace CozProjectBackend.WebAPI.Controllers
         {
             var getUserResult = await _userReadService.GetByIdAsync(updateUserAdminDto.Id);
             if (!getUserResult.Success)
-            {
                 BadRequest(getUserResult);
-            }
-            //TODO: refactoring;
+
             var user = getUserResult.Data;
-            user.FirstName = updateUserAdminDto.FirstName;
-            user.LastName = updateUserAdminDto.LastName;
-            user.Email = updateUserAdminDto.Email;
-            user.EmailConfirmed = updateUserAdminDto.EmailConfirmed;
-            user.Score = updateUserAdminDto.Score;
-            user.ProfilePhotoUrl = updateUserAdminDto.ProfilePhotoUrl;
+            user = updateUser(user, updateUserAdminDto);
+         
             var result = _userWriteService.Update(user);
-            await UpdateRoles(user, updateUserAdminDto.Roles);
+            await updateRoles(user, updateUserAdminDto.Roles);
+
             if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
         }
-        private async Task UpdateRoles(User user,List<UpdateRoleDto> roles)
+        private async Task updateRoles(User user,List<UpdateRoleDto> roles)
         {
             await _userWriteService.SaveAsync();
             foreach (var role in roles)
@@ -189,6 +184,16 @@ namespace CozProjectBackend.WebAPI.Controllers
                     await _roleWriteService.RemoveUserRoleAsync(user.Id, role.Id);
             }
             await _roleWriteService.SaveAsync();
+        }
+        private User updateUser(User user, UpdateUserAdminDto updatedUser)
+        {
+            user.FirstName = updatedUser.FirstName;
+            user.LastName = updatedUser.LastName;
+            user.Email = updatedUser.Email;
+            user.EmailConfirmed = updatedUser.EmailConfirmed;
+            user.Score = updatedUser.Score;
+            user.ProfilePhotoUrl = updatedUser.ProfilePhotoUrl;
+            return user;
         }
     }
 }

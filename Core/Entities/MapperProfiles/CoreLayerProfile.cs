@@ -16,7 +16,6 @@ namespace Core.Entities.MapperProfiles
             CreateMap<User, UpdateUserDto>();
             CreateMap<UpdateUserDto, User>();
             CreateMap<UpdateUserAdminDto, User>();
-            CreateMap<User, UpdateUserAdminDto>();
         }
     }
 }
