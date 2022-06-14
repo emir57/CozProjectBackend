@@ -36,7 +36,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             var result = await _roleReadService.GetListAsync();
             return Ok(result);
         }
-        [HttpGet("getuserRoles")]
+        [HttpGet("getuserroles")]
         public async Task<IActionResult> GetUserRoles(int userId)
         {
             var getUserResult = await _userReadService.GetByIdAsync(userId);
