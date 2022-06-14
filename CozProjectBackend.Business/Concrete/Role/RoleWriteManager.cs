@@ -38,8 +38,9 @@ namespace CozProjectBackend.Business.Concrete
         
         public async Task AddUserRoleAsync(int userId, int roleId)
         {
-            var checkRole = await _roleReadService.IsInRole()
-            await _roleWriteDal.AddUserRoleAsync(userId, roleId);
+            var checkRole = await _roleReadService.IsInRole(userId, roleId);
+            if(!checkRole.Success)
+                await _roleWriteDal.AddUserRoleAsync(userId, roleId);
         }
 
         [SecuredOperation("Admin")]
@@ -52,6 +53,7 @@ namespace CozProjectBackend.Business.Concrete
 
         public async Task RemoveUserRoleAsync(int userId, int roleId)
         {
+            var checkRole = await _roleReadService.IsInRole(userId, roleId);
             await _roleWriteDal.RemoveUserRoleAsync(userId, roleId);
         }
 
