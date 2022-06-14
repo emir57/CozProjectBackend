@@ -25,14 +25,18 @@ namespace CozProjectBackend.WebAPI.Controllers
         private readonly IUserReadService _userReadService;
         private readonly IUserWriteService _userWriteService;
         private readonly IQuestionCompleteWriteService _questionCompleteWriteService;
+        private readonly IRoleWriteService _roleWriteService;
+        private readonly IRoleReadService _roleReadService;
         private readonly IMapper _mapper;
-        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub, IMapper mapper)
+        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub, IMapper mapper, IRoleWriteService roleWriteService, IRoleReadService roleReadService)
         {
             _userReadService = userReadService;
             _userWriteService = userWriteService;
             _questionCompleteWriteService = questionCompleteWriteService;
             _scoreHub = scoreHub;
             _mapper = mapper;
+            _roleWriteService = roleWriteService;
+            _roleReadService = roleReadService;
         }
         [HttpGet("getroles")]
         public async Task<IActionResult> GetRoles(int userId)
@@ -166,6 +170,21 @@ namespace CozProjectBackend.WebAPI.Controllers
             user.Score = updateUserAdminDto.Score;
             user.ProfilePhotoUrl = updateUserAdminDto.ProfilePhotoUrl;
             var result = _userWriteService.Update(user);
+
+            updateUserAdminDto.Roles.ForEach(async role =>
+            {
+                var getRole = await _roleReadService.GetByIdAsync(role.Id, tracking: false);
+                if (role.Checked)
+                {
+
+                }
+                else
+                {
+
+                    _roleWriteService.Delete(getRole.Data);
+                }
+            });
+            await _roleWriteService.SaveAsync();
             await _userWriteService.SaveAsync();
             if (!result.Success)
                 return BadRequest(result);
