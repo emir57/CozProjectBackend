@@ -166,6 +166,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             user.Score = updateUserAdminDto.Score;
             user.ProfilePhotoUrl = updateUserAdminDto.ProfilePhotoUrl;
             var result = _userWriteService.Update(user);
+            await _userWriteService.SaveAsync();Async
             if (!result.Success)
                 return BadRequest(result);
             return Ok(result);

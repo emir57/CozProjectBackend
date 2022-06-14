@@ -13,6 +13,6 @@ namespace Core.Entities.Dtos
         public bool EmailConfirmed { get; set; }
         public int Score { get; set; }
         public string ProfilePhotoUrl { get; set; }
-        public int[] Roles { get; set; }
+        //public int[] Roles { get; set; }
     }
 }
