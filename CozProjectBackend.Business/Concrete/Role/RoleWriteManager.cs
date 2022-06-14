@@ -53,8 +53,9 @@ namespace CozProjectBackend.Business.Concrete
 
         public async Task RemoveUserRoleAsync(int userId, int roleId)
         {
-            var checkRole = await _roleReadService.IsInRole(userId, roleId);
-            await _roleWriteDal.RemoveUserRoleAsync(userId, roleId);
+            var userRole = await _roleWriteDal.GetUserRoleById(userId, roleId);
+            if(userRole != null)
+                _roleWriteDal.RemoveUserRole(userRole);
         }
 
         [CacheRemoveAspect("IRoleReadService.Get")]
