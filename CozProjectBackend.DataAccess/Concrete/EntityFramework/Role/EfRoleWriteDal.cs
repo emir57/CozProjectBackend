@@ -25,9 +25,15 @@ namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
                 RoleId = roleId
             });
         }
-        public async Task RemoveUserRoleAsync(int userId, int roleId)
+
+        public async Task<UserRole> GetUserRoleById(int userId, int roleId)
         {
-            var userRole = await _context.Set<UserRole>().SingleOrDefaultAsync(x=>x.UserId==userId && x.RoleId == roleId);
+            return await _context.Set<UserRole>().SingleOrDefaultAsync(x => x.UserId == userId && x.RoleId == roleId);
+        }
+
+        public void RemoveUserRole(UserRole userRole)
+        {
+
             _context.Set<UserRole>().Remove(userRole);
         }
     }

@@ -11,6 +11,6 @@ namespace CozProjectBackend.DataAccess.Abstract
     {
         Task<UserRole> GetUserRoleById(int userId, int roleId);
         Task AddUserRoleAsync(int userId, int roleId);
-        Task RemoveUserRoleAsync(int userId, int roleId);
+        void RemoveUserRole(UserRole userRole);
     }
 }
