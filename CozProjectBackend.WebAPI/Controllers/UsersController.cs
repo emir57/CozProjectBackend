@@ -150,9 +150,25 @@ namespace CozProjectBackend.WebAPI.Controllers
             return Ok(result);
         }
         [HttpPost("updateuseradmin")]
-        public async Task<IActionResult> UpdateUserAdmin()
+        public async Task<IActionResult> UpdateUserAdmin(UpdateUserAdminDto updateUserAdminDto)
         {
-            var result = await _userWriteService.Update()
+            var getUserResult = await _userReadService.GetByIdAsync(updateUserAdminDto.Id);
+            if (!getUserResult.Success)
+            {
+                BadRequest(getUserResult);
+            }
+            //TODO: refactoring;
+            var user = getUserResult.Data;
+            user.FirstName = updateUserAdminDto.FirstName;
+            user.LastName = updateUserAdminDto.LastName;
+            user.Email = updateUserAdminDto.Email;
+            user.EmailConfirmed = updateUserAdminDto.EmailConfirmed;
+            user.Score = updateUserAdminDto.Score;
+            user.ProfilePhotoUrl = updateUserAdminDto.ProfilePhotoUrl;
+            var result = _userWriteService.Update(user);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
         }
     }
 }
