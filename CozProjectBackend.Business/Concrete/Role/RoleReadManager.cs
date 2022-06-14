@@ -41,9 +41,12 @@ namespace CozProjectBackend.Business.Concrete
             return new SuccessDataResult<Role>(role, _languageMessage.SuccessGet);
         }
 
-        public Task<IResult> IsInRole(User user, Role role)
+        public async Task<IResult> IsInRole(User user, Role role)
         {
-            _roleReadDal.
+            var result = await _roleReadDal.IsInRole(user, role);
+            if (result)
+                return new SuccessResult();
+            return new ErrorResult();
         }
     }
 }
