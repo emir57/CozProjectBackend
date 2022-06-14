@@ -170,8 +170,15 @@ namespace CozProjectBackend.WebAPI.Controllers
             user.Score = updateUserAdminDto.Score;
             user.ProfilePhotoUrl = updateUserAdminDto.ProfilePhotoUrl;
             var result = _userWriteService.Update(user);
+            await UpdateRoles(user, updateUserAdminDto.Roles);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
+        }
+        private async Task UpdateRoles(User user,List<UpdateRoleDto> roles)
+        {
             await _userWriteService.SaveAsync();
-            foreach (var role in updateUserAdminDto.Roles)
+            foreach (var role in roles)
             {
                 var getRole = await _roleReadService.GetByIdAsync(role.Id);
                 if (role.Checked)
@@ -182,9 +189,6 @@ namespace CozProjectBackend.WebAPI.Controllers
                     await _roleWriteService.RemoveUserRoleAsync(user.Id, role.Id);
             }
             await _roleWriteService.SaveAsync();
-            if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
         }
     }
 }
