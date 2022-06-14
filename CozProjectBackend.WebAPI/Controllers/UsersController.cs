@@ -149,5 +149,10 @@ namespace CozProjectBackend.WebAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("updateuseradmin")]
+        public async Task<IActionResult> UpdateUserAdmin()
+        {
+            var result = await _userWriteService.Update()
+        }
     }
 }
