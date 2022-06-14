@@ -46,6 +46,12 @@ namespace CozProjectBackend.Business.Concrete
             _roleWriteDal.Delete(entity);
             return new SuccessResult(_languageMessage.SuccessDelete);
         }
+
+        public async Task RemoveUserRoleAsync(int userId, int roleId)
+        {
+            await _roleWriteDal.RemoveUserRoleAsync(userId, roleId);
+        }
+
         [CacheRemoveAspect("IRoleReadService.Get")]
         public Task<int> SaveAsync()
         {
