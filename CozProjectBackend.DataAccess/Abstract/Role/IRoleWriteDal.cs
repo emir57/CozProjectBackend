@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace CozProjectBackend.DataAccess.Abstract
 {
-    public interface IRoleWriteDal:IWriteRepository<Role>
+    public interface IRoleWriteDal : IWriteRepository<Role>
     {
-        Task AddUserRoleAsync(int userId,int roleId);
+        Task AddUserRoleAsync(int userId, int roleId);
+        Task RemoveUserRoleAsync(int userId, int roleId);
     }
 }
