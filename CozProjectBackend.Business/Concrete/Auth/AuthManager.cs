@@ -74,6 +74,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
             IResult result = await _userWriteService.AddAsync(user);
             await _userWriteService.SaveAsync();
             await _roleWriteService.AddUserRoleAsync(user.Id, 4);
+            await _roleWriteService.AddUserRoleAsync(user.Id, 2);
             await _roleWriteService.SaveAsync();
             if (!result.Success)
             {
