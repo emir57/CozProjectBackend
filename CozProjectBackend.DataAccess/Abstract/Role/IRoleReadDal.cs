@@ -3,10 +3,12 @@ using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CozProjectBackend.DataAccess.Abstract
 {
-    public interface IRoleReadDal:IReadRepository<Role>
+    public interface IRoleReadDal : IReadRepository<Role>
     {
+        Task<bool> IsInRole(User user, Role role);
     }
 }

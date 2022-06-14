@@ -40,5 +40,10 @@ namespace CozProjectBackend.Business.Concrete
                 return new SuccessDataResult<Role>(_languageMessage.RoleNotFound);
             return new SuccessDataResult<Role>(role, _languageMessage.SuccessGet);
         }
+
+        public Task<IResult> IsInRole(User user, Role role)
+        {
+            _roleReadDal.
+        }
     }
 }
