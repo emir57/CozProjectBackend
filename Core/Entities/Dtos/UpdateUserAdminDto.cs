@@ -12,7 +12,6 @@ namespace Core.Entities.Dtos
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
         public int Score { get; set; }
-        public string ProfilePhotoUrl { get; set; }
-        //public int[] Roles { get; set; }
+        public List<UpdateRoleDto> Roles { get; set; }
     }
 }
