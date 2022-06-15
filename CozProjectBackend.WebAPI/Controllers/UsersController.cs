@@ -175,8 +175,6 @@ namespace CozProjectBackend.WebAPI.Controllers
             await _userWriteService.SaveAsync();
             foreach (var role in roles)
             {
-                var getRole = await _roleReadService.GetByIdAsync(role.Id);
-
                 if (role.Checked)
                     await _roleWriteService.AddUserRoleAsync(user.Id, role.Id);
                 else
