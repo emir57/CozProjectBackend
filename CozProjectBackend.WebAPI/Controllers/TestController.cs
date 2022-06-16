@@ -1,6 +1,6 @@
 ﻿using Core.Entities.Concrete;
-using Core.Entities.FluentEntities;
 using Core.Utilities.Security.Hashing;
+using FluentEntity_ConsoleApp.FEntity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
