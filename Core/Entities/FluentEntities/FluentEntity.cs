@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.Entities.FluentEntities
 {
-    public class FluentEntity<T>
+    public class FluentEntity<T> : IFluentEntity<T>
         where T : class, IEntity, new()
     {
         private T entity;
@@ -14,7 +14,7 @@ namespace Core.Entities.FluentEntities
         {
             entity = new T();
         }
-        public FluentEntity<T> AddParameter<P>(Expression<Func<T, P>> exp, object value)
+        public IFluentEntity<T> AddParameter<P>(Expression<Func<T, P>> exp, object value)
         {
             var propertyName = (exp.Body as MemberExpression).Member.Name;
             PropertyInfo propertyInfo = entity.GetType().GetProperty(propertyName);
