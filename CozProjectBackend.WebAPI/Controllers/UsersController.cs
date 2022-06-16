@@ -178,13 +178,14 @@ namespace CozProjectBackend.WebAPI.Controllers
         }
         private User updateUser(User user, UpdateUserAdminDto updatedUser)
         {
-            user.FirstName = updatedUser.FirstName;
-            user.LastName = updatedUser.LastName;
-            user.Email = updatedUser.Email;
-            user.EmailConfirmed = updatedUser.EmailConfirmed;
-            user.Score = updatedUser.Score;
-            user.ProfilePhotoUrl = updatedUser.ProfilePhotoUrl;
-            return user;
+            return new FluentEntity<User>(user)
+                .AddParameter(u => u.FirstName, updatedUser.FirstName)
+                .AddParameter(u => u.LastName, updatedUser.LastName)
+                .AddParameter(u => u.Email, updatedUser.Email)
+                .AddParameter(u => u.EmailConfirmed, updatedUser.EmailConfirmed)
+                .AddParameter(u => u.Score, updatedUser.Score)
+                .AddParameter(u => u.ProfilePhotoUrl, updatedUser.ProfilePhotoUrl)
+                .GetEntity();
         }
     }
 }
