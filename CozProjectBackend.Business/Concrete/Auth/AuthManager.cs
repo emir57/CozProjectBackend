@@ -99,8 +99,10 @@ namespace CozProjectBackend.Business.Concrete.Auth
             }
 
             HashingHelper.CreatePasswordHash(newPassword, out passwordHash, out passwordSalt);
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            user = new FluentEntity<User>(user)
+                .AddParameter(u => u.PasswordHash, passwordHash)
+                .AddParameter(u => u.PasswordSalt, passwordSalt)
+                .GetEntity();
             var result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
             return result;
