@@ -8,6 +8,7 @@ using CozProjectBackend.Business.Abstract.Auth;
 using CozProjectBackend.Entities.Concrete;
 using CozProjectBackend.Entities.Dto;
 using CozProjectBackend.WebAPI.Hubs;
+using FluentEntity_ConsoleApp.FEntity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -68,8 +69,10 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(errorModel);
             }
             //TODO: refactoring
-            user.FirstName = updateUserDto.FirstName;
-            user.LastName = updateUserDto.LastName;
+            user = new FluentEntity<User>(user)
+                .AddParameter(u => u.FirstName, updateUserDto.FirstName)
+                .AddParameter(u => u.LastName, updateUserDto.LastName)
+                .GetEntity();
             IResult result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
             if (!result.Success)
