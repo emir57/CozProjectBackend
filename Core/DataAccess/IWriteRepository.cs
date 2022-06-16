@@ -13,7 +13,7 @@ namespace Core.DataAccess
         Task AddRangeAsync(List<T> entities);
         bool Update(T entity);
         void UpdateRange(List<T> entities);
-        void Delete(T entity);
+        bool Delete(T entity);
         void DeleteRange(List<T> entities);
         Task<int> SaveAsync();
     }

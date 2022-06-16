@@ -29,9 +29,10 @@ namespace Core.DataAccess.EntityFramework
             await _context.AddRangeAsync(entities);
         }
 
-        public void Delete(T entity)
+        public bool Delete(T entity)
         {
-            _context.Remove(entity);
+            EntityEntry<T> entityEntry = _context.Remove(entity);
+            return entityEntry.State == EntityState.Deleted;
         }
 
         public void DeleteRange(List<T> entities)
