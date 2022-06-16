@@ -13,7 +13,7 @@ namespace CozProjectBackend.WebAPI.Controllers
     public class TestController : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> Test()
+        public IActionResult Test()
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash("123456", out passwordHash, out passwordSalt);
