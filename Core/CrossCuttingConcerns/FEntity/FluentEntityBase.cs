@@ -10,10 +10,14 @@ namespace FluentEntity_ConsoleApp.FEntity
     public abstract class FluentEntityBase<T>
         where T : class, new()
     {
-        protected T entity;
+        protected T _entity;
         public FluentEntityBase()
         {
-            entity = new T();
+            _entity = new T();
+        }
+        public FluentEntityBase(T entity)
+        {
+            _entity = entity;
         }
         public virtual FluentEntityBase<T> AddParameter<P>(Expression<Func<T, P>> exp, object value)
         {
@@ -28,20 +32,20 @@ namespace FluentEntity_ConsoleApp.FEntity
         }
         public virtual FluentEntityBase<T> AddParameters<P>(object value)
         {
-            PropertyInfo[] propertyInfos = entity.GetType().GetProperties();
+            PropertyInfo[] propertyInfos = _entity.GetType().GetProperties();
             foreach (PropertyInfo propertyInfo in propertyInfos)
                 if (propertyInfo.PropertyType == typeof(P))
-                    propertyInfo.SetValue(entity, value);
+                    propertyInfo.SetValue(_entity, value);
             return this;
         }
 
-        public T GetEntity() => entity;
+        public T GetEntity() => _entity;
 
         protected virtual void SetProperty(string propertyName, object value)
         {
-            PropertyInfo propertyInfo = entity.GetType().GetProperty(propertyName);
+            PropertyInfo propertyInfo = _entity.GetType().GetProperty(propertyName);
             CheckExceptions(propertyInfo);
-            propertyInfo.SetValue(entity, value);
+            propertyInfo.SetValue(_entity, value);
         }
         protected virtual void CheckExceptions(PropertyInfo propertyInfo)
         {
