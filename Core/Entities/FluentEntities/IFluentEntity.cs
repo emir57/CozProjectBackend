@@ -9,5 +9,6 @@ namespace Core.Entities.FluentEntities
         where T : class, new()
     {
         IFluentEntity<T> AddParameter<P>(Expression<Func<T, P>> exp, object value);
+        T GetEntity();
     }
 }
