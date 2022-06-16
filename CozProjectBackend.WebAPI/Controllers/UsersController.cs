@@ -108,16 +108,20 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(getUserResult);
             }
             var user = getUserResult.Data;
-            user.Score += scoreModel.Score;
+            user = new FluentEntity<User>(user)
+                .AddParameter(u => u.Score, scoreModel.Score)
+                .GetEntity();
             _userWriteService.Update(user);
-            await _questionCompleteWriteService.AddAsync(new QuestionComplete
-            {
-                QuestionId = scoreModel.QuestionId,
-                Result = scoreModel.Result,
-                UserId = scoreModel.UserId
-            });
             await _userWriteService.SaveAsync();
+
+            QuestionComplete questionComplete = new FluentEntity<QuestionComplete>()
+                .AddParameter(q => q.QuestionId, scoreModel.QuestionId)
+                .AddParameter(q => q.Result, scoreModel.Result)
+                .AddParameter(q => q.UserId, scoreModel.UserId)
+                .GetEntity();
+            await _questionCompleteWriteService.AddAsync(questionComplete);
             await _questionCompleteWriteService.SaveAsync();
+
             await _scoreHub.Clients.All.SendAsync("SendScore", user.Id, user.Score);
             return Ok();
         }
