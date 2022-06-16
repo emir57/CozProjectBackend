@@ -21,5 +21,10 @@ namespace Core.Entities.FluentEntities
             propertyInfo.SetValue(entity, value);
             return this;
         }
+
+        public T GetEntity()
+        {
+            return entity;
+        }
     }
 }
