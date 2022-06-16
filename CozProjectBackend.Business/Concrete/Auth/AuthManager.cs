@@ -8,6 +8,7 @@ using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Abstract.Auth;
 using CozProjectBackend.Business.Validators.FluentValidation;
+using FluentEntity_ConsoleApp.FEntity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -61,16 +62,15 @@ namespace CozProjectBackend.Business.Concrete.Auth
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(userForRegisterDto.Password, out passwordHash, out passwordSalt);
-            User user = new User
-            {
-                FirstName = userForRegisterDto.FirstName,
-                LastName = userForRegisterDto.LastName,
-                Email = userForRegisterDto.Email,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
-                EmailConfirmed = false,
-                Score = 0,
-            };
+            User user = new FluentEntity<User>()
+                .AddParameter(x => x.FirstName, userForRegisterDto.FirstName)
+                .AddParameter(x => x.LastName, userForRegisterDto.LastName)
+                .AddParameter(x => x.Email, userForRegisterDto.Email)
+                .AddParameter(x => x.PasswordHash, passwordHash)
+                .AddParameter(x => x.PasswordSalt, passwordSalt)
+                .AddParameter(x => x.EmailConfirmed, false)
+                .AddParameter(x => x.Score, 0)
+                .GetEntity();
             IResult result = await _userWriteService.AddAsync(user);
             await _userWriteService.SaveAsync();
             await _roleWriteService.AddUserRoleAsync(user.Id, 4);
