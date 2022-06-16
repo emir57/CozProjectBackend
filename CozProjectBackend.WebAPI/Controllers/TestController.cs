@@ -14,7 +14,7 @@ namespace CozProjectBackend.WebAPI.Controllers
         public async Task<IActionResult> Test()
         {
             var user = new FluentEntity<User>()
-                .AddParameter(x=>x.);
+                .AddParameter(x => x.FirstName, "Emir");
             return Ok();
         }
     }

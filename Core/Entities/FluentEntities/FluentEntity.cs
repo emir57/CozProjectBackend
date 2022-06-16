@@ -15,7 +15,8 @@ namespace Core.Entities.FluentEntities
         }
         public FluentEntity<T> AddParameter(Expression<Func<T, object>> exp, object value)
         {
-
+            var a = exp;
+            var v = value;
             return this;
         }
     }
