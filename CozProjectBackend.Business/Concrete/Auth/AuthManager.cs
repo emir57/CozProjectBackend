@@ -83,6 +83,29 @@ namespace CozProjectBackend.Business.Concrete.Auth
             return new SuccessDataResult<User>(_language.SuccessRegister);
         }
 
+        public async Task<IResult> ResetPasswordAsync(User user, string oldPassword, string newPassword)
+        {
+            byte[] passwordHash, passwordSalt;
+
+            if (!HashingHelper.VerifyPasswordHash(oldPassword, user.PasswordHash, user.PasswordSalt))
+            {
+                var errorModel = new ErrorResult("Eski şifreniz uyuşmuyor!");
+                return errorModel;
+            }
+            if (HashingHelper.VerifyPasswordHash(oldPassword, user.PasswordHash, user.PasswordSalt))
+            {
+                var errorModel = new ErrorResult("Yeni şifreniz eski şifre ile aynı olamaz!");
+                return errorModel;
+            }
+
+            HashingHelper.CreatePasswordHash(newPassword, out passwordHash, out passwordSalt);
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+            var result = _userWriteService.Update(user);
+            await _userWriteService.SaveAsync();
+            return result;
+        }
+
         public async Task<IResult> UserExistsAsync(string email)
         {
             User user = (await _userReadService.GetByEmailAsync(email)).Data;

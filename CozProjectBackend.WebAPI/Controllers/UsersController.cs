@@ -4,6 +4,7 @@ using Core.Entities.Dtos;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.Abstract.Auth;
 using CozProjectBackend.Entities.Concrete;
 using CozProjectBackend.Entities.Dto;
 using CozProjectBackend.WebAPI.Hubs;
@@ -27,8 +28,9 @@ namespace CozProjectBackend.WebAPI.Controllers
         private readonly IQuestionCompleteWriteService _questionCompleteWriteService;
         private readonly IRoleWriteService _roleWriteService;
         private readonly IRoleReadService _roleReadService;
+        private readonly IAuthService _authService;
         private readonly IMapper _mapper;
-        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub, IMapper mapper, IRoleWriteService roleWriteService, IRoleReadService roleReadService)
+        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub, IMapper mapper, IRoleWriteService roleWriteService, IRoleReadService roleReadService, IAuthService authService)
         {
             _userReadService = userReadService;
             _userWriteService = userWriteService;
@@ -37,6 +39,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             _mapper = mapper;
             _roleWriteService = roleWriteService;
             _roleReadService = roleReadService;
+            _authService = authService;
         }
         [HttpGet("getroles")]
         public async Task<IActionResult> GetRoles(int userId)
@@ -84,25 +87,9 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(getUser);
             }
-
             var user = getUser.Data;
-            if (!HashingHelper.VerifyPasswordHash(userResetPasswordDto.OldPassword, user.PasswordHash, user.PasswordSalt))
-            {
-                var errorModel = new ErrorResult("Eski şifreniz uyuşmuyor!");
-                return BadRequest(errorModel);
-            }
-            if (HashingHelper.VerifyPasswordHash(userResetPasswordDto.NewPassword, user.PasswordHash, user.PasswordSalt))
-            {
-                var errorModel = new ErrorResult("Yeni şifreniz eski şifre ile aynı olamaz!");
-                return BadRequest(errorModel);
-            }
 
-            HashingHelper.CreatePasswordHash(userResetPasswordDto.NewPassword, out passwordHash, out passwordSalt);
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-            var result = _userWriteService.Update(user);
-            await _userWriteService.SaveAsync();
-
+            var result = await _authService.ResetPasswordAsync(user, userResetPasswordDto.OldPassword, userResetPasswordDto.NewPassword);
             if (!result.Success)
             {
                 return BadRequest(result);
@@ -162,7 +149,7 @@ namespace CozProjectBackend.WebAPI.Controllers
 
             var user = getUserResult.Data;
             user = updateUser(user, updateUserAdminDto);
-         
+
             var result = _userWriteService.Update(user);
             await updateRoles(user, updateUserAdminDto.Roles);
 
@@ -170,7 +157,7 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(result);
             return Ok(result);
         }
-        private async Task updateRoles(User user,List<UpdateRoleDto> roles)
+        private async Task updateRoles(User user, List<UpdateRoleDto> roles)
         {
             await _userWriteService.SaveAsync();
             foreach (var role in roles)

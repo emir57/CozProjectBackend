@@ -15,6 +15,6 @@ namespace CozProjectBackend.Business.Abstract.Auth
         Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto);
         Task<IDataResult<AccessToken>> CreateAccessTokenAsync(User user);
         Task<IResult> UserExistsAsync(string email);
-        Task<IResult> ResetPasswordAsync(User user, string newPassword);
+        Task<IResult> ResetPasswordAsync(User user, string oldPassword, string newPassword);
     }
 }
