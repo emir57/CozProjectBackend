@@ -1,7 +1,9 @@
 ﻿using Core.Entities.Concrete;
 using Core.Entities.FluentEntities;
+using Core.Utilities.Security.Hashing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace CozProjectBackend.WebAPI.Controllers
@@ -13,9 +15,17 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Test()
         {
-            var user = new FluentEntity<User>()
-                .AddParameter(x => x.FirstName, "Emir");
-            return Ok();
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash("123456", out passwordHash, out passwordSalt);
+            User user = new FluentEntity<User>()
+                .AddParameter(x => x.FirstName, "Emir")
+                .AddParameter(x => x.LastName, "Gürbüz")
+                .AddParameter(x => x.CreatedDate, DateTime.Now)
+                .AddParameter(x => x.Score, 20)
+                .AddParameter(x => x.EmailConfirmed, true)
+                .AddParameter(x => x.PasswordHash, passwordHash)
+                .GetEntity();
+            return Ok(user);
         }
     }
 }
