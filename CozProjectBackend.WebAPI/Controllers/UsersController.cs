@@ -68,13 +68,14 @@ namespace CozProjectBackend.WebAPI.Controllers
                 var errorModel = new ErrorResult("Şifre Yanlış!");
                 return BadRequest(errorModel);
             }
-            //TODO: refactoring
+
             user = new FluentEntity<User>(user)
                 .AddParameter(u => u.FirstName, updateUserDto.FirstName)
                 .AddParameter(u => u.LastName, updateUserDto.LastName)
                 .GetEntity();
             IResult result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
+
             if (!result.Success)
             {
                 return BadRequest(result);
