@@ -81,7 +81,6 @@ namespace CozProjectBackend.WebAPI.Controllers
         [HttpPost("resetpassword")]
         public async Task<IActionResult> ResetPassword(UserResetPasswordDto userResetPasswordDto)
         {
-            byte[] passwordHash, passwordSalt;
             var getUser = await _userReadService.GetByEmailAsync(userResetPasswordDto.Email);
             if (getUser.Data == null)
             {
