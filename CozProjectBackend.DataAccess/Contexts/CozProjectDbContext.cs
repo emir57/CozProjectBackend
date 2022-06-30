@@ -14,6 +14,7 @@ namespace CozProjectBackend.DataAccess.Contexts
     {
         public CozProjectDbContext(DbContextOptions options) : base(options)
         {
+            ChangeTracker.LazyLoadingEnabled = false;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
