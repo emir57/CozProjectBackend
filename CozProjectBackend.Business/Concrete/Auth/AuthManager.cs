@@ -1,4 +1,5 @@
-﻿using Core.Aspects.Autofac.Validation;
+﻿using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using Core.Utilities.Message;
@@ -58,6 +59,7 @@ namespace CozProjectBackend.Business.Concrete.Auth
             return new SuccessDataResult<User>(user, _language.LoginSuccess);
         }
         [ValidationAspect(typeof(UserForRegisterValidator))]
+        [CacheRemoveAspect("IUserReadService.GetListAsync")]
         public async Task<IDataResult<User>> RegisterAsync(UserForRegisterDto userForRegisterDto)
         {
             byte[] passwordHash, passwordSalt;

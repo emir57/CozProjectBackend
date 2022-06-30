@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using Core.Aspects.Autofac.Caching;
+using Core.Entities.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
@@ -23,9 +24,10 @@ namespace CozProjectBackend.Business.Concrete
             _languageMessage = language;
         }
         [SecuredOperation("Admin")]
+        [CacheAspect(5)]
         public async Task<IDataResult<List<User>>> GetListAsync()
         {
-            return new SuccessDataResult<List<User>>(await _userReadDal.GetAll().ToListAsync(),_languageMessage.SuccessList);
+            return new SuccessDataResult<List<User>>(await _userReadDal.GetAll().ToListAsync(), _languageMessage.SuccessList);
         }
 
         public async Task<IDataResult<User>> GetByEmailAsync(string email)
@@ -33,14 +35,14 @@ namespace CozProjectBackend.Business.Concrete
             User user = await _userReadDal.GetAsync(x => x.Email == email);
             if (user == null)
                 return new ErrorDataResult<User>(_languageMessage.UserNotFound);
-            return new SuccessDataResult<User>(user,_languageMessage.SuccessGet);
+            return new SuccessDataResult<User>(user, _languageMessage.SuccessGet);
         }
         public async Task<IDataResult<User>> GetByIdAsync(int id)
         {
             User user = await _userReadDal.GetByIdAsync(id);
             if (user == null)
                 return new ErrorDataResult<User>(_languageMessage.UserNotFound);
-            return new SuccessDataResult<User>(user,_languageMessage.SuccessGet);
+            return new SuccessDataResult<User>(user, _languageMessage.SuccessGet);
         }
         public async Task<List<Role>> GetRolesAsync(User user)
         {
