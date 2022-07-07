@@ -6,10 +6,7 @@ using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.DataAccess.Abstract;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CozProjectBackend.Business.Concrete
