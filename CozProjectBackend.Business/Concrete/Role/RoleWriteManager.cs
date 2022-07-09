@@ -7,9 +7,6 @@ using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.Business.Validators.FluentValidation;
 using CozProjectBackend.DataAccess.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CozProjectBackend.Business.Concrete
