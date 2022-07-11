@@ -77,10 +77,8 @@ namespace CozProjectBackend.WebAPI.Controllers
             IResult result = _userWriteService.Update(user);
             await _userWriteService.SaveAsync();
 
-            if (!result.Success)
-            {
+            if (result.Success == false)
                 return BadRequest(result);
-            }
             return Ok(result);
         }
         [HttpPost("resetpassword")]
