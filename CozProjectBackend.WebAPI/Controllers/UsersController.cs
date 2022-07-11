@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos;
+using Core.Utilities.Message;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using CozProjectBackend.Business.Abstract;
@@ -29,7 +30,8 @@ namespace CozProjectBackend.WebAPI.Controllers
         private readonly IRoleReadService _roleReadService;
         private readonly IAuthService _authService;
         private readonly IMapper _mapper;
-        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub, IMapper mapper, IRoleWriteService roleWriteService, IRoleReadService roleReadService, IAuthService authService)
+        private readonly ILanguageMessage _languageMessage;
+        public UsersController(IUserReadService userReadService, IUserWriteService userWriteService, IQuestionCompleteWriteService questionCompleteWriteService, IHubContext<ScoreHub> scoreHub, IMapper mapper, IRoleWriteService roleWriteService, IRoleReadService roleReadService, IAuthService authService, ILanguageMessage languageMessage)
         {
             _userReadService = userReadService;
             _userWriteService = userWriteService;
@@ -39,6 +41,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             _roleWriteService = roleWriteService;
             _roleReadService = roleReadService;
             _authService = authService;
+            _languageMessage = languageMessage;
         }
         [HttpGet("getroles")]
         public async Task<IActionResult> GetRoles(int userId)
@@ -63,7 +66,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             User user = getUser.Data;
             if (!HashingHelper.VerifyPasswordHash(updateUserDto.Password, user.PasswordHash, user.PasswordSalt))
             {
-                var errorModel = new ErrorResult("Şifre Yanlış!");
+                var errorModel = new ErrorResult(_languageMessage.PasswordIsWrong);
                 return BadRequest(errorModel);
             }
 
