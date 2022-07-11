@@ -181,7 +181,8 @@ namespace CozProjectBackend.WebAPI.Controllers
                 .AddParameter(u => u.ProfilePhotoUrl, updatedUser.ProfilePhotoUrl)
                 .GetEntity();
         }
-
+        
+        [NonAction]
         private async Task updateUserScore(User user, int score)
         {
             user = new FluentEntity<User>(user)
