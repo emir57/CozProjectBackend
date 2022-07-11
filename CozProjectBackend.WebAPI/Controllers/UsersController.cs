@@ -92,10 +92,8 @@ namespace CozProjectBackend.WebAPI.Controllers
             var user = getUser.Data;
 
             var result = await _authService.ResetPasswordAsync(user, userResetPasswordDto.OldPassword, userResetPasswordDto.NewPassword);
-            if (!result.Success)
-            {
+            if (result.Success == false)
                 return BadRequest(result);
-            }
             return Ok(result);
         }
 
@@ -103,16 +101,14 @@ namespace CozProjectBackend.WebAPI.Controllers
         public async Task<IActionResult> UpdateScore(UpdateScoreModel scoreModel)
         {
             var getUserResult = await _userReadService.GetByIdAsync(scoreModel.UserId);
-            if (!getUserResult.Success)
-            {
+            if (getUserResult.Success == false)
                 return BadRequest(getUserResult);
-            }
-            var user = getUserResult.Data;
+
+            User user = getUserResult.Data;
             user = new FluentEntity<User>(user)
                 .AddParameter(u => u.Score, scoreModel.Score)
                 .GetEntity();
             _userWriteService.Update(user);
-            await _userWriteService.SaveAsync();
 
             QuestionComplete questionComplete = new FluentEntity<QuestionComplete>()
                 .AddParameter(q => q.QuestionId, scoreModel.QuestionId)
@@ -120,6 +116,8 @@ namespace CozProjectBackend.WebAPI.Controllers
                 .AddParameter(q => q.UserId, scoreModel.UserId)
                 .GetEntity();
             await _questionCompleteWriteService.AddAsync(questionComplete);
+
+            await _userWriteService.SaveAsync();
             await _questionCompleteWriteService.SaveAsync();
 
             await _scoreHub.Clients.All.SendAsync("SendScore", user.Id, user.Score);
