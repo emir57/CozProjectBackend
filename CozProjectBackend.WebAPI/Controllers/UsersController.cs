@@ -105,10 +105,7 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(getUserResult);
 
             User user = getUserResult.Data;
-            user = new FluentEntity<User>(user)
-                .AddParameter(u => u.Score, scoreModel.Score)
-                .GetEntity();
-            _userWriteService.Update(user);
+
 
             QuestionComplete questionComplete = new FluentEntity<QuestionComplete>()
                 .AddParameter(q => q.QuestionId, scoreModel.QuestionId)
@@ -117,7 +114,7 @@ namespace CozProjectBackend.WebAPI.Controllers
                 .GetEntity();
             await _questionCompleteWriteService.AddAsync(questionComplete);
 
-            await _userWriteService.SaveAsync();
+
             await _questionCompleteWriteService.SaveAsync();
 
             await _scoreHub.Clients.All.SendAsync("SendScore", user.Id, user.Score);
@@ -183,6 +180,15 @@ namespace CozProjectBackend.WebAPI.Controllers
                 .AddParameter(u => u.Score, updatedUser.Score)
                 .AddParameter(u => u.ProfilePhotoUrl, updatedUser.ProfilePhotoUrl)
                 .GetEntity();
+        }
+
+        private async Task updateUserScore(User user, int score)
+        {
+            user = new FluentEntity<User>(user)
+                .AddParameter(u => u.Score, score)
+                .GetEntity();
+            _userWriteService.Update(user);
+            await _userWriteService.SaveAsync();
         }
     }
 }
