@@ -105,7 +105,7 @@ namespace CozProjectBackend.WebAPI.Controllers
                 return BadRequest(getUserResult);
 
             User user = getUserResult.Data;
-
+            await updateUserScore(user, scoreModel.Score);
 
             QuestionComplete questionComplete = new FluentEntity<QuestionComplete>()
                 .AddParameter(q => q.QuestionId, scoreModel.QuestionId)
