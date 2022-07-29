@@ -1,15 +1,14 @@
-﻿using Core.CrossCuttingConcerns.Logging.Log4Net;
+﻿using Castle.DynamicProxy;
+using Core.CrossCuttingConcerns.Logging;
+using Core.CrossCuttingConcerns.Logging.Log4Net;
+using Core.Extensions;
 using Core.Utilities.AspectMessage;
 using Core.Utilities.Interceptors;
 using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
-using Castle.DynamicProxy;
-using Core.CrossCuttingConcerns.Logging;
-using Core.Extensions;
 
 namespace Core.Aspects.Autofac.Exception
 {
