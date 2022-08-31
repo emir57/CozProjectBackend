@@ -3,27 +3,15 @@ using Core.Entities.MapperProfiles;
 using Core.Extensions;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.Concrete;
-using CozProjectBackend.Business.DependencyResolvers.Microsoft;
-using CozProjectBackend.DataAccess.Abstract;
-using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
 using CozProjectBackend.WebAPI.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CozProjectBackend.WebAPI
 {
@@ -39,19 +27,28 @@ namespace CozProjectBackend.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region SignalR
             services.AddSignalR();
+            #endregion
+
+            #region Context
             services.AddDbContext<CozProjectDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection"),
                 sqlServerOptionsAction: sqlOptions =>
                 {
                     sqlOptions.EnableRetryOnFailure();
                 }));
+            #endregion
+
+            #region AutoMapper
             services.AddAutoMapper(typeof(CoreLayerProfile));
+            #endregion
+
             //services.AddMicrosoftBusinessModule();
             services.AddControllers();
 
+            #region JWT
             TokenOptions tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -66,9 +63,14 @@ namespace CozProjectBackend.WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+            #endregion
+
+            #region CoreModule
             services.AddDependencyResolvers(
                 new CoreModule());
+            #endregion
 
+            #region Cors
             services.AddCors(opt =>
             {
                 opt.AddDefaultPolicy(policy =>
@@ -76,9 +78,10 @@ namespace CozProjectBackend.WebAPI
                     policy.AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowAnyOrigin();
-                        //.WithOrigins("http://localhost:8100");
+                    //.WithOrigins("http://localhost:8100");
                 });
             });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,7 +98,6 @@ namespace CozProjectBackend.WebAPI
             app.UseRouting();
 
             app.UseAuthentication();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
