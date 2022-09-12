@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,8 +11,14 @@ namespace CozProjectBackend.Entities.Concrete
     {
         public int Id { get; set; }
         public string Content { get; set; }
+
         public int TeacherId { get; set; }
+        [ForeignKey("TeacherId")]
+        public User User { get; set; }
+
         public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
         public int Score { get; set; }
         [NotMapped]
         public List<Answer> Answers { get; set; }
