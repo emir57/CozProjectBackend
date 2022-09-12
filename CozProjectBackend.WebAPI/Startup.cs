@@ -77,8 +77,8 @@ namespace CozProjectBackend.WebAPI
                 {
                     policy.AllowAnyHeader()
                         .AllowAnyMethod()
-                        .AllowAnyOrigin();
-                    //.WithOrigins("http://localhost:8100");
+                        .AllowAnyOrigin()
+                    .WithOrigins("http://localhost:8100");
                 });
             });
             #endregion
