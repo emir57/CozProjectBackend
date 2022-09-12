@@ -9,8 +9,14 @@ namespace CozProjectBackend.Entities.Concrete
 {
     public class Question : IEntity
     {
+        public Question()
+        {
+            Answers = new HashSet<Answer>();
+        }
+
         public int Id { get; set; }
         public string Content { get; set; }
+        public int Score { get; set; }
 
         public int TeacherId { get; set; }
         [ForeignKey("TeacherId")]
@@ -19,10 +25,8 @@ namespace CozProjectBackend.Entities.Concrete
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public int Score { get; set; }
-        [NotMapped]
-        public List<Answer> Answers { get; set; }
-        [NotMapped]
+        public ICollection<Answer> Answers { get; set; }
+
         public bool? Result { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
