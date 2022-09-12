@@ -9,6 +9,7 @@ namespace CozProjectBackend.Entities.Concrete
     {
         public int Id { get; set; }
         public int QuestionId { get; set; }
+        public Question Question { get; set; }
         public string Content { get; set; }
         public bool IsTrue { get; set; }
         public DateTime? CreatedDate { get; set; }
