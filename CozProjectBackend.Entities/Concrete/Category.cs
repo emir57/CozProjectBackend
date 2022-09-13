@@ -6,10 +6,6 @@ namespace CozProjectBackend.Entities.Concrete
 {
     public class Category : IEntity
     {
-        public Category()
-        {
-            Questions = new HashSet<Question>();
-        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string BackgroundColor { get; set; }
@@ -21,5 +17,19 @@ namespace CozProjectBackend.Entities.Concrete
 
         public ICollection<Question> Questions { get; set; }
 
+        public Category()
+        {
+            Questions = new HashSet<Question>();
+        }
+
+        public Category(int ıd, string name, string backgroundColor, string textColor, bool isComplete, DateTime? createdDate) : this()
+        {
+            Id = ıd;
+            Name = name;
+            BackgroundColor = backgroundColor;
+            TextColor = textColor;
+            this.isComplete = isComplete;
+            CreatedDate = createdDate;
+        }
     }
 }
