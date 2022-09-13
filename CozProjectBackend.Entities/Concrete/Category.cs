@@ -22,13 +22,12 @@ namespace CozProjectBackend.Entities.Concrete
             Questions = new HashSet<Question>();
         }
 
-        public Category(int ıd, string name, string backgroundColor, string textColor, bool isComplete, DateTime? createdDate) : this()
+        public Category(int id, string name, string backgroundColor, string textColor, DateTime? createdDate) : this()
         {
-            Id = ıd;
+            Id = id;
             Name = name;
             BackgroundColor = backgroundColor;
             TextColor = textColor;
-            this.isComplete = isComplete;
             CreatedDate = createdDate;
         }
     }

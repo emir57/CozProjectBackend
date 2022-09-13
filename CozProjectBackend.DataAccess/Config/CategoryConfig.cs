@@ -1,6 +1,7 @@
 ﻿using CozProjectBackend.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace CozProjectBackend.DataAccess.Config
 {
@@ -39,6 +40,13 @@ namespace CozProjectBackend.DataAccess.Config
                 .HasColumnName("UpdatedDate");
             builder.Property(a => a.DeletedDate)
                 .HasColumnName("DeletedDate");
+
+            Category[] categoryEntitySeeds =
+            {
+                new Category(1,"C#","#26b628","#ffffff",DateTime.Now),
+                new Category(2,"Javascript","#f7df1e","#ae9090",DateTime.Now)
+            };
+            builder.HasData(categoryEntitySeeds);
         }
     }
 }
