@@ -1,6 +1,7 @@
 ﻿using CozProjectBackend.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace CozProjectBackend.DataAccess.Config
 {
@@ -39,7 +40,14 @@ namespace CozProjectBackend.DataAccess.Config
             builder.Property(a => a.DeletedDate)
                 .HasColumnName("DeletedDate");
 
-
+            Question[] questionEntitySeeds =
+            {
+                new Question(1,"Hangisi veritabanından tek kayıt getirmek için kullanılır?",3,1,1,DateTime.Now),
+                new Question(2,"HMACSHA512 hangi kütüphanenin altında dır?",3,1,1,DateTime.Now),
+                new Question(3,"Hangisi objeden alan silmek için kullanılır?",3,1,2,DateTime.Now),
+                new Question(4,"Hangisi diziden son objeyi kaldırır ?",3,1,2,DateTime.Now),
+            };
+            builder.HasData(questionEntitySeeds);
         }
     }
 }

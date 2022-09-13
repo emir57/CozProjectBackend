@@ -9,11 +9,6 @@ namespace CozProjectBackend.Entities.Concrete
 {
     public class Question : IEntity
     {
-        public Question()
-        {
-            Answers = new HashSet<Answer>();
-        }
-
         public int Id { get; set; }
         public string Content { get; set; }
         public int Score { get; set; }
@@ -31,5 +26,20 @@ namespace CozProjectBackend.Entities.Concrete
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
+
+        public Question()
+        {
+            Answers = new HashSet<Answer>();
+        }
+
+        public Question(int id, string content, int score, int teacherId, int categoryId, DateTime? createdDate) : this()
+        {
+            Id = id;
+            Content = content;
+            Score = score;
+            TeacherId = teacherId;
+            CategoryId = categoryId;
+            CreatedDate = createdDate;
+        }
     }
 }
