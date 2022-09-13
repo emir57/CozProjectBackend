@@ -1,7 +1,5 @@
 ﻿using Core.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CozProjectBackend.Entities.Concrete
 {
@@ -15,5 +13,19 @@ namespace CozProjectBackend.Entities.Concrete
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
+
+        public Answer()
+        {
+            new Question();
+        }
+
+        public Answer(int id, int questionId, string content, bool isTrue, DateTime? createdDate) : this()
+        {
+            Id = id;
+            QuestionId = questionId;
+            Content = content;
+            IsTrue = isTrue;
+            CreatedDate = createdDate;
+        }
     }
 }
