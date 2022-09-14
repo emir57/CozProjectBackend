@@ -3,6 +3,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProjectBackend.Business.Abstract;
+using CozProjectBackend.Business.BusinessAspects;
 using CozProjectBackend.Business.Validators.FluentValidation;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.Entities.Concrete;
@@ -21,6 +22,8 @@ namespace CozProjectBackend.Business.Concrete
             _answerWriteDal = answerWriteDal;
             _language = language;
         }
+
+        [SecuredOperation("Admin,Teacher")]
         [ValidationAspect(typeof(AnswerValidator))]
         public async Task<IResult> AddAsync(Answer answer)
         {
@@ -30,6 +33,7 @@ namespace CozProjectBackend.Business.Concrete
             return new ErrorResult(_language.FailureAdd);
         }
 
+        [SecuredOperation("Admin,Teacher")]
         public async Task<IResult> AddRangeAsync(List<Answer> answers)
         {
             var result = BusinessRules.Run(
@@ -73,6 +77,7 @@ namespace CozProjectBackend.Business.Concrete
             return new SuccessResult();
         }
 
+        [SecuredOperation("Admin,Teacher")]
         public IResult Delete(Answer answer)
         {
             _answerWriteDal.Delete(answer);
@@ -83,6 +88,8 @@ namespace CozProjectBackend.Business.Concrete
         {
             return await _answerWriteDal.SaveAsync();
         }
+
+        [SecuredOperation("Admin,Teacher")]
         [ValidationAspect(typeof(AnswerValidator))]
         public IResult Update(Answer answer)
         {
@@ -92,12 +99,14 @@ namespace CozProjectBackend.Business.Concrete
             return new ErrorResult(_language.FailureUpdate);
         }
 
+        [SecuredOperation("Admin,Teacher")]
         public IResult UpdateRange(List<Answer> answers)
         {
             _answerWriteDal.UpdateRange(answers);
             return new SuccessResult(_language.SuccessUpdate);
         }
 
+        [SecuredOperation("Admin,Teacher")]
         public IResult DeleteRange(List<Answer> answers)
         {
             _answerWriteDal.DeleteRange(answers);
