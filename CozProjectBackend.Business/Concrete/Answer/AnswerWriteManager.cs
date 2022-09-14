@@ -6,9 +6,7 @@ using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Validators.FluentValidation;
 using CozProjectBackend.DataAccess.Abstract;
 using CozProjectBackend.Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CozProjectBackend.Business.Concrete
@@ -35,23 +33,23 @@ namespace CozProjectBackend.Business.Concrete
         public async Task<IResult> AddRangeAsync(List<Answer> answers)
         {
             var result = BusinessRules.Run(
-                CheckAnswersLength(answers),
-                CheckTrueAnswers(answers),
-                CheckContentAnswers(answers));
+                checkAnswersLength(answers),
+                checkTrueAnswers(answers),
+                checkContentAnswers(answers));
             if (result != null)
                 return result;
             await _answerWriteDal.AddRangeAsync(answers);
             return new SuccessResult(_language.SuccessAdd);
         }
 
-        private IResult CheckAnswersLength(List<Answer> answers)
+        private IResult checkAnswersLength(List<Answer> answers)
         {
             if (answers.Count > 1)
                 return new SuccessResult();
             return new ErrorResult("En az iki şık olabilir.");
         }
 
-        private IResult CheckContentAnswers(List<Answer> answers)
+        private IResult checkContentAnswers(List<Answer> answers)
         {
             foreach (var answer in answers)
             {
@@ -61,7 +59,7 @@ namespace CozProjectBackend.Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckTrueAnswers(List<Answer> answers)
+        private IResult checkTrueAnswers(List<Answer> answers)
         {
             int count = 0;
             foreach (var answer in answers)
