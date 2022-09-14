@@ -96,8 +96,8 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
-            question.Answers.ForEach(x => x.QuestionId = question.Id);
-            IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers);
+            question.Answers.ToList().ForEach(x => x.QuestionId = question.Id);
+            IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers.ToList());
             await _answerWriteService.SaveAsync();
             if (!result2.Success)
             {
@@ -114,7 +114,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             {
                 return BadRequest(result);
             }
-            IResult result2 = _answerWriteService.UpdateRange(question.Answers);
+            IResult result2 = _answerWriteService.UpdateRange(question.Answers.ToList());
             await _answerWriteService.SaveAsync();
             if (!result2.Success)
             {

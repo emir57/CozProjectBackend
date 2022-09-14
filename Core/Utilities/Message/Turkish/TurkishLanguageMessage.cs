@@ -1,7 +1,4 @@
-﻿using Core.Utilities.Message;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Core.Utilities.Message.Turkish
 {
@@ -45,5 +42,13 @@ namespace Core.Utilities.Message.Turkish
         public string FailureList => "Listeleme Başarısız";
 
         public string FailEmailConfirm => "Lütfen Eposta adresinizi onaylayınız";
+
+        public string ShouldBeLeastTwoAnswer => "En az iki cevap olmalı";
+
+        public string PleaseCheckEnteredAnswers => "Lütfen girilien cevapları kontrol ediniz";
+
+        public string ShouldBeTrueAnswer => "Doğru cevap olmalı";
+
+        public string CannotShouldMoreThanOneTrueAnswer => "Birden fazla doğru cevap olamaz";
     }
 }

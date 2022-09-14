@@ -34,5 +34,10 @@ namespace Core.Utilities.Message
         string SuccessRegister { get; }
 
         string FailEmailConfirm { get; }
+
+        string ShouldBeLeastTwoAnswer { get; }
+        string PleaseCheckEnteredAnswers { get; }
+        string ShouldBeTrueAnswer { get; }
+        string CannotShouldMoreThanOneTrueAnswer { get; }
     }
 }

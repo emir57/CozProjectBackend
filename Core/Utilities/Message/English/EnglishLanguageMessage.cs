@@ -1,9 +1,4 @@
-﻿using Core.Utilities.Message;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Utilities.Message.English
+﻿namespace Core.Utilities.Message.English
 {
     public class EnglishLanguageMessage : ILanguageMessage
     {
@@ -43,5 +38,13 @@ namespace Core.Utilities.Message.English
         public string FailureList => "Listing Unsuccessful";
 
         public string FailEmailConfirm => "Please verify your email";
+
+        public string ShouldBeLeastTwoAnswer => "Should be least two answer";
+
+        public string PleaseCheckEnteredAnswers => "Please check entered answers";
+
+        public string ShouldBeTrueAnswer => "Should be true answer";
+
+        public string CannotShouldMoreThanOneTrueAnswer => "Cannot should more than one true answer";
     }
 }
