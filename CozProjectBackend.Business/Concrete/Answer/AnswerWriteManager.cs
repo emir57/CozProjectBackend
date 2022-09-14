@@ -46,7 +46,7 @@ namespace CozProjectBackend.Business.Concrete
         {
             if (answers.Count > 1)
                 return new SuccessResult();
-            return new ErrorResult("En az iki şık olabilir.");
+            return new ErrorResult(_language.ShouldBeLeastTwoAnswer);
         }
 
         private IResult checkContentAnswers(List<Answer> answers)
@@ -54,7 +54,7 @@ namespace CozProjectBackend.Business.Concrete
             foreach (var answer in answers)
             {
                 if (string.IsNullOrEmpty(answer.Content))
-                    return new ErrorResult("Lütfen girilen şıkları kontrol ediniz.");
+                    return new ErrorResult(_language.PleaseCheckEnteredAnswers);
             }
             return new SuccessResult();
         }
@@ -67,9 +67,9 @@ namespace CozProjectBackend.Business.Concrete
                 count += answer.IsTrue ? 1 : 0;
             }
             if (count == 0)
-                return new ErrorResult("Lütfen doğru şık belirtiniz.");
+                return new ErrorResult(_language.ShouldBeTrueAnswer);
             if (count > 1)
-                return new ErrorResult("Birden fazla doğru şık olamaz");
+                return new ErrorResult(_language.CannotShouldMoreThanOneTrueAnswer);
             return new SuccessResult();
         }
 
