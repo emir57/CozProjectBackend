@@ -1,8 +1,5 @@
 ﻿using Core.Entities.Dtos;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CozProjectBackend.Business.Validators.FluentValidation
 {
