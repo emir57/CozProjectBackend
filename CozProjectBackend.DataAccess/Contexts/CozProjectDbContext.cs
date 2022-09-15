@@ -1,7 +1,9 @@
 ﻿using Core.Entities;
 using Core.Entities.Concrete;
+using Core.Extensions;
 using CozProjectBackend.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -24,17 +26,9 @@ namespace CozProjectBackend.DataAccess.Contexts
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            var datas = ChangeTracker.Entries<IEntity>();
-            foreach (var data in datas)
-            {
-                var _ = data.State switch
-                {
-                    EntityState.Added => data.Entity.CreatedDate = DateTime.Now,
-                    EntityState.Modified => data.Entity.UpdatedDate = DateTime.Now,
-                    EntityState.Deleted => data.Entity.DeletedDate = DateTime.Now,
-                    _ => DateTime.Now
-                };
-            }
+            IEnumerable<EntityEntry<IEntity>> entries = ChangeTracker.Entries<IEntity>();
+            entries.EntityStateSet();
+
             return base.SaveChangesAsync(cancellationToken);
         }
 
