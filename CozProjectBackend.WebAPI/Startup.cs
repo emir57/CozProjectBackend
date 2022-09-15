@@ -1,6 +1,7 @@
 using Core.DependencyResolvers;
 using Core.Entities.MapperProfiles;
 using Core.Extensions;
+using Core.Utilities.Message.Turkish;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using CozProjectBackend.DataAccess.Contexts;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Diagnostics;
 
 namespace CozProjectBackend.WebAPI
 {
@@ -80,6 +82,13 @@ namespace CozProjectBackend.WebAPI
                         .AllowAnyOrigin()
                     .WithOrigins("http://localhost:8100");
                 });
+            });
+            #endregion
+
+            #region ResultMessage
+            services.AddResultMessage((builder) =>
+            {
+                builder.LanguageMessage = new TurkishLanguageMessage();
             });
             #endregion
         }

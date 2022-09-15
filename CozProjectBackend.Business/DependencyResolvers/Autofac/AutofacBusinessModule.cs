@@ -61,7 +61,7 @@ namespace CozProjectBackend.Business.DependencyResolvers.Autofac
                     Selector = new AspectInterceptorSelector()
                 });
 
-            builder.RegisterType<TurkishLanguageMessage>().As<ILanguageMessage>();
+            //builder.RegisterType<TurkishLanguageMessage>().As<ILanguageMessage>();
             base.Load(builder);
         }
     }
