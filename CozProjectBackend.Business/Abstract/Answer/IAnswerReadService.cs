@@ -1,11 +1,9 @@
 ﻿using Core.Utilities.Result;
-using CozProjectBackend.Entities.Concrete;
-using System;
+using CozProject.Entities.Concrete;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Abstract
+namespace CozProject.Business.Abstract
 {
     public interface IAnswerReadService
     {

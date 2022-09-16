@@ -1,13 +1,10 @@
 ﻿using Core.Utilities.Message;
 using Core.Utilities.Result;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.DataAccess.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using CozProject.Business.Abstract;
+using CozProject.DataAccess.Abstract;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Concrete.QuestionComplete
+namespace CozProject.Business.Concrete.QuestionComplete
 {
     public class QuestionCompleteReadManager : IQuestionCompleteReadService
     {

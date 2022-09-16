@@ -1,7 +1,7 @@
 ﻿using Core.DataAccess;
-using CozProjectBackend.Entities.Concrete;
+using CozProject.Entities.Concrete;
 
-namespace CozProjectBackend.DataAccess.Abstract
+namespace CozProject.DataAccess.Abstract
 {
     public interface ICategoryWriteDal : IWriteRepository<Category>
     {

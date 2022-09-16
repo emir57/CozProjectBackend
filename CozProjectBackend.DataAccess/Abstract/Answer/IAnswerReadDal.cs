@@ -1,10 +1,7 @@
 ﻿using Core.DataAccess;
-using CozProjectBackend.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using CozProject.Entities.Concrete;
 
-namespace CozProjectBackend.DataAccess.Abstract
+namespace CozProject.DataAccess.Abstract
 {
     public interface IAnswerReadDal:IReadRepository<Answer>
     {

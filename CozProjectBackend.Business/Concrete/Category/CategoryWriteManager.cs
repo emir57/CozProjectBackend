@@ -2,18 +2,15 @@
 using Core.Utilities.Business;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.BusinessAspects;
-using CozProjectBackend.Business.Validators.FluentValidation;
-using CozProjectBackend.DataAccess.Abstract;
-using CozProjectBackend.Entities.Concrete;
-using System;
-using System.Collections.Generic;
+using CozProject.Business.Abstract;
+using CozProject.Business.BusinessAspects;
+using CozProject.Business.Validators.FluentValidation;
+using CozProject.DataAccess.Abstract;
+using CozProject.Entities.Concrete;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Concrete
+namespace CozProject.Business.Concrete
 {
     public class CategoryWriteManager : ICategoryWriteService
     {

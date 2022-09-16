@@ -1,11 +1,6 @@
 ﻿using Core.Entities.Concrete;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.DataAccess.Abstract;
-using Microsoft.AspNetCore.Http;
+using CozProject.Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CozProjectBackend.WebAPI.Controllers

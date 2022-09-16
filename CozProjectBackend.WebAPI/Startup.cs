@@ -4,8 +4,8 @@ using Core.Extensions;
 using Core.Utilities.Message.Turkish;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
-using CozProjectBackend.DataAccess.Contexts;
-using CozProjectBackend.WebAPI.Hubs;
+using CozProject.DataAccess.Contexts;
+using CozProject.WebAPI.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Diagnostics;
 
 namespace CozProjectBackend.WebAPI
 {

@@ -1,16 +1,14 @@
-﻿using Core.Utilities.Interceptors;
-using Core.Utilities.IoC;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
-using Castle.DynamicProxy;
+﻿using Castle.DynamicProxy;
 using Core.Extensions;
-using Core.Utilities.Message;
 using Core.Utilities.Exception.UnAuthorizedException;
+using Core.Utilities.Interceptors;
+using Core.Utilities.IoC;
+using Core.Utilities.Message;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
-namespace CozProjectBackend.Business.BusinessAspects
+namespace CozProject.Business.BusinessAspects
 {
     public class SecuredOperation : MethodInterception
     {

@@ -3,13 +3,13 @@ using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.BusinessAspects;
-using CozProjectBackend.Business.Validators.FluentValidation;
-using CozProjectBackend.DataAccess.Abstract;
+using CozProject.Business.Abstract;
+using CozProject.Business.BusinessAspects;
+using CozProject.Business.Validators.FluentValidation;
+using CozProject.DataAccess.Abstract;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Concrete
+namespace CozProject.Business.Concrete
 {
     public class RoleWriteManager : IRoleWriteService
     {

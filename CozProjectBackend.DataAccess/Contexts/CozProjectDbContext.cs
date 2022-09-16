@@ -1,17 +1,15 @@
 ﻿using Core.Entities;
 using Core.Entities.Concrete;
 using Core.Extensions;
-using CozProjectBackend.Entities.Concrete;
+using CozProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.DataAccess.Contexts
+namespace CozProject.DataAccess.Contexts
 {
     public class CozProjectDbContext : DbContext
     {

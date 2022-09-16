@@ -1,9 +1,9 @@
 ﻿using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
-using CozProjectBackend.DataAccess.Abstract;
+using CozProject.DataAccess.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
+namespace CozProject.DataAccess.Concrete.EntityFramework
 {
     public class EfUserWriteDal : EfWriteRepository<User>, IUserWriteDal
     {

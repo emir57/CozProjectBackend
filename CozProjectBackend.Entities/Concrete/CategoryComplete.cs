@@ -2,7 +2,7 @@
 using Core.Entities.Concrete;
 using System;
 
-namespace CozProjectBackend.Entities.Concrete
+namespace CozProject.Entities.Concrete
 {
     public class CategoryComplete : IEntity
     {

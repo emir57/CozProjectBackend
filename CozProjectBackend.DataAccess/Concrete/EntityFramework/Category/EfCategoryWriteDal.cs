@@ -1,9 +1,9 @@
 ﻿using Core.DataAccess.EntityFramework;
-using CozProjectBackend.DataAccess.Abstract;
-using CozProjectBackend.Entities.Concrete;
+using CozProject.DataAccess.Abstract;
+using CozProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
-namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
+namespace CozProject.DataAccess.Concrete.EntityFramework
 {
     public class EfCategoryWriteDal : EfWriteRepository<Category>, ICategoryWriteDal
     {

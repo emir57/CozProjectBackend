@@ -1,7 +1,7 @@
 ﻿using Core.Entities.Dtos;
 using FluentValidation;
 
-namespace CozProjectBackend.Business.Validators.FluentValidation
+namespace CozProject.Business.Validators.FluentValidation
 {
     public class UserForLoginValidator : AbstractValidator<UserForLoginDto>
     {

@@ -1,11 +1,9 @@
 ﻿using Core.DataAccess;
-using CozProjectBackend.Entities.Concrete;
-using System;
+using CozProject.Entities.Concrete;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.DataAccess.Abstract
+namespace CozProject.DataAccess.Abstract
 {
     public interface ICategoryReadDal : IReadRepository<Category>
     {

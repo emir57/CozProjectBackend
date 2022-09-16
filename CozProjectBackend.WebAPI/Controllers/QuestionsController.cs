@@ -1,9 +1,7 @@
 ﻿using Core.Utilities.Result;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Entities.Concrete;
-using Microsoft.AspNetCore.Http;
+using CozProject.Business.Abstract;
+using CozProject.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

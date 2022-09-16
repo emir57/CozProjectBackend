@@ -1,8 +1,8 @@
-﻿using CozProjectBackend.Entities.Concrete;
+﻿using CozProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CozProjectBackend.DataAccess.Config
+namespace CozProject.DataAccess.Config
 {
     public sealed class QuestionCompleteConfig : IEntityTypeConfiguration<QuestionComplete>
     {

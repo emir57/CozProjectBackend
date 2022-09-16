@@ -1,13 +1,13 @@
 ﻿using Core.Utilities.Security.JWT;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.Concrete;
-using CozProjectBackend.DataAccess.Abstract;
-using CozProjectBackend.DataAccess.Concrete.EntityFramework;
-using CozProjectBackend.DataAccess.Contexts;
+using CozProject.DataAccess.Abstract;
+using CozProject.DataAccess.Concrete.EntityFramework;
+using CozProject.DataAccess.Contexts;
+using CozProject.Business.Abstract;
+using CozProject.Business.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CozProjectBackend.Business.DependencyResolvers.Microsoft
+namespace CozProject.Business.DependencyResolvers.Microsoft
 {
     public static class MicrosoftBusinessModuleExtension
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CozProjectBackend.Entities.Concrete
+namespace CozProject.Entities.Concrete
 {
     public class Category : IEntity
     {

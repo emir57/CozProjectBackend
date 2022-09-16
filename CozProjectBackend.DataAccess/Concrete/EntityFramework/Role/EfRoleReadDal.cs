@@ -1,13 +1,13 @@
 ﻿using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
-using CozProjectBackend.DataAccess.Abstract;
+using CozProject.DataAccess.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.DataAccess.Concrete.EntityFramework
+namespace CozProject.DataAccess.Concrete.EntityFramework
 {
     public class EfRoleReadDal : EfReadRepository<Role>, IRoleReadDal
     {

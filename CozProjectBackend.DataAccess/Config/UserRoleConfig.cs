@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 
-namespace CozProjectBackend.DataAccess.Config
+namespace CozProject.DataAccess.Config
 {
     public sealed class UserRoleConfig : IEntityTypeConfiguration<UserRole>
     {

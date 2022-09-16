@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Configuration;
 
-namespace CozProjectBackend.DataAccess.Config
+namespace CozProject.DataAccess.Config
 {
     public sealed class UserConfig : IEntityTypeConfiguration<User>
     {

@@ -1,9 +1,9 @@
-﻿using CozProjectBackend.Entities.Concrete;
+﻿using CozProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 
-namespace CozProjectBackend.DataAccess.Config
+namespace CozProject.DataAccess.Config
 {
     public sealed class CategoryConfig : IEntityTypeConfiguration<Category>
     {

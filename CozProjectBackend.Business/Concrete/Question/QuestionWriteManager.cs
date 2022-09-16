@@ -1,16 +1,13 @@
 ﻿using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.Validators.FluentValidation;
-using CozProjectBackend.DataAccess.Abstract;
-using CozProjectBackend.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using CozProject.Business.Abstract;
+using CozProject.Business.Validators.FluentValidation;
+using CozProject.DataAccess.Abstract;
+using CozProject.Entities.Concrete;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Concrete
+namespace CozProject.Business.Concrete
 {
     public class QuestionWriteManager : IQuestionWriteService
     {

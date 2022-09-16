@@ -2,15 +2,15 @@
 using Autofac.Extras.DynamicProxy;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.Concrete;
-using CozProjectBackend.Business.Concrete.QuestionComplete;
-using CozProjectBackend.DataAccess.Abstract;
-using CozProjectBackend.DataAccess.Concrete.EntityFramework;
-using CozProjectBackend.DataAccess.Contexts;
+using CozProject.Business.Abstract;
+using CozProject.Business.Concrete;
+using CozProject.Business.Concrete.QuestionComplete;
+using CozProject.DataAccess.Abstract;
+using CozProject.DataAccess.Concrete.EntityFramework;
+using CozProject.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace CozProjectBackend.Business.DependencyResolvers.Autofac
+namespace CozProject.Business.DependencyResolvers.Autofac
 {
     public class AutofacBusinessModule : Module
     {

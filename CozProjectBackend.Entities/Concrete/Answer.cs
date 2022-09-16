@@ -1,7 +1,7 @@
 ﻿using Core.Entities;
 using System;
 
-namespace CozProjectBackend.Entities.Concrete
+namespace CozProject.Entities.Concrete
 {
     public class Answer : IEntity
     {

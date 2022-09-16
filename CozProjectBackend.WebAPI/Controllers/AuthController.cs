@@ -3,7 +3,7 @@ using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using Core.Utilities.Result;
 using Core.Utilities.Security.JWT;
-using CozProjectBackend.Business.Abstract.Auth;
+using CozProject.Business.Abstract.Auth;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

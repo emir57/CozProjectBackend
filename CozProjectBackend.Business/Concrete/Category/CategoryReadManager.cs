@@ -1,15 +1,13 @@
 ﻿using Core.Utilities.Message;
 using Core.Utilities.Result;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.DataAccess.Abstract;
-using CozProjectBackend.Entities.Concrete;
+using CozProject.Business.Abstract;
+using CozProject.DataAccess.Abstract;
+using CozProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Concrete
+namespace CozProject.Business.Concrete
 {
     public class CategoryReadManager : ICategoryReadService
     {

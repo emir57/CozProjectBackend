@@ -1,8 +1,7 @@
 ﻿using Core.DataAccess;
-using CozProjectBackend.Entities.Concrete;
-using System.Collections.Generic;
+using CozProject.Entities.Concrete;
 
-namespace CozProjectBackend.DataAccess.Abstract
+namespace CozProject.DataAccess.Abstract
 {
     public interface IAnswerWriteDal : IWriteRepository<Answer>
     {

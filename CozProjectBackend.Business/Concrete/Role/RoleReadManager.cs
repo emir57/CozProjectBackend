@@ -1,21 +1,15 @@
 ﻿using Core.Aspects.Autofac.Caching;
-using Core.Aspects.Autofac.Exception;
-using Core.Aspects.Autofac.Logging;
-using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Entities.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.BusinessAspects;
-using CozProjectBackend.DataAccess.Abstract;
+using CozProject.Business.Abstract;
+using CozProject.Business.BusinessAspects;
+using CozProject.DataAccess.Abstract;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Concrete
+namespace CozProject.Business.Concrete
 {
     public class RoleReadManager : IRoleReadService
     {

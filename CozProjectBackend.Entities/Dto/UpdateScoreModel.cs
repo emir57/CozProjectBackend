@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CozProjectBackend.Entities.Dto
+﻿namespace CozProject.Entities.Dto
 {
     public class UpdateScoreModel
     {

@@ -6,16 +6,13 @@ using Core.Utilities.Message;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
-using CozProjectBackend.Business.Abstract;
-using CozProjectBackend.Business.Abstract.Auth;
-using CozProjectBackend.Business.Validators.FluentValidation;
+using CozProject.Business.Abstract;
+using CozProject.Business.Abstract.Auth;
+using CozProject.Business.Validators.FluentValidation;
 using FluentEntity_ConsoleApp.FEntity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.Business.Concrete.Auth
+namespace CozProject.Business.Concrete.Auth
 {
     public class AuthManager : IAuthService
     {

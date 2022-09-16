@@ -1,7 +1,7 @@
-﻿using CozProjectBackend.Entities.Concrete;
+﻿using CozProject.Entities.Concrete;
 using FluentValidation;
 
-namespace CozProjectBackend.Business.Validators.FluentValidation
+namespace CozProject.Business.Validators.FluentValidation
 {
     public class CategoryValidator : AbstractValidator<Category>
     {

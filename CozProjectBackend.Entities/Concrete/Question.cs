@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CozProjectBackend.Entities.Concrete
+namespace CozProject.Entities.Concrete
 {
     public class Question : IEntity
     {
