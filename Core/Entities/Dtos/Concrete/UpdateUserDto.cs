@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Core.Entities.Dtos.Abstract;
 
-namespace Core.Entities.Dtos
+namespace Core.Entities.Dtos.Concrete
 {
-    public class UpdateUserDto : IDto
+    public sealed class UpdateUserDto : IDto
     {
         public string Email { get; set; }
         public string FirstName { get; set; }

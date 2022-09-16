@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Core.Entities.Dtos.Abstract;
 
-namespace Core.Entities.Dtos
+namespace Core.Entities.Dtos.Concrete
 {
-    public class UserResetPasswordDto : IDto
+    public sealed class UserResetPasswordDto : IDto
     {
         public string Email { get; set; }
         public string OldPassword { get; set; }

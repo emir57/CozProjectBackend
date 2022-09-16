@@ -1,7 +1,7 @@
 ﻿using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
-using Core.Entities.Dtos;
+using Core.Entities.Dtos.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;

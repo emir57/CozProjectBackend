@@ -28,7 +28,7 @@ namespace CozProject.DataAccess.Concrete.EntityFramework
                              TextColor = category.TextColor,
                              BackgroundColor = category.BackgroundColor,
                              CreatedDate = category.CreatedDate,
-                             isComplete = _context.Set<CategoryComplete>().SingleOrDefault(x => x.UserId == userId && x.CategoryId == category.Id) == null ? false : true
+                             IsComplete = _context.Set<CategoryComplete>().SingleOrDefault(x => x.UserId == userId && x.CategoryId == category.Id) == null ? false : true
                          };
             return await result.ToListAsync();
         }

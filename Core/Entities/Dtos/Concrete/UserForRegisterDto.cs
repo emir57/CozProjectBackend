@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Core.Entities.Dtos.Abstract;
 
-namespace Core.Entities.Dtos
+namespace Core.Entities.Dtos.Concrete
 {
-    public class UserForRegisterDto : IDto
+    public sealed class UserForRegisterDto : IDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

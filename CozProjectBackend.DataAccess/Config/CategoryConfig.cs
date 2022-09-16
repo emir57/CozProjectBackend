@@ -32,7 +32,7 @@ namespace CozProject.DataAccess.Config
                 .IsRequired()
                 .HasMaxLength(20);
 
-            builder.Ignore(c => c.isComplete);
+            builder.Ignore(c => c.IsComplete);
 
             builder.Property(a => a.CreatedDate)
                 .HasColumnName("CreatedDate");

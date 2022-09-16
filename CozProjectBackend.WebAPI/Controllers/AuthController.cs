@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities.Concrete;
-using Core.Entities.Dtos;
+using Core.Entities.Dtos.Concrete;
 using Core.Utilities.Result;
 using Core.Utilities.Security.JWT;
 using CozProject.Business.Abstract.Auth;
@@ -34,7 +34,7 @@ namespace CozProjectBackend.WebAPI.Controllers
             var loginResponseDto = new LoginResponseDto()
             {
                 Token = tokenResult.Data,
-                User = _mapper.Map<LoginedUserDto>(loginResult.Data)
+                User = _mapper.Map<UserReadDto>(loginResult.Data)
             };
             DataResult<LoginResponseDto> result = new DataResult<LoginResponseDto>(loginResponseDto, true, "Giriş Başarılı");
             return Ok(result);
