@@ -1,6 +1,4 @@
-﻿using Core.Utilities.Message;
-using Core.Utilities.Message.English;
-using Core.Utilities.Security.JWT;
+﻿using Core.Utilities.Security.JWT;
 using CozProjectBackend.Business.Abstract;
 using CozProjectBackend.Business.Concrete;
 using CozProjectBackend.DataAccess.Abstract;
@@ -8,9 +6,6 @@ using CozProjectBackend.DataAccess.Concrete.EntityFramework;
 using CozProjectBackend.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CozProjectBackend.Business.DependencyResolvers.Microsoft
 {
@@ -18,7 +13,6 @@ namespace CozProjectBackend.Business.DependencyResolvers.Microsoft
     {
         public static IServiceCollection AddMicrosoftBusinessModule(this IServiceCollection services)
         {
-            services.AddSingleton<ILanguageMessage, EnglishLanguageMessage>();
             services.AddSingleton<ITokenHelper, JwtHelper>();
             services.AddScoped<DbContext, CozProjectDbContext>();
             services.AddScoped<IRoleWriteDal, EfRoleWriteDal>();
