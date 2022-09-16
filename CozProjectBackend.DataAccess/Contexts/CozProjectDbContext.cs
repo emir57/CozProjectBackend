@@ -27,7 +27,7 @@ namespace CozProjectBackend.DataAccess.Contexts
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             IEnumerable<EntityEntry<IEntity>> entries = ChangeTracker.Entries<IEntity>();
-            entries.EntityStateSet();
+            entries.SetEntityState();
 
             return base.SaveChangesAsync(cancellationToken);
         }

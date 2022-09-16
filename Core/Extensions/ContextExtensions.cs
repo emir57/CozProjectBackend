@@ -8,7 +8,7 @@ namespace Core.Extensions
 {
     public static class ContextExtensions
     {
-        public static void EntityStateSet(this IEnumerable<EntityEntry<IEntity>> entries)
+        public static void SetEntityState(this IEnumerable<EntityEntry<IEntity>> entries)
         {
             foreach (var entry in entries)
             {
