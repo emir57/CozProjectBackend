@@ -1,17 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32126.315
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozProjectBackend.DataAccess", "CozProjectBackend.DataAccess\CozProjectBackend.DataAccess.csproj", "{DD067BAA-5F87-4731-99D3-6046425A5F05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozProjectBackend.DataAccess", "CozProjectBackend.DataAccess\CozProjectBackend.DataAccess.csproj", "{DD067BAA-5F87-4731-99D3-6046425A5F05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozProjectBackend.Entities", "CozProjectBackend.Entities\CozProjectBackend.Entities.csproj", "{FC1A3255-DE68-42CC-ACE8-E9CEB8D94CB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozProjectBackend.Entities", "CozProjectBackend.Entities\CozProjectBackend.Entities.csproj", "{FC1A3255-DE68-42CC-ACE8-E9CEB8D94CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozProjectBackend.Business", "CozProjectBackend.Business\CozProjectBackend.Business.csproj", "{7C44ABA3-CA30-4574-B041-7A0E956783D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozProjectBackend.Business", "CozProjectBackend.Business\CozProjectBackend.Business.csproj", "{7C44ABA3-CA30-4574-B041-7A0E956783D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{DE98E13A-3C85-4FD3-90E0-A25048A1A002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{DE98E13A-3C85-4FD3-90E0-A25048A1A002}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozProjectBackend.WebAPI", "CozProjectBackend.WebAPI\CozProjectBackend.WebAPI.csproj", "{95910287-E691-4412-BFD2-F30999C02639}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozProjectBackend.WebAPI", "CozProjectBackend.WebAPI\CozProjectBackend.WebAPI.csproj", "{95910287-E691-4412-BFD2-F30999C02639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozProject.Dto", "CozProject.Dto\CozProject.Dto.csproj", "{C2626598-7F16-464D-95C2-8EA3F83712D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{95910287-E691-4412-BFD2-F30999C02639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95910287-E691-4412-BFD2-F30999C02639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95910287-E691-4412-BFD2-F30999C02639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2626598-7F16-464D-95C2-8EA3F83712D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2626598-7F16-464D-95C2-8EA3F83712D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2626598-7F16-464D-95C2-8EA3F83712D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2626598-7F16-464D-95C2-8EA3F83712D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
