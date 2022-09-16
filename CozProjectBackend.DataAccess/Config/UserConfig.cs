@@ -1,6 +1,10 @@
 ﻿using Core.Entities.Concrete;
+using Core.Utilities.Security.Hashing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Configuration;
 
 namespace CozProjectBackend.DataAccess.Config
 {
@@ -63,6 +67,36 @@ namespace CozProjectBackend.DataAccess.Config
                 .HasColumnName("UpdatedDate");
             builder.Property(c => c.DeletedDate)
                 .HasColumnName("DeletedDate");
+
+            User adminUser = getAdminUser();
+            builder.HasData(adminUser);
+        }
+
+        private User getAdminUser()
+        {
+            byte[] passwordHash, passwordSalt;
+            string password = configuration().GetSection("AdminUser:Password").Value;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            return new User
+            {
+                Id = 1,
+                FirstName = configuration().GetSection("AdminUser:FirstName").Value,
+                LastName = configuration().GetSection("AdminUser:LastName").Value,
+                Email = configuration().GetSection("AdminUser:Email").Value,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                CreatedDate = DateTime.Now,
+                EmailConfirmed = true
+            };
+        }
+
+        private IConfigurationRoot configuration()
+        {
+            IConfigurationRoot configurationRoot = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            return configurationRoot;
         }
     }
 }
