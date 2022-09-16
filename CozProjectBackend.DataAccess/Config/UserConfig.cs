@@ -11,7 +11,7 @@ namespace CozProjectBackend.DataAccess.Config
             builder.ToTable("Users")
                 .HasKey(u => u.Id);
 
-            //builder.HasMany(u => u.Roles);
+            builder.HasMany(u => u.UserRoles);
 
             builder.Property(u => u.Id)
                 .HasColumnName("Id");

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities.Concrete
 {
@@ -12,5 +11,24 @@ namespace Core.Entities.Concrete
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
+
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+
+        [ForeignKey("RoleId")]
+        public Role Role { get; set; }
+        public UserRole()
+        {
+            new User();
+            new Role();
+        }
+
+        public UserRole(int id, int userId, int roleId, DateTime? createdDate)
+        {
+            Id = id;
+            UserId = userId;
+            RoleId = roleId;
+            CreatedDate = createdDate;
+        }
     }
 }

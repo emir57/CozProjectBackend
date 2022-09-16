@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Core.Entities.Concrete
 {
@@ -11,5 +10,19 @@ namespace Core.Entities.Concrete
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
+
+        public ICollection<UserRole> UserRoles { get; set; }
+
+        public Role()
+        {
+            UserRoles = new HashSet<UserRole>();
+        }
+
+        public Role(int id, string name, DateTime? createdDate) : this()
+        {
+            Id = id;
+            Name = name;
+            CreatedDate = createdDate;
+        }
     }
 }
