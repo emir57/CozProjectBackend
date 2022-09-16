@@ -1,7 +1,7 @@
 ﻿using Core.Entities.Dtos.Abstract;
 using System;
 
-namespace CozProject.Dto.Concrete.QuestionComplete
+namespace CozProject.Dto.Concrete
 {
     public sealed class QuestionCompleteReadDto : IReadDto
     {

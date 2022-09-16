@@ -1,6 +1,6 @@
 ﻿using Core.Entities.Dtos.Abstract;
 
-namespace CozProject.Dto.Concrete.QuestionComplete
+namespace CozProject.Dto.Concrete
 {
     public sealed class QuestionCompleteWriteDto : IWriteDto
     {
