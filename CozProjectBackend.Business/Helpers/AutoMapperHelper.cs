@@ -1,18 +1,17 @@
 ﻿using AutoMapper;
-using Core.Entities.Concrete;
 using Core.Dtos.Concrete;
+using Core.Entities.Concrete;
 
-namespace Core.Entities.MapperProfiles
+namespace CozProject.Business.Helpers
 {
-    public sealed class CoreLayerProfile : Profile
+    public sealed class AutoMapperHelper : Profile
     {
-        public CoreLayerProfile()
+        public AutoMapperHelper()
         {
             CreateMap<User, UserReadDto>().ReverseMap();
-
             CreateMap<User, UpdateUserDto>().ReverseMap();
-
             CreateMap<UpdateUserAdminDto, User>().ReverseMap();
+
         }
     }
 }

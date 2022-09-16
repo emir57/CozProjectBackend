@@ -1,9 +1,9 @@
 using Core.DependencyResolvers;
-using Core.Entities.MapperProfiles;
 using Core.Extensions;
 using Core.Utilities.Message.Turkish;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
+using CozProject.Business.Helpers;
 using CozProject.DataAccess.Contexts;
 using CozProject.WebAPI.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -42,7 +42,7 @@ namespace CozProjectBackend.WebAPI
             #endregion
 
             #region AutoMapper
-            services.AddAutoMapper(typeof(CoreLayerProfile));
+            services.AddAutoMapper(typeof(AutoMapperHelper));
             #endregion
 
             //services.AddMicrosoftBusinessModule();
