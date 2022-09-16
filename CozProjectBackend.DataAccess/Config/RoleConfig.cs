@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace CozProjectBackend.DataAccess.Config
 {
@@ -27,6 +28,15 @@ namespace CozProjectBackend.DataAccess.Config
                 .HasColumnName("UpdatedDate");
             builder.Property(c => c.DeletedDate)
                 .HasColumnName("DeletedDate");
+
+            Role[] roleEntitySeeds =
+            {
+                new Role(1,"Admin",DateTime.Now),
+                new Role(2,"Student",DateTime.Now),
+                new Role(3,"Teacher",DateTime.Now),
+                new Role(4,"User",DateTime.Now)
+            };
+            builder.HasData(roleEntitySeeds);
         }
     }
 }
