@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities.Concrete;
-using Core.Entities.Dtos.Concrete;
+using Core.Dtos.Concrete;
 
 namespace Core.Entities.MapperProfiles
 {

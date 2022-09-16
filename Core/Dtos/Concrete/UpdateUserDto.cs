@@ -1,6 +1,6 @@
-﻿using Core.Entities.Dtos.Abstract;
+﻿using Core.Dtos.Abstract;
 
-namespace Core.Entities.Dtos.Concrete
+namespace Core.Dtos.Concrete
 {
     public sealed class UpdateUserDto : IDto
     {

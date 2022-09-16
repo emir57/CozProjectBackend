@@ -1,7 +1,7 @@
-﻿using Core.Entities.Dtos.Abstract;
+﻿using Core.Dtos.Abstract;
 using System;
 
-namespace Core.Entities.Dtos.Concrete
+namespace Core.Dtos.Concrete
 {
     public sealed class UserReadDto : IReadDto
     {

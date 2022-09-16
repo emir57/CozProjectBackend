@@ -1,4 +1,4 @@
-﻿using Core.Entities.Dtos.Abstract;
+﻿using Core.Dtos.Abstract;
 using System;
 
 namespace CozProject.Dto.Concrete

@@ -1,4 +1,4 @@
-﻿using Core.Entities.Dtos.Concrete;
+﻿using Core.Dtos.Concrete;
 using FluentValidation;
 
 namespace CozProject.Business.Validators.FluentValidation

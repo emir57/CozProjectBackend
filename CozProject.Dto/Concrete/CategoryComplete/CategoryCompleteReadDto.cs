@@ -1,5 +1,5 @@
-﻿using Core.Entities.Dtos.Abstract;
-using Core.Entities.Dtos.Concrete;
+﻿using Core.Dtos.Abstract;
+using Core.Dtos.Concrete;
 using System;
 
 namespace CozProject.Dto.Concrete
