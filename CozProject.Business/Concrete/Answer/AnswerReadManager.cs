@@ -4,9 +4,7 @@ using CozProject.Business.Abstract;
 using CozProject.DataAccess.Abstract;
 using CozProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CozProject.Business.Concrete
