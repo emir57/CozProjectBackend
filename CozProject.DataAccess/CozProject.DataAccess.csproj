@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\CozProject.Entities\CozProject.Entities.csproj" />
-    <ProjectReference Include="..\CozProjectBackend.Entities\CozProject.Entities.csproj" />
   </ItemGroup>
 
 </Project>

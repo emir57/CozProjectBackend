@@ -17,8 +17,6 @@
     <ProjectReference Include="..\CozProject.Business\CozProject.Business.csproj" />
     <ProjectReference Include="..\CozProject.DataAccess\CozProject.DataAccess.csproj" />
     <ProjectReference Include="..\CozProject.Entities\CozProject.Entities.csproj" />
-    <ProjectReference Include="..\CozProjectBackend.Business\CozProject.Business.csproj" />
-    <ProjectReference Include="..\CozProjectBackend.DataAccess\CozProject.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
