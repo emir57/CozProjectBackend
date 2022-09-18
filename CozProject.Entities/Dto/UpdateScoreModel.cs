@@ -1,10 +1,9 @@
-﻿namespace CozProject.Entities.Dto
+﻿namespace CozProject.Entities.Dto;
+
+public class UpdateScoreModel
 {
-    public class UpdateScoreModel
-    {
-        public int UserId { get; set; }
-        public int QuestionId { get; set; }
-        public bool Result { get; set; }
-        public int Score { get; set; }
-    }
+    public int UserId { get; set; }
+    public int QuestionId { get; set; }
+    public bool Result { get; set; }
+    public int Score { get; set; }
 }
