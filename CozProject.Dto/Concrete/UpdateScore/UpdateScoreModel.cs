@@ -1,4 +1,4 @@
-﻿namespace CozProject.Entities.Dto;
+﻿namespace CozProject.Dto.Concrete;
 
 public class UpdateScoreModel
 {

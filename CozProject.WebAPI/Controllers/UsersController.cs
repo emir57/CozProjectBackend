@@ -7,7 +7,6 @@ using Core.Utilities.Security.Hashing;
 using CozProject.Business.Abstract;
 using CozProject.Business.Abstract.Auth;
 using CozProject.Entities.Concrete;
-using CozProject.Entities.Dto;
 using CozProject.WebAPI.Hubs;
 using FluentEntity_ConsoleApp.FEntity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +14,7 @@ using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CozProject.Dto.Concrete;
 
 namespace CozProjectBackend.WebAPI.Controllers
 {
@@ -181,7 +181,7 @@ namespace CozProjectBackend.WebAPI.Controllers
                 .AddParameter(u => u.ProfilePhotoUrl, updatedUser.ProfilePhotoUrl)
                 .GetEntity();
         }
-        
+
         [NonAction]
         private async Task updateUserScore(User user, int score)
         {

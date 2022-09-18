@@ -1,10 +1,9 @@
 ﻿using Core.Dtos.Abstract;
 
-namespace CozProject.Dto.Concrete
+namespace CozProject.Dto.Concrete;
+
+public sealed class CategoryCompleteWriteDto : IWriteDto
 {
-    public sealed class CategoryCompleteWriteDto : IWriteDto
-    {
-        public int UserId { get; set; }
-        public int CategoryId { get; set; }
-    }
+    public int UserId { get; set; }
+    public int CategoryId { get; set; }
 }

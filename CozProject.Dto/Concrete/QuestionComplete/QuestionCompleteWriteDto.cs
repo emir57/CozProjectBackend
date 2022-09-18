@@ -1,10 +1,9 @@
 ﻿using Core.Dtos.Abstract;
 
-namespace CozProject.Dto.Concrete
+namespace CozProject.Dto.Concrete;
+
+public sealed class QuestionCompleteWriteDto : IWriteDto
 {
-    public sealed class QuestionCompleteWriteDto : IWriteDto
-    {
-        public int UserId { get; set; }
-        public int QuestionId { get; set; }
-    }
+    public int UserId { get; set; }
+    public int QuestionId { get; set; }
 }
