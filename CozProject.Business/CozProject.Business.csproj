@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\CozProject.DataAccess\CozProject.DataAccess.csproj" />
+    <ProjectReference Include="..\CozProject.Dto\CozProject.Dto.csproj" />
     <ProjectReference Include="..\CozProject.Entities\CozProject.Entities.csproj" />
   </ItemGroup>
 
