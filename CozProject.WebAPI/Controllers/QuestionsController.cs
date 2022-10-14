@@ -6,136 +6,135 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CozProjectBackend.WebAPI.Controllers
+namespace CozProjectBackend.WebAPI.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class QuestionsController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class QuestionsController : ControllerBase
+    private readonly IQuestionWriteService _questionWriteService;
+    private readonly IQuestionReadService _questionReadService;
+    private readonly IAnswerWriteService _answerWriteService;
+    private readonly IAnswerReadService _answerReadService;
+    public QuestionsController(IQuestionWriteService questionWriteService, IQuestionReadService questionReadService, IAnswerWriteService answerWriteService, IAnswerReadService answerReadService)
     {
-        private readonly IQuestionWriteService _questionWriteService;
-        private readonly IQuestionReadService _questionReadService;
-        private readonly IAnswerWriteService _answerWriteService;
-        private readonly IAnswerReadService _answerReadService;
-        public QuestionsController(IQuestionWriteService questionWriteService, IQuestionReadService questionReadService, IAnswerWriteService answerWriteService, IAnswerReadService answerReadService)
-        {
-            _questionWriteService = questionWriteService;
-            _questionReadService = questionReadService;
-            _answerWriteService = answerWriteService;
-            _answerReadService = answerReadService;
-        }
+        _questionWriteService = questionWriteService;
+        _questionReadService = questionReadService;
+        _answerWriteService = answerWriteService;
+        _answerReadService = answerReadService;
+    }
 
-        [HttpGet("getall")]
-        public async Task<IActionResult> GetAll()
+    [HttpGet("getall")]
+    public async Task<IActionResult> GetAll()
+    {
+        IDataResult<List<Question>> result = await _questionReadService.GetListAsync();
+        if (!result.Success)
         {
-            IDataResult<List<Question>> result = await _questionReadService.GetListAsync();
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return BadRequest(result);
         }
-        [HttpGet("getallwithanswers")]
-        public async Task<IActionResult> GetAllQuestionsWithAnswers()
+        return Ok(result);
+    }
+    [HttpGet("getallwithanswers")]
+    public async Task<IActionResult> GetAllQuestionsWithAnswers()
+    {
+        IDataResult<List<Question>> result = await _questionReadService.GetAllWithAnswers();
+        if (!result.Success)
         {
-            IDataResult<List<Question>> result = await _questionReadService.GetAllWithAnswers();
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return BadRequest(result);
         }
-        [HttpGet("getallwithanswersbyuserid")]
-        public async Task<IActionResult> GetAllQuestionsWithAnswers(int id)
+        return Ok(result);
+    }
+    [HttpGet("getallwithanswersbyuserid")]
+    public async Task<IActionResult> GetAllQuestionsWithAnswers(int id)
+    {
+        IDataResult<List<Question>> result = await _questionReadService.GetAllWithAnswers(id);
+        if (!result.Success)
         {
-            IDataResult<List<Question>> result = await _questionReadService.GetAllWithAnswers(id);
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return BadRequest(result);
         }
-        [HttpGet("getbycategoryidwithanswersbyuserid")]
-        public async Task<IActionResult> GetByCategoryIdQuestionsWithAnswers(int categoryId, int userId)
+        return Ok(result);
+    }
+    [HttpGet("getbycategoryidwithanswersbyuserid")]
+    public async Task<IActionResult> GetByCategoryIdQuestionsWithAnswers(int categoryId, int userId)
+    {
+        IDataResult<List<Question>> result = await _questionReadService.GetByCategoryIdWithAnswers(categoryId, userId);
+        if (!result.Success)
         {
-            IDataResult<List<Question>> result = await _questionReadService.GetByCategoryIdWithAnswers(categoryId, userId);
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return BadRequest(result);
         }
-        [HttpGet("getlistbycategoryid")]
-        public async Task<IActionResult> GetListByCategoryId(int categoryId)
+        return Ok(result);
+    }
+    [HttpGet("getlistbycategoryid")]
+    public async Task<IActionResult> GetListByCategoryId(int categoryId)
+    {
+        IDataResult<List<Question>> result = await _questionReadService.GetListByCategoryIdAsync(categoryId);
+        if (!result.Success)
         {
-            IDataResult<List<Question>> result = await _questionReadService.GetListByCategoryIdAsync(categoryId);
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return BadRequest(result);
         }
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        return Ok(result);
+    }
+    [HttpGet("getbyid")]
+    public IActionResult GetById(int id)
+    {
+        IDataResult<Question> result = _questionReadService.GetByIdWithAnswers(id);
+        if (!result.Success)
         {
-            IDataResult<Question> result = _questionReadService.GetByIdWithAnswers(id);
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return BadRequest(result);
         }
+        return Ok(result);
+    }
 
-        [HttpPost("add")]
-        public async Task<IActionResult> Add(Question question)
+    [HttpPost("add")]
+    public async Task<IActionResult> Add(Question question)
+    {
+        IResult result = await _questionWriteService.AddAsync(question);
+        await _questionWriteService.SaveAsync();
+        if (!result.Success)
         {
-            IResult result = await _questionWriteService.AddAsync(question);
-            await _questionWriteService.SaveAsync();
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            question.Answers.ToList().ForEach(x => x.QuestionId = question.Id);
-            IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers.ToList());
-            await _answerWriteService.SaveAsync();
-            if (!result2.Success)
-            {
-                return BadRequest(result2);
-            }
-            return Ok(result2);
+            return BadRequest(result);
         }
-        [HttpPost("update")]
-        public async Task<IActionResult> Update(Question question)
+        question.Answers.ToList().ForEach(x => x.QuestionId = question.Id);
+        IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers.ToList());
+        await _answerWriteService.SaveAsync();
+        if (!result2.Success)
         {
-            IResult result = _questionWriteService.Update(question);
-            await _questionWriteService.SaveAsync();
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            IResult result2 = _answerWriteService.UpdateRange(question.Answers.ToList());
-            await _answerWriteService.SaveAsync();
-            if (!result2.Success)
-            {
-                return BadRequest(result2);
-            }
-            return Ok(result);
+            return BadRequest(result2);
         }
-        [HttpDelete("delete")]
-        public async Task<IActionResult> Delete(int id)
+        return Ok(result2);
+    }
+    [HttpPost("update")]
+    public async Task<IActionResult> Update(Question question)
+    {
+        IResult result = _questionWriteService.Update(question);
+        await _questionWriteService.SaveAsync();
+        if (!result.Success)
         {
-            IDataResult<Question> questionResult = await _questionReadService.GetByIdAsync(id);
-            if (!questionResult.Success)
-            {
-                return BadRequest(questionResult);
-            }
-            IResult result = _questionWriteService.Delete(questionResult.Data);
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
-            var answers = (await _answerReadService.GetListByQuestionIdAsync(questionResult.Data.Id)).Data;
-            _answerWriteService.DeleteRange(answers);
-            return Ok(result);
+            return BadRequest(result);
         }
+        IResult result2 = _answerWriteService.UpdateRange(question.Answers.ToList());
+        await _answerWriteService.SaveAsync();
+        if (!result2.Success)
+        {
+            return BadRequest(result2);
+        }
+        return Ok(result);
+    }
+    [HttpDelete("delete")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        IDataResult<Question> questionResult = await _questionReadService.GetByIdAsync(id);
+        if (!questionResult.Success)
+        {
+            return BadRequest(questionResult);
+        }
+        IResult result = _questionWriteService.Delete(questionResult.Data);
+        if (!result.Success)
+        {
+            return BadRequest(result);
+        }
+        var answers = (await _answerReadService.GetListByQuestionIdAsync(questionResult.Data.Id)).Data;
+        _answerWriteService.DeleteRange(answers);
+        return Ok(result);
     }
 }
