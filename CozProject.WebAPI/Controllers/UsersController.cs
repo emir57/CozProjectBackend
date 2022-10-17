@@ -121,7 +121,7 @@ public class UsersController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("getall")]
+    [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         var result = await _userReadService.GetListAsync();
@@ -131,7 +131,7 @@ public class UsersController : ControllerBase
         }
         return Ok(result);
     }
-    [HttpGet("getbyid")]
+    [HttpGet("{userId}")]
     public async Task<IActionResult> GetById(int userId)
     {
         var result = await _userReadService.GetByIdAsync(userId);
