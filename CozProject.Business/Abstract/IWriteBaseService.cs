@@ -1,10 +1,15 @@
-﻿using Core.Utilities.Result;
+﻿using Core.Dtos.Abstract;
+using Core.Entities;
+using Core.Utilities.Result;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CozProject.Business.Abstract;
 
 public interface IWriteBaseService<TEntity, TWriteDto, TReadDto>
+    where TEntity : class, IEntity, new()
+    where TWriteDto : class, IWriteDto, new()
+    where TReadDto : class, IReadDto, new()
 {
     Task<IResult> AddAsync(TWriteDto writeDto);
     IResult Update(TWriteDto writeDto);
