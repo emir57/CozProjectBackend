@@ -11,6 +11,6 @@ public interface IReadBaseService<TEntity, TWriteDto, TReadDto>
     where TWriteDto : class, IWriteDto, new()
     where TReadDto : class, IReadDto, new()
 {
-    Task<IDataResult<List<TReadDto>>> GetListAsync();
-    Task<IDataResult<TReadDto>> GetByIdAsync(int id);
+    Task<IDataResult<List<TReadDto>>> GetListAsync(bool tracking = true);
+    Task<IDataResult<TReadDto>> GetByIdAsync(int id, bool tracking = true);
 }
