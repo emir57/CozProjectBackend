@@ -1,7 +1,9 @@
-﻿using Core.Utilities.Message;
+﻿using AutoMapper;
+using Core.Utilities.Message;
 using Core.Utilities.Result;
 using CozProject.Business.Abstract;
 using CozProject.DataAccess.Abstract;
+using CozProject.Dto.Concrete;
 using CozProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -9,35 +11,15 @@ using System.Threading.Tasks;
 
 namespace CozProject.Business.Concrete
 {
-    public class AnswerReadManager : IAnswerReadService
+    public class AnswerReadManager : ReadBaseService<Answer, AnswerWriteDto, AnswerReadDto>, IAnswerReadService
     {
-        private readonly IAnswerReadDal _answerReadDal;
-        private readonly ILanguageMessage _language;
-
-        public AnswerReadManager(ILanguageMessage language, IAnswerReadDal answerReadDal)
+        public AnswerReadManager(IAnswerReadDal _answerReadDal, IMapper mapper, ILanguageMessage languageMessage) : base(_answerReadDal, mapper, languageMessage)
         {
-            _language = language;
-            _answerReadDal = answerReadDal;
-        }
-
-        public async Task<IDataResult<Answer>> GetByIdAsync(int answerId)
-        {
-            Answer answer = await _answerReadDal.GetByIdAsync(answerId);
-            if (answer == null)
-            {
-                return new ErrorDataResult<Answer>(answer, _language.FailureGet);
-            }
-            return new SuccessDataResult<Answer>(answer, _language.SuccessGet);
-        }
-
-        public async Task<IDataResult<List<Answer>>> GetListAsync()
-        {
-            return new SuccessDataResult<List<Answer>>(await _answerReadDal.GetAll().ToListAsync(), _language.SuccessList);
         }
 
         public async Task<IDataResult<List<Answer>>> GetListByQuestionIdAsync(int questionId)
         {
-            return new SuccessDataResult<List<Answer>>(await _answerReadDal.GetAll(x => x.QuestionId == questionId).ToListAsync(), _language.SuccessList);
+            return new SuccessDataResult<List<Answer>>(await ReadRepository.GetAll(x => x.QuestionId == questionId).ToListAsync(), LanguageMessage.SuccessList);
         }
     }
 }
