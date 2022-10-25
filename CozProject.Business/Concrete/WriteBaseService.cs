@@ -15,68 +15,68 @@ public class WriteBaseService<TEntity, TWriteDto, TReadDto> : IWriteBaseService<
     where TWriteDto : class, IWriteDto, new()
     where TReadDto : class, IReadDto, new()
 {
-    private readonly IWriteRepository<TEntity> _writeRepository;
-    private readonly IReadRepository<TEntity> _readRepository;
-    private readonly IMapper _mapper;
-    private readonly ILanguageMessage _languageMessage;
+    protected readonly IWriteRepository<TEntity> WriteRepository;
+    protected readonly IReadRepository<TEntity> ReadRepository;
+    protected readonly IMapper Mapper;
+    protected readonly ILanguageMessage LanguageMessage;
 
     public WriteBaseService(IWriteRepository<TEntity> writeRepository, IMapper mapper, ILanguageMessage languageMessage, IReadRepository<TEntity> readRepository)
     {
-        _writeRepository = writeRepository;
-        _mapper = mapper;
-        _languageMessage = languageMessage;
-        _readRepository = readRepository;
+        WriteRepository = writeRepository;
+        Mapper = mapper;
+        LanguageMessage = languageMessage;
+        ReadRepository = readRepository;
     }
 
-    public async Task<IResult> AddAsync(TWriteDto writeDto)
+    public virtual async Task<IResult> AddAsync(TWriteDto writeDto)
     {
-        TEntity addedEntity = _mapper.Map<TEntity>(writeDto);
+        TEntity addedEntity = Mapper.Map<TEntity>(writeDto);
 
-        await _writeRepository.AddAsync(addedEntity);
+        await WriteRepository.AddAsync(addedEntity);
 
-        return new SuccessResult(_languageMessage.SuccessAdd);
+        return new SuccessResult(LanguageMessage.SuccessAdd);
     }
 
-    public async Task<IResult> AddRangeAsync(List<TWriteDto> writeDtos)
+    public virtual async Task<IResult> AddRangeAsync(List<TWriteDto> writeDtos)
     {
-        List<TEntity> addedEntities = _mapper.Map<List<TEntity>>(writeDtos);
+        List<TEntity> addedEntities = Mapper.Map<List<TEntity>>(writeDtos);
 
-        await _writeRepository.AddRangeAsync(addedEntities);
+        await WriteRepository.AddRangeAsync(addedEntities);
 
-        return new SuccessResult(_languageMessage.SuccessAdd);
+        return new SuccessResult(LanguageMessage.SuccessAdd);
     }
 
-    public IResult Delete(TWriteDto writeDto)
+    public virtual IResult Delete(TWriteDto writeDto)
     {
-        TEntity deletedEntity = _mapper.Map<TEntity>(writeDto);
+        TEntity deletedEntity = Mapper.Map<TEntity>(writeDto);
 
-        _writeRepository.Delete(deletedEntity);
+        WriteRepository.Delete(deletedEntity);
 
-        return new SuccessResult(_languageMessage.SuccessDelete);
+        return new SuccessResult(LanguageMessage.SuccessDelete);
     }
 
-    public IResult DeleteRange(List<TWriteDto> writeDtos)
+    public virtual IResult DeleteRange(List<TWriteDto> writeDtos)
     {
-        List<TEntity> deletedEntities = _mapper.Map<List<TEntity>>(writeDtos);
+        List<TEntity> deletedEntities = Mapper.Map<List<TEntity>>(writeDtos);
 
-        _writeRepository.DeleteRange(deletedEntities);
+        WriteRepository.DeleteRange(deletedEntities);
 
-        return new SuccessResult(_languageMessage.SuccessDelete);
+        return new SuccessResult(LanguageMessage.SuccessDelete);
     }
 
-    public async Task<int> SaveAsync()
+    public virtual async Task<int> SaveAsync()
     {
-        return await _writeRepository.SaveAsync();
+        return await WriteRepository.SaveAsync();
     }
 
-    public async Task<IResult> UpdateAsync(int id, TWriteDto writeDto)
+    public virtual async Task<IResult> UpdateAsync(int id, TWriteDto writeDto)
     {
-        TEntity updatedEntity = await _readRepository.GetAsync(x => x.Id == id);
+        TEntity updatedEntity = await ReadRepository.GetAsync(x => x.Id == id);
 
-        _mapper.Map(writeDto, updatedEntity);
+        Mapper.Map(writeDto, updatedEntity);
 
-        _writeRepository.Update(updatedEntity);
+        WriteRepository.Update(updatedEntity);
 
-        return new SuccessResult(_languageMessage.SuccessUpdate);
+        return new SuccessResult(LanguageMessage.SuccessUpdate);
     }
 }
