@@ -28,7 +28,7 @@ public class ReadBaseService<TEntity, TWriteDto, TReadDto> : IReadBaseService<TE
         LanguageMessage = languageMessage;
     }
 
-    public async Task<IDataResult<TReadDto>> GetByIdAsync(int id, bool tracking = true)
+    public virtual async Task<IDataResult<TReadDto>> GetByIdAsync(int id, bool tracking = true)
     {
         TEntity findedEntity = await ReadRepository.GetByIdAsync(id, tracking);
 
@@ -39,7 +39,7 @@ public class ReadBaseService<TEntity, TWriteDto, TReadDto> : IReadBaseService<TE
         return new SuccessDataResult<TReadDto>(readDto, LanguageMessage.SuccessGet);
     }
 
-    public async Task<IDataResult<List<TReadDto>>> GetListAsync(bool tracking = true)
+    public virtual async Task<IDataResult<List<TReadDto>>> GetListAsync(bool tracking = true)
     {
         IQueryable<TEntity> queryable = ReadRepository.GetAll(tracking);
 
