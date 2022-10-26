@@ -44,12 +44,12 @@ namespace CozProject.Business.Concrete.Auth
             {
                 return new ErrorDataResult<User>(_language.UserNotFound);
             }
-            if (!user.EmailConfirmed)
+            if (user.EmailConfirmed == false)
             {
                 //TODO: send email verification
                 return new ErrorDataResult<User>(_language.FailEmailConfirm);
             }
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, user.PasswordHash, user.PasswordSalt))
+            if (HashingHelper.VerifyPasswordHash(userForLoginDto.Password, user.PasswordHash, user.PasswordSalt) == false)
             {
                 return new ErrorDataResult<User>(_language.PasswordIsWrong);
             }
@@ -75,7 +75,7 @@ namespace CozProject.Business.Concrete.Auth
             await _roleWriteService.AddUserRoleAsync(user.Id, 4);
             await _roleWriteService.AddUserRoleAsync(user.Id, 2);
             await _roleWriteService.SaveAsync();
-            if (!result.Success)
+            if (result.Success == false)
             {
                 return new ErrorDataResult<User>(_language.FailureRegister);
             }
@@ -86,7 +86,7 @@ namespace CozProject.Business.Concrete.Auth
         {
             byte[] passwordHash, passwordSalt;
 
-            if (!HashingHelper.VerifyPasswordHash(oldPassword, user.PasswordHash, user.PasswordSalt))
+            if (HashingHelper.VerifyPasswordHash(oldPassword, user.PasswordHash, user.PasswordSalt) == false)
             {
                 var errorModel = new ErrorResult("Eski şifreniz uyuşmuyor!");
                 return errorModel;
