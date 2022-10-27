@@ -13,7 +13,7 @@ public interface IWriteBaseService<TEntity, TWriteDto, TReadDto>
 {
     Task<IResult> AddAsync(TWriteDto writeDto);
     Task<IResult> UpdateAsync(int id, TWriteDto writeDto);
-    IResult Delete(TWriteDto writeDto);
+    IResult Delete(int id);
     IResult DeleteRange(List<TWriteDto> writeDtos);
     Task<IResult> AddRangeAsync(List<TWriteDto> writeDtos);
     Task<int> SaveAsync();

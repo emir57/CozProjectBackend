@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Result;
 using CozProject.Business.Abstract;
+using CozProject.Dto.Concrete;
 using CozProject.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -19,20 +20,20 @@ public class AnswersController : ControllerBase
         _answerWriteService = answerWriteService;
         _answerReadService = answerReadService;
     }
-    [HttpGet("getall")]
+    [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        IDataResult<List<Answer>> result = await _answerReadService.GetListAsync();
+        IDataResult<List<AnswerReadDto>> result = await _answerReadService.GetListAsync();
         if (!result.Success)
         {
             return BadRequest(result);
         }
         return Ok(result);
     }
-    [HttpGet("getbyid")]
-    public async Task<IActionResult> GetById(int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        IDataResult<Answer> result = await _answerReadService.GetByIdAsync(id);
+        IDataResult<AnswerReadDto> result = await _answerReadService.GetByIdAsync(id);
         if (!result.Success)
         {
             return BadRequest(result);
@@ -50,10 +51,10 @@ public class AnswersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("add")]
-    public async Task<IActionResult> Add(Answer answer)
+    [HttpPost]
+    public async Task<IActionResult> Add([FromBody] AnswerWriteDto answerWriteDto)
     {
-        IResult result = await _answerWriteService.AddAsync(answer);
+        IResult result = await _answerWriteService.AddAsync(answerWriteDto);
         await _answerWriteService.SaveAsync();
         if (!result.Success)
         {
@@ -61,10 +62,10 @@ public class AnswersController : ControllerBase
         }
         return Ok(result);
     }
-    [HttpPost("update")]
-    public async Task<IActionResult> Update(Answer answer)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] AnswerWriteDto answerWriteDto)
     {
-        IResult result = _answerWriteService.Update(answer);
+        IResult result = await _answerWriteService.UpdateAsync(id, answerWriteDto);
         await _answerWriteService.SaveAsync();
         if (!result.Success)
         {
@@ -72,16 +73,16 @@ public class AnswersController : ControllerBase
         }
         return Ok(result);
     }
-    [HttpDelete("delete")]
-    public async Task<IActionResult> Delete(int id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        IDataResult<Answer> answerResult = await _answerReadService.GetByIdAsync(id);
-        if (!answerResult.Success)
+        IDataResult<AnswerReadDto> answerResult = await _answerReadService.GetByIdAsync(id);
+        if (answerResult.Success == false)
         {
             return BadRequest(answerResult);
         }
-        IResult result = _answerWriteService.Delete(answerResult.Data);
-        if (!result.Success)
+        IResult result = _answerWriteService.Delete(answerResult.Data.Id);
+        if (result.Success == false)
         {
             return BadRequest(result);
         }
