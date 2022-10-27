@@ -46,20 +46,18 @@ public class WriteBaseService<TEntity, TWriteDto, TReadDto> : IWriteBaseService<
         return new SuccessResult(LanguageMessage.SuccessAdd);
     }
 
-    public virtual IResult Delete(TWriteDto writeDto)
+    public async Task<IResult> DeleteAsync(int id)
     {
-        TEntity deletedEntity = Mapper.Map<TEntity>(writeDto);
-
-        WriteRepository.Delete(deletedEntity);
+        TEntity entity = await ReadRepository.GetAsync(e => e.Id == id);
+        
+        WriteRepository.Delete(entity);
 
         return new SuccessResult(LanguageMessage.SuccessDelete);
     }
 
-    public virtual IResult DeleteRange(List<TWriteDto> writeDtos)
+    public virtual IResult DeleteRange(int[] ids)
     {
-        List<TEntity> deletedEntities = Mapper.Map<List<TEntity>>(writeDtos);
-
-        WriteRepository.DeleteRange(deletedEntities);
+        WriteRepository.DeleteRange(ids);
 
         return new SuccessResult(LanguageMessage.SuccessDelete);
     }
@@ -75,7 +73,7 @@ public class WriteBaseService<TEntity, TWriteDto, TReadDto> : IWriteBaseService<
 
         Mapper.Map(writeDto, updatedEntity);
 
-        WriteRepository.Update(updatedEntity);
+        await WriteRepository.UpdateAsync(updatedEntity);
 
         return new SuccessResult(LanguageMessage.SuccessUpdate);
     }

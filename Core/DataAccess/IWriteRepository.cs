@@ -12,6 +12,6 @@ public interface IWriteRepository<T> : IRepository<T>
     Task<bool> UpdateAsync(T entity);
     void UpdateRange(List<T> entities);
     bool Delete(T entity);
-    void DeleteRange(List<T> entities);
+    void DeleteRange(int[] ids);
     Task<int> SaveAsync();
 }

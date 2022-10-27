@@ -1,5 +1,7 @@
-﻿using Core.Utilities.Result;
+﻿using AutoMapper;
+using Core.Utilities.Result;
 using CozProject.Business.Abstract;
+using CozProject.Dto.Concrete;
 using CozProject.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -16,12 +18,14 @@ public class QuestionsController : ControllerBase
     private readonly IQuestionReadService _questionReadService;
     private readonly IAnswerWriteService _answerWriteService;
     private readonly IAnswerReadService _answerReadService;
-    public QuestionsController(IQuestionWriteService questionWriteService, IQuestionReadService questionReadService, IAnswerWriteService answerWriteService, IAnswerReadService answerReadService)
+    private readonly IMapper _mapper;
+    public QuestionsController(IQuestionWriteService questionWriteService, IQuestionReadService questionReadService, IAnswerWriteService answerWriteService, IAnswerReadService answerReadService, IMapper mapper)
     {
         _questionWriteService = questionWriteService;
         _questionReadService = questionReadService;
         _answerWriteService = answerWriteService;
         _answerReadService = answerReadService;
+        _mapper = mapper;
     }
 
     [HttpGet("getall")]
@@ -95,7 +99,7 @@ public class QuestionsController : ControllerBase
             return BadRequest(result);
         }
         question.Answers.ToList().ForEach(x => x.QuestionId = question.Id);
-        IResult result2 = await _answerWriteService.AddRangeAsync(question.Answers.ToList());
+        IResult result2 = await _answerWriteService.AddRangeAsync(_mapper.Map<List<AnswerWriteDto>>(question.Answers.ToList()));
         await _answerWriteService.SaveAsync();
         if (!result2.Success)
         {
@@ -120,8 +124,8 @@ public class QuestionsController : ControllerBase
         }
         return Ok(result);
     }
-    [HttpDelete("delete")]
-    public async Task<IActionResult> Delete(int id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] int id)
     {
         IDataResult<Question> questionResult = await _questionReadService.GetByIdAsync(id);
         if (!questionResult.Success)
@@ -134,7 +138,7 @@ public class QuestionsController : ControllerBase
             return BadRequest(result);
         }
         var answers = (await _answerReadService.GetListByQuestionIdAsync(questionResult.Data.Id)).Data;
-        _answerWriteService.DeleteRange(answers);
+        _answerWriteService.DeleteRange(answers.Select(a => a.Id).ToArray());
         return Ok(result);
     }
 }
