@@ -81,7 +81,7 @@ public class AnswersController : ControllerBase
         {
             return BadRequest(answerResult);
         }
-        IResult result = _answerWriteService.Delete(answerResult.Data.Id);
+        IResult result = await _answerWriteService.DeleteAsync(answerResult.Data.Id);
         if (result.Success == false)
         {
             return BadRequest(result);

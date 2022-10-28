@@ -46,7 +46,7 @@ public class WriteBaseService<TEntity, TWriteDto, TReadDto> : IWriteBaseService<
         return new SuccessResult(LanguageMessage.SuccessAdd);
     }
 
-    public async Task<IResult> DeleteAsync(int id)
+    public virtual async Task<IResult> DeleteAsync(int id)
     {
         TEntity entity = await ReadRepository.GetAsync(e => e.Id == id);
         
@@ -55,9 +55,9 @@ public class WriteBaseService<TEntity, TWriteDto, TReadDto> : IWriteBaseService<
         return new SuccessResult(LanguageMessage.SuccessDelete);
     }
 
-    public virtual IResult DeleteRange(int[] ids)
+    public virtual async Task<IResult> DeleteRangeAsync(int[] ids)
     {
-        WriteRepository.DeleteRange(ids);
+        await WriteRepository.DeleteRangeAsync(ids);
 
         return new SuccessResult(LanguageMessage.SuccessDelete);
     }

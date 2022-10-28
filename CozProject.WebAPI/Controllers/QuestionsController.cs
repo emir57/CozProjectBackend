@@ -138,7 +138,7 @@ public class QuestionsController : ControllerBase
             return BadRequest(result);
         }
         var answers = (await _answerReadService.GetListByQuestionIdAsync(questionResult.Data.Id)).Data;
-        _answerWriteService.DeleteRange(answers.Select(a => a.Id).ToArray());
+        await _answerWriteService.DeleteRangeAsync(answers.Select(a => a.Id).ToArray());
         return Ok(result);
     }
 }
