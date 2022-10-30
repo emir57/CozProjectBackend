@@ -1,4 +1,5 @@
-﻿using Core.Aspects.Autofac.Validation;
+﻿using AutoMapper;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
@@ -6,68 +7,55 @@ using CozProject.Business.Abstract;
 using CozProject.Business.BusinessAspects;
 using CozProject.Business.Validators.FluentValidation;
 using CozProject.DataAccess.Abstract;
+using CozProject.Dto.Concrete;
 using CozProject.Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CozProject.Business.Concrete
+namespace CozProject.Business.Concrete;
+
+public class CategoryWriteManager : WriteBaseService<Category, CategoryWriteDto, CategoryReadDto>, ICategoryWriteService
 {
-    public class CategoryWriteManager : ICategoryWriteService
+    public CategoryWriteManager(ICategoryWriteDal writeRepository, IMapper mapper, ILanguageMessage languageMessage, ICategoryReadDal readRepository) : base(writeRepository, mapper, languageMessage, readRepository)
+    { 
+    }
+
+    [SecuredOperation("Admin")]
+    [ValidationAspect(typeof(CategoryValidator))]
+    public async override Task<IResult> AddAsync(CategoryWriteDto writeDto)
     {
-        private readonly ICategoryWriteDal _categoryWriteDal;
-        private readonly ILanguageMessage _language;
-        private readonly ICategoryReadService _categoryReadService;
-
-        public CategoryWriteManager(ILanguageMessage language, ICategoryWriteDal categoryWriteDal, ICategoryReadService categoryReadService)
+        IResult result = BusinessRules.Run(
+            await CheckCategoryNameAsync(writeDto));
+        if (result != null)
         {
-            _language = language;
-            _categoryWriteDal = categoryWriteDal;
-            _categoryReadService = categoryReadService;
-        }
-        [SecuredOperation("Admin")]
-        [ValidationAspect(typeof(CategoryValidator))]
-        public async Task<IResult> AddAsync(Category entity)
-        {
-            var result = BusinessRules.Run(
-                await CheckCategoryNameAsync(entity));
-            if (result != null)
-            {
-                return result;
-            }
-            bool addResult = await _categoryWriteDal.AddAsync(entity);
-            if (addResult)
-                return new SuccessResult(_language.SuccessAdd);
-            return new ErrorResult(_language.FailureAdd);
+            return result;
         }
 
-        private async Task<IResult> CheckCategoryNameAsync(Category entity)
-        {
-            var categories = await _categoryReadService.GetListAsync();
-            if (categories.Data.Any(x => x.Name.ToLower() == entity.Name.ToLower()))
-            {
-                return new ErrorResult("Böyle bir kategori zaten var");
-            }
-            return new SuccessResult();
-        }
-        [SecuredOperation("Admin")]
-        public IResult Delete(Category entity)
-        {
-            _categoryWriteDal.Delete(entity);
-            return new SuccessResult(_language.SuccessDelete);
-        }
+        return await base.AddAsync(writeDto);
+    }
 
-        public async Task<int> SaveAsync()
+    private async Task<IResult> CheckCategoryNameAsync(CategoryWriteDto writeDto)
+    {
+        List<Category> categories = await ReadRepository.GetAll().ToListAsync();
+        if (categories.Any(x => x.Name.ToLower() == writeDto.Name.ToLower()))
         {
-            return await _categoryWriteDal.SaveAsync();
+            return new ErrorResult("Böyle bir kategori zaten var");
         }
-        [SecuredOperation("Admin")]
-        [ValidationAspect(typeof(CategoryValidator))]
-        public IResult Update(Category entity)
-        {
-            bool result = _categoryWriteDal.Update(entity);
-            if (result)
-                return new SuccessResult(_language.SuccessUpdate);
-            return new ErrorResult(_language.FailureUpdate);
-        }
+        return new SuccessResult();
+    }
+    
+    [SecuredOperation("Admin")]
+    public override Task<IResult> DeleteAsync(int id)
+    {
+        return base.DeleteAsync(id);
+    }
+
+    [SecuredOperation("Admin")]
+    [ValidationAspect(typeof(CategoryValidator))]
+    public override Task<IResult> UpdateAsync(int id, CategoryWriteDto writeDto)
+    {
+        return base.UpdateAsync(id, writeDto);
     }
 }
