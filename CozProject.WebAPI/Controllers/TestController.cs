@@ -24,7 +24,7 @@ public class TestController : ControllerBase
             .AddParameter(x => x.Score, 20)
             .AddParameter(x => x.EmailConfirmed, true)
             .AddParameter(x => x.PasswordHash, passwordHash)
-            .GetEntity();
+            .Entity;
         return Ok(user);
     }
 }

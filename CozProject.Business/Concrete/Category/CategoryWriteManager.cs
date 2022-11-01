@@ -11,6 +11,7 @@ using CozProject.Dto.Concrete;
 using CozProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace CozProject.Business.Concrete;
 public class CategoryWriteManager : WriteBaseService<Category, CategoryWriteDto, CategoryReadDto>, ICategoryWriteService
 {
     public CategoryWriteManager(ICategoryWriteDal writeRepository, IMapper mapper, ILanguageMessage languageMessage, ICategoryReadDal readRepository) : base(writeRepository, mapper, languageMessage, readRepository)
-    { 
+    {
     }
 
     [SecuredOperation("Admin")]
@@ -39,13 +40,13 @@ public class CategoryWriteManager : WriteBaseService<Category, CategoryWriteDto,
     private async Task<IResult> CheckCategoryNameAsync(CategoryWriteDto writeDto)
     {
         List<Category> categories = await ReadRepository.GetAll().ToListAsync();
-        if (categories.Any(x => x.Name.ToLower() == writeDto.Name.ToLower()))
+        if (categories.Any(x => x.Name.ToLower(CultureInfo.CurrentCulture) == writeDto.Name.ToLower(CultureInfo.CurrentCulture)))
         {
             return new ErrorResult("Böyle bir kategori zaten var");
         }
         return new SuccessResult();
     }
-    
+
     [SecuredOperation("Admin")]
     public override Task<IResult> DeleteAsync(int id)
     {

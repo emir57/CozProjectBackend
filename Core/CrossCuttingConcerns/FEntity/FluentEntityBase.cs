@@ -65,7 +65,7 @@ namespace FluentEntity_ConsoleApp.FEntity
         /// returns the entity with values
         /// </summary>
         /// <returns></returns>
-        public T GetEntity() => _entity;
+        public T Entity => _entity;
 
         /// <summary>
         /// assigns value to property

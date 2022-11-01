@@ -69,7 +69,7 @@ public class AuthManager : IAuthService
             .AddParameter(x => x.PasswordSalt, passwordSalt)
             .AddParameter(x => x.EmailConfirmed, false)
             .AddParameter(x => x.Score, 0)
-            .GetEntity();
+            .Entity;
         IResult result = await _userWriteService.AddAsync(user);
         await _userWriteService.SaveAsync();
         await _roleWriteService.AddUserRoleAsync(user.Id, 4);
@@ -101,7 +101,7 @@ public class AuthManager : IAuthService
         user = new FluentEntity<User>(user)
             .AddParameter(u => u.PasswordHash, passwordHash)
             .AddParameter(u => u.PasswordSalt, passwordSalt)
-            .GetEntity();
+            .Entity;
         var result = _userWriteService.Update(user);
         await _userWriteService.SaveAsync();
         return result;

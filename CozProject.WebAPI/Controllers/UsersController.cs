@@ -73,7 +73,7 @@ public class UsersController : ControllerBase
         user = new FluentEntity<User>(user)
             .AddParameter(u => u.FirstName, updateUserDto.FirstName)
             .AddParameter(u => u.LastName, updateUserDto.LastName)
-            .GetEntity();
+            .Entity;
         IResult result = _userWriteService.Update(user);
         await _userWriteService.SaveAsync();
 
@@ -111,7 +111,7 @@ public class UsersController : ControllerBase
             .AddParameter(q => q.QuestionId, scoreModel.QuestionId)
             .AddParameter(q => q.Result, scoreModel.Result)
             .AddParameter(q => q.UserId, scoreModel.UserId)
-            .GetEntity();
+            .Entity;
         await _questionCompleteWriteService.AddAsync(questionComplete);
 
 
@@ -179,7 +179,7 @@ public class UsersController : ControllerBase
             .AddParameter(u => u.EmailConfirmed, updatedUser.EmailConfirmed)
             .AddParameter(u => u.Score, updatedUser.Score)
             .AddParameter(u => u.ProfilePhotoUrl, updatedUser.ProfilePhotoUrl)
-            .GetEntity();
+            .Entity;
     }
 
     [NonAction]
@@ -187,7 +187,7 @@ public class UsersController : ControllerBase
     {
         user = new FluentEntity<User>(user)
             .AddParameter(u => u.Score, score)
-            .GetEntity();
+            .Entity;
         _userWriteService.Update(user);
         await _userWriteService.SaveAsync();
     }

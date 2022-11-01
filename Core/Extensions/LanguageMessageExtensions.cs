@@ -15,14 +15,13 @@ namespace Core.Extensions
                 return services;
             }
         }
-
-        public class LanguageSettings : IDisposable
+    }
+    public sealed class LanguageSettings : IDisposable
+    {
+        public ILanguageMessage LanguageMessage { get; set; }
+        public void Dispose()
         {
-            public ILanguageMessage LanguageMessage { get; set; }
-            public void Dispose()
-            {
-                GC.SuppressFinalize(this);
-            }
+            GC.SuppressFinalize(this);
         }
     }
 }
