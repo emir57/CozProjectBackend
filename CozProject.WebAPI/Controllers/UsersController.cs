@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
-using Core.Entities.Concrete;
 using Core.Dtos.Concrete;
+using Core.Entities.Concrete;
 using Core.Utilities.Message;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using CozProject.Business.Abstract;
 using CozProject.Business.Abstract.Auth;
+using CozProject.Dto.Concrete;
 using CozProject.Entities.Concrete;
 using CozProject.WebAPI.Hubs;
 using FluentEntity_ConsoleApp.FEntity;
@@ -14,7 +15,6 @@ using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CozProject.Dto.Concrete;
 
 namespace CozProjectBackend.WebAPI.Controllers;
 
@@ -170,7 +170,7 @@ public class UsersController : ControllerBase
         }
         await _roleWriteService.SaveAsync();
     }
-    private User updateUser(User user, UpdateUserAdminDto updatedUser)
+    private static User updateUser(User user, UpdateUserAdminDto updatedUser)
     {
         return new FluentEntity<User>(user)
             .AddParameter(u => u.FirstName, updatedUser.FirstName)
