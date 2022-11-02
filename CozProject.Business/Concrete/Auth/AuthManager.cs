@@ -49,7 +49,7 @@ public class AuthManager : IAuthService
             //TODO: send email verification
             return new ErrorDataResult<User>(_language.FailEmailConfirm);
         }
-        if (HashingHelper.VerifyPasswordHash(userForLoginDto.Password, user.PasswordHash, user.PasswordSalt) == false)
+        if (HashingHelper.VerifyPasswordHash(userForLoginDto.Password, user.GetPasswordHash(), user.GetPasswordSalt()) == false)
         {
             return new ErrorDataResult<User>(_language.PasswordIsWrong);
         }
@@ -65,8 +65,8 @@ public class AuthManager : IAuthService
             .AddParameter(x => x.FirstName, userForRegisterDto.FirstName)
             .AddParameter(x => x.LastName, userForRegisterDto.LastName)
             .AddParameter(x => x.Email, userForRegisterDto.Email)
-            .AddParameter(x => x.PasswordHash, passwordHash)
-            .AddParameter(x => x.PasswordSalt, passwordSalt)
+            .AddParameter(x => x.GetPasswordHash(), passwordHash)
+            .AddParameter(x => x.GetPasswordSalt(), passwordSalt)
             .AddParameter(x => x.EmailConfirmed, false)
             .AddParameter(x => x.Score, 0)
             .Entity;
@@ -86,12 +86,12 @@ public class AuthManager : IAuthService
     {
         byte[] passwordHash, passwordSalt;
 
-        if (HashingHelper.VerifyPasswordHash(oldPassword, user.PasswordHash, user.PasswordSalt) == false)
+        if (HashingHelper.VerifyPasswordHash(oldPassword, user.GetPasswordHash(), user.GetPasswordSalt()) == false)
         {
             var errorModel = new ErrorResult("Eski şifreniz uyuşmuyor!");
             return errorModel;
         }
-        if (HashingHelper.VerifyPasswordHash(oldPassword, user.PasswordHash, user.PasswordSalt))
+        if (HashingHelper.VerifyPasswordHash(oldPassword, user.GetPasswordHash(), user.GetPasswordSalt()))
         {
             var errorModel = new ErrorResult("Yeni şifreniz eski şifre ile aynı olamaz!");
             return errorModel;
@@ -99,8 +99,8 @@ public class AuthManager : IAuthService
 
         HashingHelper.CreatePasswordHash(newPassword, out passwordHash, out passwordSalt);
         user = new FluentEntity<User>(user)
-            .AddParameter(u => u.PasswordHash, passwordHash)
-            .AddParameter(u => u.PasswordSalt, passwordSalt)
+            .AddParameter(u => u.GetPasswordHash(), passwordHash)
+            .AddParameter(u => u.GetPasswordSalt(), passwordSalt)
             .Entity;
         var result = _userWriteService.Update(user);
         await _userWriteService.SaveAsync();

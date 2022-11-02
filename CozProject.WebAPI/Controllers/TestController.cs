@@ -23,7 +23,7 @@ public class TestController : ControllerBase
             .AddParameter(x => x.CreatedDate, DateTime.Now)
             .AddParameter(x => x.Score, 20)
             .AddParameter(x => x.EmailConfirmed, true)
-            .AddParameter(x => x.PasswordHash, passwordHash)
+            .AddParameter(x => x.GetPasswordHash(), passwordHash)
             .Entity;
         return Ok(user);
     }

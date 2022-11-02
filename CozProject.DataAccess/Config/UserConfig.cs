@@ -39,11 +39,11 @@ namespace CozProject.DataAccess.Config
                 .HasMaxLength(50)
                 .HasColumnName("Email");
 
-            builder.Property(u => u.PasswordHash)
+            builder.Property(u => u.GetPasswordHash())
                 .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("PasswordHash");
-            builder.Property(u => u.PasswordSalt)
+            builder.Property(u => u.GetPasswordSalt())
                 .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("PasswordSalt");
