@@ -31,7 +31,7 @@ namespace Core.Utilities.Middleware
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, System.Exception e)
+        private static Task HandleExceptionAsync(HttpContext context, System.Exception e)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

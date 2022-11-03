@@ -47,8 +47,8 @@ namespace Core.Utilities.Security.JWT
                 claims: SetClaims(user, roles),
                 expires: _accessTokenExpiration);
         }
-
-        private IEnumerable<Claim> SetClaims(User user, List<Role> roles)
+        
+        private static IEnumerable<Claim> SetClaims(User user, List<Role> roles)
         {
             List<Claim> claims = new List<Claim>();
             claims.AddEmail(user.Email);

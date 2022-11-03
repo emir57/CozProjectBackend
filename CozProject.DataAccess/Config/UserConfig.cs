@@ -90,7 +90,7 @@ namespace CozProject.DataAccess.Config
             };
         }
 
-        private IConfigurationRoot configuration()
+        private static IConfigurationRoot configuration()
         {
             IConfigurationRoot configurationRoot = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")

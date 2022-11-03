@@ -9,5 +9,13 @@ namespace Core.Utilities.Exception.UnAuthorizedException
         public UnAuthorizedException(string message) : base(message)
         {
         }
+
+        public UnAuthorizedException()
+        {
+        }
+
+        public UnAuthorizedException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

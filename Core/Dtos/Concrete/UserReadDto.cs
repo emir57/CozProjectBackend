@@ -10,7 +10,7 @@ namespace Core.Dtos.Concrete
         public string LastName { get; set; }
         public string Email { get; set; }
         public int Score { get; set; }
-        public string ProfilePhotoUrl { get; set; }
+        public Uri ProfilePhotoUrl { get; set; }
 
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
