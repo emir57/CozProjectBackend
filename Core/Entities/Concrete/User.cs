@@ -9,31 +9,8 @@ public class User : IEntity
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
-
-    private byte[] passwordHash;
-
-    public byte[] GetPasswordHash()
-    {
-        return passwordHash;
-    }
-
-    public void SetPasswordHash(byte[] value)
-    {
-        passwordHash = value;
-    }
-
-    private byte[] passwordSalt;
-
-    public byte[] GetPasswordSalt()
-    {
-        return passwordSalt;
-    }
-
-    public void SetPasswordSalt(byte[] value)
-    {
-        passwordSalt = value;
-    }
-
+    public byte[] PasswordHash { get; set; }
+    public byte[] PasswordSalt { get; set; }
     public bool EmailConfirmed { get; set; }
     public int Score { get; set; }
     public Uri ProfilePhotoUrl { get; set; }
@@ -54,8 +31,8 @@ public class User : IEntity
         FirstName = firstName;
         LastName = lastName;
         Email = email;
-        SetPasswordHash(passwordHash);
-        SetPasswordSalt(passwordSalt);
+        PasswordHash = passwordHash;
+        PasswordSalt = passwordSalt;
         EmailConfirmed = emailConfirmed;
         Score = score;
         ProfilePhotoUrl = profilePhotoUrl;

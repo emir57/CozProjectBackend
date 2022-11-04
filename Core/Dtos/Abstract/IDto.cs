@@ -1,6 +1,5 @@
-﻿namespace Core.Dtos.Abstract
+﻿namespace Core.Dtos.Abstract;
+
+public interface IDto
 {
-    public interface IDto
-    {
-    }
 }
