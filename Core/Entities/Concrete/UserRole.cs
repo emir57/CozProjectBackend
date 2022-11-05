@@ -19,8 +19,8 @@ namespace Core.Entities.Concrete
         public Role Role { get; set; }
         public UserRole()
         {
-            new User();
-            new Role();
+            User = new User();
+            Role = new Role();
         }
 
         public UserRole(int id, int userId, int roleId, DateTime? createdDate)

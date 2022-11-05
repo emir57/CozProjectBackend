@@ -16,7 +16,7 @@ public class Answer : IEntity
 
     public Answer()
     {
-        new Question();
+        Question = new Question();
     }
 
     public Answer(int id, int questionId, string content, bool isTrue, DateTime? createdDate) : this()
