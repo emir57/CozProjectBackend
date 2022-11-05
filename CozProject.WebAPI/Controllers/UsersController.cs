@@ -64,7 +64,7 @@ public class UsersController : ControllerBase
             return BadRequest(getUser);
         }
         User user = getUser.Data;
-        if (!HashingHelper.VerifyPasswordHash(updateUserDto.Password, user.GetPasswordHash(), user.GetPasswordSalt()))
+        if (!HashingHelper.VerifyPasswordHash(updateUserDto.Password, user.PasswordHash, user.PasswordSalt))
         {
             var errorModel = new ErrorResult(_languageMessage.PasswordIsWrong);
             return BadRequest(errorModel);
