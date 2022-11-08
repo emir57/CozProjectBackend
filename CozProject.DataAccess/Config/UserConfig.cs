@@ -71,7 +71,7 @@ namespace CozProject.DataAccess.Config
             builder.HasData(adminUser);
         }
 
-        private User getAdminUser()
+        private static User getAdminUser()
         {
             byte[] passwordHash, passwordSalt;
             string password = configuration().GetSection("AdminUser:Password").Value;
