@@ -20,7 +20,7 @@ public class CategoryReadManager : ReadBaseService<Category, CategoryWriteDto, C
 
     public async Task<IDataResult<List<Category>>> GetCategoriesWithComplete(int userId)
     {
-        var result = await _categoryReadDal.GetCategoriesWithComplete(userId);
+        List<Category> result = await _categoryReadDal.GetCategoriesWithComplete(userId);
         return new SuccessDataResult<List<Category>>(result, LanguageMessage.SuccessList);
     }
 }
