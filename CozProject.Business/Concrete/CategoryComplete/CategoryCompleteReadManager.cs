@@ -1,27 +1,27 @@
 ﻿using Core.Utilities.Result;
 using CozProject.Business.Abstract;
 using CozProject.DataAccess.Abstract;
+using CozProject.Entities.Concrete;
 using System.Threading.Tasks;
 
-namespace CozProject.Business.Concrete
+namespace CozProject.Business.Concrete;
+
+public class CategoryCompleteReadManager : ICategoryCompleteReadService
 {
-    public class CategoryCompleteReadManager : ICategoryCompleteReadService
+    private readonly ICategoryCompleteReadDal _categoryCompleteReadDal;
+
+    public CategoryCompleteReadManager(ICategoryCompleteReadDal categoryCompleteReadDal)
     {
-        private readonly ICategoryCompleteReadDal _categoryCompleteReadDal;
+        _categoryCompleteReadDal = categoryCompleteReadDal;
+    }
 
-        public CategoryCompleteReadManager(ICategoryCompleteReadDal categoryCompleteReadDal)
+    public async Task<IDataResult<bool>> CheckCategoryCompleteAsync(int userId, int categoryId)
+    {
+        CategoryComplete categoryComplete = await _categoryCompleteReadDal.GetAsync(x => x.UserId == userId && x.CategoryId == categoryId);
+        if (categoryComplete is null)
         {
-            _categoryCompleteReadDal = categoryCompleteReadDal;
+            return new SuccessDataResult<bool>(true);
         }
-
-        public async Task<IDataResult<bool>> CheckCategoryCompleteAsync(int userId, int categoryId)
-        {
-            var categoryComplete = await _categoryCompleteReadDal.GetAsync(x => x.UserId == userId && x.CategoryId == categoryId);
-            if (categoryComplete == null)
-            {
-                return new SuccessDataResult<bool>(true);
-            }
-            return new SuccessDataResult<bool>(false);
-        }
+        return new SuccessDataResult<bool>(false);
     }
 }
