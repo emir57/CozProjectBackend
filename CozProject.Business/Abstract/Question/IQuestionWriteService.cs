@@ -2,13 +2,12 @@
 using CozProject.Entities.Concrete;
 using System.Threading.Tasks;
 
-namespace CozProject.Business.Abstract
+namespace CozProject.Business.Abstract;
+
+public interface IQuestionWriteService
 {
-    public interface IQuestionWriteService
-    {
-        Task<IResult> AddAsync(Question question);
-        IResult Update(Question question);
-        IResult Delete(Question question);
-        Task<int> SaveAsync();
-    }
+    Task<IResult> AddAsync(Question question);
+    Task<IResult> UpdateAsync(Question question);
+    IResult Delete(Question question);
+    Task<int> SaveAsync();
 }
