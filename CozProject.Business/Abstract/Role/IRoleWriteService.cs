@@ -7,7 +7,7 @@ namespace CozProject.Business.Abstract
     public interface IRoleWriteService
     {
         Task<IResult> AddAsync(Role entity);
-        IResult Update(Role entity);
+        Task<IResult> UpdateAsync(Role entity);
         IResult Delete(Role entity);
         Task AddUserRoleAsync(int userId, int roleId);
         Task RemoveUserRoleAsync(int userId, int roleId);
