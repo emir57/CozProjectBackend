@@ -116,7 +116,7 @@ public class QuestionsController : ControllerBase
         {
             return BadRequest(result);
         }
-        IResult result2 = _answerWriteService.UpdateRange(question.Answers.ToList());
+        IResult result2 = await _answerWriteService.UpdateRangeAsync(question.Answers.ToList());
         await _answerWriteService.SaveAsync();
         if (!result2.Success)
         {

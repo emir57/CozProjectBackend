@@ -89,4 +89,11 @@ public class AnswerWriteManager : WriteBaseService<Answer, AnswerWriteDto, Answe
     {
         return base.DeleteRangeAsync(ids);
     }
+
+    [SecuredOperation("Admin,Teacher")]
+    [ValidationAspect(typeof(AnswerValidator))]
+    public void UpdateRange(List<Answer> answers)
+    {
+        WriteRepository.UpdateRange(answers);
+    }
 }
