@@ -88,12 +88,12 @@ public class AuthManager : IAuthService
 
         if (HashingHelper.VerifyPasswordHash(oldPassword, user.PasswordHash, user.PasswordSalt) == false)
         {
-            var errorModel = new ErrorResult("Eski şifreniz uyuşmuyor!");
+            ErrorResult errorModel = new("Eski şifreniz uyuşmuyor!");
             return errorModel;
         }
         if (HashingHelper.VerifyPasswordHash(oldPassword, user.PasswordHash, user.PasswordSalt))
         {
-            var errorModel = new ErrorResult("Yeni şifreniz eski şifre ile aynı olamaz!");
+            ErrorResult errorModel = new("Yeni şifreniz eski şifre ile aynı olamaz!");
             return errorModel;
         }
 
@@ -102,7 +102,8 @@ public class AuthManager : IAuthService
             .AddParameter(u => u.PasswordHash, passwordHash)
             .AddParameter(u => u.PasswordSalt, passwordSalt)
             .Entity;
-        var result = _userWriteService.Update(user);
+
+        IResult result = await _userWriteService.UpdateAsync(user);
         await _userWriteService.SaveAsync();
         return result;
     }

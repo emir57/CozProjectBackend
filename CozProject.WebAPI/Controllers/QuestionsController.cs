@@ -110,7 +110,7 @@ public class QuestionsController : ControllerBase
     [HttpPost("update")]
     public async Task<IActionResult> Update(Question question)
     {
-        IResult result = _questionWriteService.Update(question);
+        IResult result = await _questionWriteService.UpdateAsync(question);
         await _questionWriteService.SaveAsync();
         if (!result.Success)
         {
