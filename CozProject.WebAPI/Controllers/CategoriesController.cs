@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Result;
 using CozProject.Business.Abstract;
+using CozProject.Dto.Concrete;
 using CozProject.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ public class CategoriesController : ControllerBase
     [HttpGet("getall")]
     public async Task<IActionResult> GetAll()
     {
-        IDataResult<List<Category>> result = await _categoryReadService.GetListAsync();
+        IDataResult<List<CategoryReadDto>> result = await _categoryReadService.GetListAsync();
         if (!result.Success)
         {
             return BadRequest(result);
@@ -43,7 +44,7 @@ public class CategoriesController : ControllerBase
     [HttpGet("getbyid")]
     public async Task<IActionResult> GetById(int id)
     {
-        IDataResult<Category> result = await _categoryReadService.GetByIdAsync(id);
+        IDataResult<CategoryReadDto> result = await _categoryReadService.GetByIdAsync(id);
         if (!result.Success)
         {
             return BadRequest(result);
@@ -51,10 +52,10 @@ public class CategoriesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("add")]
-    public async Task<IActionResult> Add(Category category)
+    [HttpPost]
+    public async Task<IActionResult> Add(CategoryWriteDto categoryWriteDto)
     {
-        IResult result = await _categoryWriteService.AddAsync(category);
+        IResult result = await _categoryWriteService.AddAsync(categoryWriteDto);
         await _categoryWriteService.SaveAsync();
         if (!result.Success)
         {
@@ -62,10 +63,10 @@ public class CategoriesController : ControllerBase
         }
         return Ok(result);
     }
-    [HttpPut("update")]
-    public async Task<IActionResult> Update(Category category)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CategoryWriteDto categoryWriteDto)
     {
-        IResult result = _categoryWriteService.Update(category);
+        IResult result = await _categoryWriteService.UpdateAsync(id, categoryWriteDto);
         await _categoryWriteService.SaveAsync();
         if (!result.Success)
         {
@@ -73,15 +74,10 @@ public class CategoriesController : ControllerBase
         }
         return Ok(result);
     }
-    [HttpDelete("delete")]
+    [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
-        IDataResult<Category> categoryResult = await _categoryReadService.GetByIdAsync(id);
-        if (!categoryResult.Success)
-        {
-            return BadRequest(categoryResult);
-        }
-        IResult result = _categoryWriteService.Delete(categoryResult.Data);
+        IResult result = await _categoryWriteService.DeleteAsync(id);
         if (!result.Success)
         {
             return BadRequest(result);
