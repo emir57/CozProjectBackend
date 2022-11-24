@@ -32,7 +32,7 @@ public class QuestionsController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         IDataResult<List<Question>> result = await _questionReadService.GetListAsync();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -42,7 +42,7 @@ public class QuestionsController : ControllerBase
     public async Task<IActionResult> GetAllQuestionsWithAnswers()
     {
         IDataResult<List<Question>> result = await _questionReadService.GetAllWithAnswers();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -52,7 +52,7 @@ public class QuestionsController : ControllerBase
     public async Task<IActionResult> GetAllQuestionsWithAnswers(int id)
     {
         IDataResult<List<Question>> result = await _questionReadService.GetAllWithAnswers(id);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -62,7 +62,7 @@ public class QuestionsController : ControllerBase
     public async Task<IActionResult> GetByCategoryIdQuestionsWithAnswers(int categoryId, int userId)
     {
         IDataResult<List<Question>> result = await _questionReadService.GetByCategoryIdWithAnswers(categoryId, userId);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -72,7 +72,7 @@ public class QuestionsController : ControllerBase
     public async Task<IActionResult> GetListByCategoryId(int categoryId)
     {
         IDataResult<List<Question>> result = await _questionReadService.GetListByCategoryIdAsync(categoryId);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -82,7 +82,7 @@ public class QuestionsController : ControllerBase
     public IActionResult GetById(int id)
     {
         IDataResult<Question> result = _questionReadService.GetByIdWithAnswers(id);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -92,52 +92,52 @@ public class QuestionsController : ControllerBase
     [HttpPost("add")]
     public async Task<IActionResult> Add(Question question)
     {
-        IResult result = await _questionWriteService.AddAsync(question);
+        IResult addResult = await _questionWriteService.AddAsync(question);
         await _questionWriteService.SaveAsync();
-        if (!result.Success)
+        if (addResult.Success is false)
         {
-            return BadRequest(result);
+            return BadRequest(addResult);
         }
+
         question.Answers.ToList().ForEach(x => x.QuestionId = question.Id);
-        IResult result2 = await _answerWriteService.AddRangeAsync(_mapper.Map<List<AnswerWriteDto>>(question.Answers.ToList()));
+        IResult addRangeResult = await _answerWriteService.AddRangeAsync(_mapper.Map<List<AnswerWriteDto>>(question.Answers.ToList()));
         await _answerWriteService.SaveAsync();
-        if (!result2.Success)
+
+        if (addRangeResult.Success is false)
         {
-            return BadRequest(result2);
+            return BadRequest(addRangeResult);
         }
-        return Ok(result2);
+        return Ok(addRangeResult);
     }
     [HttpPost("update")]
     public async Task<IActionResult> Update(Question question)
     {
         IResult result = await _questionWriteService.UpdateAsync(question);
         await _questionWriteService.SaveAsync();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
-        IResult result2 = await _answerWriteService.UpdateRangeAsync(question.Answers.ToList());
-        await _answerWriteService.SaveAsync();
-        if (!result2.Success)
-        {
-            return BadRequest(result2);
-        }
+
+        _answerWriteService.UpdateRange(question.Answers.ToList());
+
         return Ok(result);
     }
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         IDataResult<Question> questionResult = await _questionReadService.GetByIdAsync(id);
-        if (!questionResult.Success)
+        if (questionResult.Success is false)
         {
             return BadRequest(questionResult);
         }
         IResult result = _questionWriteService.Delete(questionResult.Data);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
-        var answers = (await _answerReadService.GetListByQuestionIdAsync(questionResult.Data.Id)).Data;
+
+        List<Answer> answers = (await _answerReadService.GetListByQuestionIdAsync(questionResult.Data.Id)).Data;
         await _answerWriteService.DeleteRangeAsync(answers.Select(a => a.Id).ToArray());
         return Ok(result);
     }
