@@ -28,7 +28,7 @@ public class QuestionsController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet("getall")]
+    [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         IDataResult<List<Question>> result = await _questionReadService.GetListAsync();
@@ -78,8 +78,8 @@ public class QuestionsController : ControllerBase
         }
         return Ok(result);
     }
-    [HttpGet("getbyid")]
-    public IActionResult GetById(int id)
+    [HttpGet("{id}")]
+    public IActionResult GetById([FromRoute] int id)
     {
         IDataResult<Question> result = _questionReadService.GetByIdWithAnswers(id);
         if (result.Success is false)
@@ -89,8 +89,8 @@ public class QuestionsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("add")]
-    public async Task<IActionResult> Add(Question question)
+    [HttpPost]
+    public async Task<IActionResult> Add([FromBody] Question question)
     {
         IResult addResult = await _questionWriteService.AddAsync(question);
         await _questionWriteService.SaveAsync();
@@ -109,8 +109,8 @@ public class QuestionsController : ControllerBase
         }
         return Ok(addRangeResult);
     }
-    [HttpPost("update")]
-    public async Task<IActionResult> Update(Question question)
+    [HttpPost]
+    public async Task<IActionResult> Update([FromBody] Question question)
     {
         IResult result = await _questionWriteService.UpdateAsync(question);
         await _questionWriteService.SaveAsync();
