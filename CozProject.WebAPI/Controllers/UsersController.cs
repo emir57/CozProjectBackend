@@ -47,7 +47,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> GetRoles(int userId)
     {
         IDataResult<User> userResult = await _userReadService.GetByIdAsync(userId);
-        if (!userResult.Success)
+        if (userResult.Success is false)
         {
             return BadRequest(userResult);
         }
@@ -58,15 +58,15 @@ public class UsersController : ControllerBase
     [HttpPost("updateprofile")]
     public async Task<IActionResult> UpdateProfile(UpdateUserDto updateUserDto)
     {
-        var getUser = await _userReadService.GetByEmailAsync(updateUserDto.Email);
-        if (getUser.Data == null)
+        IDataResult<User> getUserResult = await _userReadService.GetByEmailAsync(updateUserDto.Email);
+        if (getUserResult.Data is null)
         {
-            return BadRequest(getUser);
+            return BadRequest(getUserResult);
         }
-        User user = getUser.Data;
-        if (!HashingHelper.VerifyPasswordHash(updateUserDto.Password, user.PasswordHash, user.PasswordSalt))
+        User user = getUserResult.Data;
+        if (HashingHelper.VerifyPasswordHash(updateUserDto.Password, user.PasswordHash, user.PasswordSalt) is false)
         {
-            var errorModel = new ErrorResult(_languageMessage.PasswordIsWrong);
+            ErrorResult errorModel = new ErrorResult(_languageMessage.PasswordIsWrong);
             return BadRequest(errorModel);
         }
 
@@ -74,34 +74,35 @@ public class UsersController : ControllerBase
             .AddParameter(u => u.FirstName, updateUserDto.FirstName)
             .AddParameter(u => u.LastName, updateUserDto.LastName)
             .Entity;
-        IResult result = _userWriteService.Update(user);
+        IResult result = await _userWriteService.UpdateAsync(user);
         await _userWriteService.SaveAsync();
 
-        if (result.Success == false)
+        if (result.Success is false)
             return BadRequest(result);
         return Ok(result);
     }
     [HttpPost("resetpassword")]
     public async Task<IActionResult> ResetPassword(UserResetPasswordDto userResetPasswordDto)
     {
-        var getUser = await _userReadService.GetByEmailAsync(userResetPasswordDto.Email);
-        if (getUser.Data == null)
+        IDataResult<User> getUserResult = await _userReadService.GetByEmailAsync(userResetPasswordDto.Email);
+        if (getUserResult.Data is null)
         {
-            return BadRequest(getUser);
+            return BadRequest(getUserResult);
         }
-        var user = getUser.Data;
+        User user = getUserResult.Data;
 
-        var result = await _authService.ResetPasswordAsync(user, userResetPasswordDto.OldPassword, userResetPasswordDto.NewPassword);
-        if (result.Success == false)
+        IResult result = await _authService.ResetPasswordAsync(user, userResetPasswordDto.OldPassword, userResetPasswordDto.NewPassword);
+        if (result.Success is false)
             return BadRequest(result);
+
         return Ok(result);
     }
 
     [HttpPost("updatescore")]
     public async Task<IActionResult> UpdateScore(UpdateScoreModel scoreModel)
     {
-        var getUserResult = await _userReadService.GetByIdAsync(scoreModel.UserId);
-        if (getUserResult.Success == false)
+        IDataResult<User> getUserResult = await _userReadService.GetByIdAsync(scoreModel.UserId);
+        if (getUserResult.Success is false)
             return BadRequest(getUserResult);
 
         User user = getUserResult.Data;
@@ -124,8 +125,8 @@ public class UsersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var result = await _userReadService.GetListAsync();
-        if (!result.Success)
+        IDataResult<List<User>> result = await _userReadService.GetListAsync();
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -134,8 +135,8 @@ public class UsersController : ControllerBase
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetById(int userId)
     {
-        var result = await _userReadService.GetByIdAsync(userId);
-        if (!result.Success)
+        IDataResult<User> result = await _userReadService.GetByIdAsync(userId);
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -144,24 +145,25 @@ public class UsersController : ControllerBase
     [HttpPost("updateuseradmin")]
     public async Task<IActionResult> UpdateUserAdmin(UpdateUserAdminDto updateUserAdminDto)
     {
-        var getUserResult = await _userReadService.GetByIdAsync(updateUserAdminDto.Id);
-        if (!getUserResult.Success)
+        IDataResult<User> getUserResult = await _userReadService.GetByIdAsync(updateUserAdminDto.Id);
+        if (getUserResult.Success is false)
             BadRequest(getUserResult);
 
-        var user = getUserResult.Data;
+        User user = getUserResult.Data;
         user = updateUser(user, updateUserAdminDto);
 
-        var result = _userWriteService.Update(user);
+        IResult result = await _userWriteService.UpdateAsync(user);
         await updateRoles(user, updateUserAdminDto.Roles);
 
-        if (!result.Success)
+        if (result.Success is false)
             return BadRequest(result);
+
         return Ok(result);
     }
     private async Task updateRoles(User user, List<UpdateRoleDto> roles)
     {
         await _userWriteService.SaveAsync();
-        foreach (var role in roles)
+        foreach (UpdateRoleDto role in roles)
         {
             if (role.Checked)
                 await _roleWriteService.AddUserRoleAsync(user.Id, role.Id);
@@ -188,7 +190,7 @@ public class UsersController : ControllerBase
         user = new FluentEntity<User>(user)
             .AddParameter(u => u.Score, score)
             .Entity;
-        _userWriteService.Update(user);
+        await _userWriteService.UpdateAsync(user);
         await _userWriteService.SaveAsync();
     }
 }
