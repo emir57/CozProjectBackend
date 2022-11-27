@@ -20,6 +20,7 @@ namespace CozProject.DataAccess.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.EnableSensitiveDataLogging();
             base.OnConfiguring(optionsBuilder);
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
