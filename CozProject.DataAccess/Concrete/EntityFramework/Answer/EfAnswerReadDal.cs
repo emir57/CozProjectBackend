@@ -1,17 +1,13 @@
 ﻿using Core.DataAccess.EntityFramework;
 using CozProject.DataAccess.Abstract;
+using CozProject.DataAccess.Contexts;
 using CozProject.Entities.Concrete;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CozProject.DataAccess.Concrete.EntityFramework
+namespace CozProject.DataAccess.Concrete.EntityFramework;
+
+public class EfAnswerReadDal : EfReadRepository<Answer>, IAnswerReadDal
 {
-    public class EfAnswerReadDal : EfReadRepository<Answer>, IAnswerReadDal
+    public EfAnswerReadDal(CozProjectDbContext context) : base(context)
     {
-        public EfAnswerReadDal(DbContext context) : base(context)
-        {
-        }
     }
 }

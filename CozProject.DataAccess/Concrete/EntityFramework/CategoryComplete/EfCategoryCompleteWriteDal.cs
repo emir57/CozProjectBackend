@@ -1,14 +1,13 @@
 ﻿using Core.DataAccess.EntityFramework;
 using CozProject.DataAccess.Abstract;
+using CozProject.DataAccess.Contexts;
 using CozProject.Entities.Concrete;
-using Microsoft.EntityFrameworkCore;
 
-namespace CozProject.DataAccess.Concrete.EntityFramework
+namespace CozProject.DataAccess.Concrete.EntityFramework;
+
+public class EfCategoryCompleteWriteDal : EfWriteRepository<CategoryComplete>, ICategoryCompleteWriteDal
 {
-    public class EfCategoryCompleteWriteDal : EfWriteRepository<CategoryComplete>, ICategoryCompleteWriteDal
+    public EfCategoryCompleteWriteDal(CozProjectDbContext context) : base(context)
     {
-        public EfCategoryCompleteWriteDal(DbContext context) : base(context)
-        {
-        }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
 using CozProject.DataAccess.Abstract;
-using Microsoft.EntityFrameworkCore;
+using CozProject.DataAccess.Contexts;
 
-namespace CozProject.DataAccess.Concrete.EntityFramework
+namespace CozProject.DataAccess.Concrete.EntityFramework;
+
+public class EfUserWriteDal : EfWriteRepository<User>, IUserWriteDal
 {
-    public class EfUserWriteDal : EfWriteRepository<User>, IUserWriteDal
+    public EfUserWriteDal(CozProjectDbContext context) : base(context)
     {
-        public EfUserWriteDal(DbContext context) : base(context)
-        {
-        }
     }
 }
