@@ -24,7 +24,7 @@ public class AnswersController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         IDataResult<List<AnswerReadDto>> result = await _answerReadService.GetListAsync();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -34,7 +34,7 @@ public class AnswersController : ControllerBase
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         IDataResult<AnswerReadDto> result = await _answerReadService.GetByIdAsync(id);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -44,7 +44,7 @@ public class AnswersController : ControllerBase
     public async Task<IActionResult> GetAllByQuestionId(int questionId)
     {
         IDataResult<List<Answer>> result = await _answerReadService.GetListByQuestionIdAsync(questionId);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -56,7 +56,7 @@ public class AnswersController : ControllerBase
     {
         IResult result = await _answerWriteService.AddAsync(answerWriteDto);
         await _answerWriteService.SaveAsync();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -67,7 +67,7 @@ public class AnswersController : ControllerBase
     {
         IResult result = await _answerWriteService.UpdateAsync(id, answerWriteDto);
         await _answerWriteService.SaveAsync();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -77,12 +77,12 @@ public class AnswersController : ControllerBase
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         IDataResult<AnswerReadDto> answerResult = await _answerReadService.GetByIdAsync(id);
-        if (answerResult.Success == false)
+        if (answerResult.Success is false)
         {
             return BadRequest(answerResult);
         }
         IResult result = await _answerWriteService.DeleteAsync(answerResult.Data.Id);
-        if (result.Success == false)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
