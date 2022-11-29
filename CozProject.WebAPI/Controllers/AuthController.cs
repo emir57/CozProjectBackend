@@ -24,30 +24,30 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
     {
         IDataResult<User> loginResult = await _authService.LoginAsync(userForLoginDto);
-        if (loginResult.Success == false)
+        if (loginResult.Success is false)
             return BadRequest(loginResult);
 
         IDataResult<AccessToken> tokenResult = await _authService.CreateAccessTokenAsync(loginResult.Data);
-        if (tokenResult.Success == false)
+        if (tokenResult.Success is false)
             return BadRequest(tokenResult);
 
-        var loginResponseDto = new LoginResponseDto()
+        LoginResponseDto loginResponseDto = new()
         {
             Token = tokenResult.Data,
             User = _mapper.Map<UserReadDto>(loginResult.Data)
         };
-        DataResult<LoginResponseDto> result = new DataResult<LoginResponseDto>(loginResponseDto, true, "Giriş Başarılı");
+        DataResult<LoginResponseDto> result = new(loginResponseDto, true, "Giriş Başarılı");
         return Ok(result);
     }
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
     {
         IResult userCheckResult = await _authService.UserExistsAsync(userForRegisterDto.Email);
-        if (userCheckResult.Success == false)
+        if (userCheckResult.Success is false)
             return BadRequest(userCheckResult);
 
         IDataResult<User> registerResult = await _authService.RegisterAsync(userForRegisterDto);
-        if (registerResult.Success == false)
+        if (registerResult.Success is false)
             return BadRequest(registerResult);
 
         return Ok(registerResult);
