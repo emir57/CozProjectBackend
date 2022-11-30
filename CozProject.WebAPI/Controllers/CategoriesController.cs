@@ -21,11 +21,11 @@ public class CategoriesController : ControllerBase
         _categoryReadService = categoryReadService;
     }
 
-    [HttpGet("getall")]
+    [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         IDataResult<List<CategoryReadDto>> result = await _categoryReadService.GetListAsync();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -35,17 +35,17 @@ public class CategoriesController : ControllerBase
     public async Task<IActionResult> GetAllWithCheckComplete(int userId)
     {
         IDataResult<List<Category>> result = await _categoryReadService.GetCategoriesWithComplete(userId);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
         return Ok(result);
     }
-    [HttpGet("getbyid")]
-    public async Task<IActionResult> GetById(int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById([FromRoute] int id)
     {
         IDataResult<CategoryReadDto> result = await _categoryReadService.GetByIdAsync(id);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -57,7 +57,7 @@ public class CategoriesController : ControllerBase
     {
         IResult result = await _categoryWriteService.AddAsync(categoryWriteDto);
         await _categoryWriteService.SaveAsync();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
@@ -68,17 +68,17 @@ public class CategoriesController : ControllerBase
     {
         IResult result = await _categoryWriteService.UpdateAsync(id, categoryWriteDto);
         await _categoryWriteService.SaveAsync();
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
         return Ok(result);
     }
-    [HttpDelete]
-    public async Task<IActionResult> Delete(int id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] int id)
     {
         IResult result = await _categoryWriteService.DeleteAsync(id);
-        if (!result.Success)
+        if (result.Success is false)
         {
             return BadRequest(result);
         }
