@@ -1,6 +1,8 @@
 ﻿using Core.Entities.Concrete;
+using Core.Utilities.Result;
 using CozProject.Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CozProjectBackend.WebAPI.Controllers;
@@ -18,26 +20,26 @@ public class RolesController : ControllerBase
         _roleWriteService = roleWriteService;
         _userReadService = userReadService;
     }
-    [HttpPost("add")]
+    [HttpPost]
     public async Task<IActionResult> Add(Role role)
     {
-        var result = await _roleWriteService.AddAsync(role);
+        IResult result = await _roleWriteService.AddAsync(role);
         await _roleWriteService.SaveAsync();
         return Ok(result);
     }
-    [HttpGet("getall")]
+    [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var result = await _roleReadService.GetListAsync();
+        IResult result = await _roleReadService.GetListAsync();
         return Ok(result);
     }
-    [HttpGet("getuserroles")]
-    public async Task<IActionResult> GetUserRoles(int userId)
+    [HttpGet("users/{userId}")]
+    public async Task<IActionResult> GetUserRoles([FromRoute] int userId)
     {
-        var getUserResult = await _userReadService.GetByIdAsync(userId);
-        if (!getUserResult.Success)
+        IDataResult<User> getUserResult = await _userReadService.GetByIdAsync(userId);
+        if (getUserResult.Success is false)
             return BadRequest(getUserResult);
-        var result = await _userReadService.GetRolesAsync(getUserResult.Data);
+        List<Role> result = await _userReadService.GetRolesAsync(getUserResult.Data);
         return Ok(result);
     }
 }
