@@ -1,10 +1,11 @@
 ﻿using Core.Utilities.Result;
+using CozProject.Dto.Concrete;
+using CozProject.Entities.Concrete;
 using System.Threading.Tasks;
 
-namespace CozProject.Business.Abstract
+namespace CozProject.Business.Abstract;
+
+public interface ICategoryCompleteReadService : IReadBaseService<CategoryComplete, CategoryCompleteWriteDto, CategoryCompleteReadDto>
 {
-    public interface ICategoryCompleteReadService
-    {
-        Task<IDataResult<bool>> CheckCategoryCompleteAsync(int userId, int categoryId);
-    }
+    Task<IDataResult<bool>> CheckCategoryCompleteAsync(int userId, int categoryId);
 }
